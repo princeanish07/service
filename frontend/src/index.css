@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+.form form{
+  @apply grid grid-cols-1 gap-y-4
+}
+  
+  .form form > div,.edit form > div {
+    @apply grid grid-cols-1 gap-y-4;
+  }
+  .form form > div > div {
+    @apply grid  sm:grid-cols-1 md:grid-cols-3   gap-x-12 text-[1em];
+  }
+  .edit form > div > div {
+    @apply grid  sm:grid-cols-1 lg:grid-cols-2;
+  }
+  .form form div label {
+    @apply  font-medium  text-end;
+
+  }
+  .form form > div > div  {
+    @apply  auto-rows-min;
+  }
+  .form div input {
+    @apply  text-gray-600 text-sm focus:outline-none w-full  my-1  hover:transition  border-2 hover:border-gray-500  p-1 rounded-sm shadow col-span-2 ;
+  }
+  .form div span {
+    @apply text-2xl 
+  }
+  .form form div .radio input {
+    @apply w-[10px]  mx-3 
+  }
+  .form form div .radio label {
+    @apply text-white;
+  }
+  
+   .profile >div{
+    @apply grid grid-cols-1 gap-4
+   }
+   .profile >div>div{
+    @apply grid grid-cols-1 gap-1
+   }
+   .profile div label{
+    @apply text-slate-300 text-[1em] 
+   }
+   .profile div p{
+    @apply  text-red-600 
+   }
+   .profile >div >input{
+    @apply  p-1 focus:outline-none hover:bg-gray-300 shadow 
+   }
+  .profile>div ul li span{
+    @apply mr-3
+  }  
+
+}
+@layer utilities {
+  .login {
+    @apply  grid grid-cols-1    bg-[rgba(0,0,0,.2)] p-10 gap-2;
+  }
+  .login form {
+    @apply grid grid-cols-1  gap-5;
+  }
+
+  .login form div label {
+    @apply text-slate-300 text-lg;
+  }
+  .login div input {
+    @apply bg-[#FFEEFC]  focus:outline-none border-b-2 p-1 text-[1em] w-full my-1 text-gray-800 placeholder-gray-800;
+  }
+  .profile .navbar li {
+    @apply bg-gray-200 p-3 hover:bg-blue-400 transition rounded-sm shadow-sm border-2 text-center;
+  }
+ 
+  .edit form > div {
+    @apply  md:px-20 sm:px-10 lg:px-12 xl:px-20 py-8;
+  }
+  .hide-scrollbar::-webkit-scrollbar{
+    display: none;
+  }
+  .scrolling-touch {
+    -webkit-overflow-scrolling: touch; /* For iOS devices */
+    scroll-behavior: smooth; /* For other browsers */
+  }
+
+
+  .profile .address{
+  @apply grid grid-cols-1 gap-2
+ }
+ .profile .address>:nth-child(2){
+  @apply grid grid-cols-2 grid-rows-2 gap-x-10 
+
+ }
+ .profile .address div div{
+  @apply grid grid-cols-1 grid-rows-3 auto-rows-min
+ }
+ .profile .address div div input{
+  @apply w-full p-1 focus:outline-none hover:bg-gray-300 shadow 
+ }
+ .save-button{
+  @apply grid place-content-center bg-red-600
+ }
+ .profile label>span{
+  @apply text-red-600 text-2xl
+ }
+ .profile .address label{
+  @apply text-left
+ }
+ .profile .address p{
+  @apply  text-red-600 
+ } 
+ .scope li{
+  @apply bg-gray-200 text-slate-700 p-2 rounded-md text-sm
+ }
+ .qualification input{
+  @apply w-full shadow-md focus:outline-none p-1 text-gray-600
+ }
+ .qualification textarea{
+  @apply w-full shadow-md focus:outline-none p-1 text-gray-600
+ }
+ .basic input{
+  @apply p-1;
+ }
+ .basic label{
+  @apply text-[1em]
+ }
+ .activity label{
+  @apply text-white text-[0,9em]
+ }
+ .activity input{
+  @apply focus:outline-none shadow p-1 text-black text-[0.85em]
+ }
+ .activity select{
+  @apply  p-1 focus:outline-none text-[0.9em]
+ }
+ .service-label label{
+  @apply text-gray-600
+ }
+
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87); */
+  /* background-color: #242424; */
+
+ 
+}
+
+/* a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+} */
+
+body {
+  margin: 0;
+  /* display: grid;
+  place-items: center; */
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+/* button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}-
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+} */
+
+
+     
