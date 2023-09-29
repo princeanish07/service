@@ -4,7 +4,7 @@
 
 @layer components {
 .form form{
-  @apply grid grid-cols-1 gap-y-4
+  @apply grid grid-cols-1 gap-y-4  shadow-lg bg-white p-4 w-[40Vw]
 }
   
   .form form > div,.edit form > div {
@@ -24,18 +24,10 @@
     @apply  auto-rows-min;
   }
   .form div input {
-    @apply  text-gray-600 text-sm focus:outline-none w-full  my-1  hover:transition  border-2 hover:border-gray-500  p-1 rounded-sm shadow col-span-2 ;
-  }
-  .form div span {
-    @apply text-2xl 
-  }
-  .form form div .radio input {
-    @apply w-[10px]  mx-3 
-  }
-  .form form div .radio label {
-    @apply text-white;
+    @apply  text-gray-600 text-[1em] placeholder:text-[1em] focus:outline-none  my-1  hover:transition   hover:bg-gray-200  p-2 rounded-sm shadow col-span-2 ;
   }
   
+
    .profile >div{
     @apply grid grid-cols-1 gap-4
    }
@@ -58,18 +50,19 @@
 }
 @layer utilities {
   .login {
-    @apply  grid grid-cols-1    bg-[rgba(0,0,0,.2)] p-10 gap-2;
+    @apply  grid grid-cols-1   shadow-lg bg-white p-10 gap-2;
   }
   .login form {
     @apply grid grid-cols-1  gap-5;
   }
 
   .login form div label {
-    @apply text-slate-300 text-lg;
+    @apply text-slate-800 text-lg;
   }
   .login div input {
-    @apply bg-[#FFEEFC]  focus:outline-none border-b-2 p-1 text-[1em] w-full my-1 text-gray-800 placeholder-gray-800;
+    @apply focus:outline-none border-b-2 p-2 text-[1.1em] w-full my-1 text-gray-600 placeholder:text-[1.1em] hover:bg-gray-200 rounded-sm shadow;
   }
+
   .profile .navbar li {
     @apply bg-gray-200 p-3 hover:bg-blue-400 transition rounded-sm shadow-sm border-2 text-center;
   }

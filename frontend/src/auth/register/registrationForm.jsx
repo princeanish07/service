@@ -1,7 +1,7 @@
 import React from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { object, string, date, ref } from "yup";
-import TextError from "../ErrorHandling/TextError";
+import TextError from "../../Auth/ErrorHandling/TextError";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Outlet } from "react-router-dom";

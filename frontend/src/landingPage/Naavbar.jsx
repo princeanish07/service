@@ -10,20 +10,12 @@ export default function Naavbar() {
           </div>
           <nav>
             <ul className=" flex gap-5 p-6 text-[#0118E6]  font-medium tracking-wide  ">
-              <li>
-                <a href="">Home</a>
-              </li>
-              <li>
-                <a href="">About</a>
-              </li>
-              <li>
-                <a href="">Contact</a>
-              </li>
+              
               <li>
                 <NavLink to='/signIn'>Sign In</NavLink>
               </li>
               <li>
-                <NavLink to='/buyer'>Sign Up</NavLink>
+                <NavLink to='/signup'>Sign Up</NavLink>
               </li>
             </ul>
           </nav>

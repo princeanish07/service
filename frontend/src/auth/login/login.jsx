@@ -5,6 +5,7 @@ import LoginForm from "./loginForm";
 import { ColorRing } from "react-loader-spinner";
 import Error from "../ErrorHandling/error";
 import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
 const Login = ({role,roleId}) => {
  
@@ -34,37 +35,25 @@ const Login = ({role,roleId}) => {
           ? (setState({ ...state, password: false }),
             setFieldError("email", error.data.errors.email),
             setFieldError("password", error.data.errors.password))
-          : null;
+           : null; 
       });
+      
   };
-
+  // bg-gradient-to-tr from-[#004B8F] to-[#02215B]
   return (
     <>
       {isError && error?.status != 422 ? (
         <Error error={error} />
       ) : (
-        <div  className=" bg-gradient-to-tr from-[#004B8F] to-[#02215B] grid place-content-center  h-screen ">
+        <div  className=" grid bg-gray-200 place-content-center  h-screen ">
 
-          <div className="flex w-[60Vw]  font-sans">
-            <div className=" flex-1 p-10 bg-[rgba(0,0,0,.1)] text-gray-300 text-[2em]  ">
-              <h2 className=" text-center">Welcome Back</h2>
-              <p className="p-5 text-[1rem]">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias facilis est adipisci velit provident exercitationem! Libero dolorem omnis sit commodi atque, odit, consectetur totam obcaecati reprehenderit, repudiandae nesciunt iste fugiat?
-              </p>
+          <div className="flex w-[35Vw]  font-sans">
+           
 
-            </div>
+          <div className=" login font-sans flex-1   ">
 
-          <motion.div className=" login font-sans flex-1   "
-          initial={{
-            y:0
-          }}
-          animate={{
-            y:0
-          }}
-          >
-
-            <div className="  text-gray-400 text-3xl  py-2 font-sans font-medium  text-center">
-              <span>Login</span>
+            <div className="  text-gray-600 text-3xl  py-2 font-sans font-medium  text-center">
+              <span>Sign In User</span>
             </div>
 
             <LoginForm onSubmit={onSubmit} state={state}>
@@ -85,25 +74,24 @@ const Login = ({role,roleId}) => {
                     </button>
                   </div>
                 )}
-                <div className=" my-5 text-sm text-gray-300">
-                  <span>Already have an account ?</span>
+                <div className=" my-5 text-sm text-gray-800">
+                  <span>Don't have an account ?</span>
                   <button
                     className="underline font-medium text-red-500 p-1"
                     type="button"
                     onClick={() => {
-                      navigate(`/${role}/create`, {
+                      navigate('/signUp', {
                         state: {
                           path: location.pathname,
                         },
                       });
                     }}
-                  >
-                    Sign Up
+                  >Sign Up
                   </button>
                 </div>
               </div>
             </LoginForm>
-          </motion.div>
+          </div>
           </div>
 
         </div>

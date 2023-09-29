@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useUpdateUserMutation, useEditUserQuery } from "../../redux/userSlice";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-import CreateForm from "../../profile/register/registrationForm";
+import CreateForm from "../register/registrationForm";
 import SubmitButton from "../ErrorHandling/submit";
 import { ColorRing } from "react-loader-spinner";
 import Error from "../ErrorHandling/error";
