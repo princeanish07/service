@@ -54,7 +54,7 @@ prepareHeaders:(headers)=>{
     
     }),
   editUser: build.query({
-      query: (id) =>`customer/edit/${id}`
+      query: (id) =>`view/${id}`
        
     }),
     updateUser:build.mutation({

@@ -29,19 +29,17 @@
   
 
    .profile >div{
-    @apply grid grid-cols-1 gap-4
+    @apply grid grid-cols-1 gap-4  border-2  shadow p-4
    }
    .profile >div>div{
-    @apply grid grid-cols-1 gap-1
+    @apply grid grid-cols-2 gap-1
    }
    .profile div label{
-    @apply text-slate-300 text-[1em] 
+    @apply text-[1em] text-gray-600 font-medium
    }
-   .profile div p{
-    @apply  text-red-600 
-   }
-   .profile >div >input{
-    @apply  p-1 focus:outline-none hover:bg-gray-300 shadow 
+
+   .profile div input{
+    @apply  p-2 focus:outline-none bg-gray-200  text-[1em]
    }
   .profile>div ul li span{
     @apply mr-3
@@ -114,10 +112,10 @@
   @apply w-full shadow-md focus:outline-none p-1 text-gray-600
  }
  .basic input{
-  @apply p-1;
+  @apply p-1 bg-[rgba(0,0,0,.1)]
  }
  .basic label{
-  @apply text-[1em]
+  @apply text-[1em] text-slate-600
  }
  .activity label{
   @apply text-white text-[0,9em]

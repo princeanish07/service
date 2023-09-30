@@ -12,6 +12,7 @@ import Qualification from "./users/merchant/profile/qualification";
 import Portfolio from "./users/merchant/profile/portfolio";
 import { useNavigate } from "react-router-dom";
 import CategoryId from "./users/merchant/category/categoryId";
+import SHome from "./users/merchant/services/home";
 import Profile from "./users/merchant/profile/profile";
 import ServiceSetup from "./users/merchant/services/serviceSetup";
 function App() {
@@ -23,16 +24,15 @@ function App() {
         <Route path="/signIn" element={<SignIn/>}></Route>
         <Route path="/home/*" element={<Home/>}>
           <Route path="profile" element={<Profile />}></Route>
+          <Route path="service" element={<SHome/>}/>
+          <Route path="service/category" element={<Category />}>
 
-          </Route>
-        <Route path="/seller/*" element={<MerchantHome />}>
-          <Route path="category" element={<Category />}>
             <Route path=":id" element={<CategoryId />} />
           </Route>
-          <Route path="category/service/:id" element={<ServiceSetup />}></Route>
+          <Route path="service/category/:id/service/:id" element={<ServiceSetup />}></Route>
           <Route path="qualification" element={<Qualification />} />
           <Route path="portfolio" element={<Portfolio />} />
-        </Route>
+          </Route>
 
      
         <Route path="buyer" element={<Home />}></Route>

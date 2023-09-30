@@ -62,8 +62,8 @@ const Card = () => {
          
 
         <section className=" grid lg:grid-cols-7  ">
-          <div className="grid grid-cols-3 col-start-1 row-start-1 col-end-4 text-sm  text-gray-200 font-semibold ">
-            <div className="   bg-[#004B8F]  shadow overflow-hidden">
+          <div className="grid grid-cols-3 col-start-1 row-start-1 col-end-4 text-sm   font-semibold ">
+            <div className="  shadow overflow-hidden">
               <ul className="p-2" onMouseLeave={() => handleToggle(true)}>
                 <li className="p-2 hover:cursor-pointer flex hover:bg-gray-200  hover:text-gray-700">
                   All

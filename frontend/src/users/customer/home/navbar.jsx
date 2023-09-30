@@ -17,17 +17,17 @@ import img1 from "../../../images/logo.png";
           name: "Your Requests",
         },
         {
-          link: "/services",
+          link: "service",
           name: "Your Services",
         },
       ];
   return (
-    <div className='flex text-white sticky top-0 z-auto'>
+    <div className='flex sticky top-0 z-auto '>
          <div className=" grid place-content-center ">
             <h2 className="p-2 text-xl">BIPIN KUNWAR</h2>
           </div>
 
-          <nav className=" flex  text-white  p-2  flex-1 justify-end  ">
+          <nav className=" flex  p-2  flex-1 justify-end  ">
             <ul className=" flex   text-sm font-medium gap-10  px-5 place-self-center">
               {nav.map((nav) => (
                 <li>

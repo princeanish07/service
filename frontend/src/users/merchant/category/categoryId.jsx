@@ -38,7 +38,7 @@ function CategoryId() {
     <div className=" grid grid-cols-2 grid-rows-3 auto-rows-min  gap-5    flex-1 ">
       {data.map((service) => (
         <div className="bg-white hover:cursor-pointer hover:scale-105 shadow-lg p-5 " onClick={()=>{
-          navigate(`/seller/category/service/${service.id}`)
+          navigate(`service/${service.id}`)
           
         }}
         key={service.id}

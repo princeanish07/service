@@ -6,7 +6,7 @@ const Home = () => {
     const location=useLocation()
     console.log(location.key);
   return (
-    <div className="h-screen bg-[#004B8F]  overflow-scroll z-0">
+    <div className="h-screen bg-white text-slate-600 z-0">
         <Navbar/>
         {
             location.key && location.key==="default"?<Card/>:<Outlet/>

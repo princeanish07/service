@@ -10,7 +10,7 @@ const Profile = () => {
   const { data, isLoading } = useGetUserByIdQuery(id);
   return (
     <>
-    <div className=" grid grid-cols-3  profile mx-auto w-[100%] ">
+    <div className=" grid grid-cols-3 ">
       <div className=" border  bg-[#2A3166] bg-opacity-80 shadow-lg grid grid-cols-1 place-content-start w-full ">
       <div className=" w-[200px] h-[200px]  mx-auto mb-10 p-5 grid place-content-center  ">
           <img
@@ -36,7 +36,7 @@ const Profile = () => {
           </ul>
         </div>
       </div>
-      <div className="  col-span-2 border-2">
+      <div className="">
      <Edit/>
       </div>
     </div>
