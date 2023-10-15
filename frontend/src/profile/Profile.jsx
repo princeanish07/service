@@ -1,48 +1,53 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useGetUserByIdQuery } from "./redux/userSlice";
-import Edit from "../Auth/edit/editUser";
-
-const Profile = () => {
-  const navigate = useNavigate();
-  const name = localStorage.getItem("name");
-  const id = localStorage.getItem("userId");
-  const { data, isLoading } = useGetUserByIdQuery(id);
+import React, { useState } from "react";
+import logo from "../../../images/logo.png";
+import Edit from './edit'
+function Profile() {
+  const [basic, setBasic] = useState(true);
+  const [qualification, setQualification] = useState(false);
   return (
     <>
-    <div className=" grid grid-cols-3 ">
-      <div className=" border  bg-[#2A3166] bg-opacity-80 shadow-lg grid grid-cols-1 place-content-start w-full ">
-      <div className=" w-[200px] h-[200px]  mx-auto mb-10 p-5 grid place-content-center  ">
-          <img
-            src=""
-        
-            className=" border border-gray-600 w-[200px] h-[200px] rounded-full   bg-gray-300  "
-          />
-      <div>
-        <span>BG</span>
-      </div>
-        </div>
-        <div className="border-t-4">
-        <ul className=" grid grid-cols-1 p-2 navbar gap-1">
-          <li><button>Add Profile Picture</button></li>
-            <li><button>Account Information</button></li>
-            <li><button>Password</button></li>
-            <li><button>Security</button></li>
-            <li><button onClick={()=>{
-              navigate('/login',{replace:true})
-              localStorage.removeItem("logged");
-            }}>Log Out</button></li>
+      <div className="grid grid-cols-3 gap-1 p-1 overflow-auto h-[90Vh] ">
+        <div className="  p-10 box-border shadow border-2 shadow-gray-400">
+          <div
+            className=" w-[300px] h-[300px] rounded-full border-2 border-[rgba(0,0,0,.3)]  "
+            onClick={() => {
+              document.getElementById("image").click();
+              showImage(true);
+            }}
+          >
+            <img
+              className="h-full w-full rounded-full"
+              src={logo}
+              alt=""
               
-          </ul>
+            />
+          </div>
+          <div>
+            <input
+              type="file"
+              id="image"
+              className=" hidden"
+              accept="image/*"
+             
+            />
+          </div>
+
+          <div className="mt-5">
+            <ul className=" flex flex-col gap-1">
+              <li className=" text-xl text-center mb-4">
+                Bipin Kunwar
+              </li>
+              <li className=" bg-[rgba(0,0,0,.1)] p-2">Edit Profile</li>
+              <li className=" bg-[rgba(0,0,0,.1)] p-2">Edit Qualification</li>
+            </ul>
+          </div>
+        </div>
+        <div className="col-span-2">
+              <Edit/>
         </div>
       </div>
-      <div className="">
-     <Edit/>
-      </div>
-    </div>
-      
     </>
   );
-};
+}
 
 export default Profile;

@@ -43,9 +43,14 @@
    }
   .profile>div ul li span{
     @apply mr-3
-  }  
+  } 
+  
 
 }
+@layer base{
+  
+}
+
 @layer utilities {
   .login {
     @apply  grid grid-cols-1   shadow-lg bg-white p-10 gap-2;
@@ -130,8 +135,31 @@
   @apply text-gray-600
  }
 
-}
 
+ .service >div{
+  @apply grid grid-cols-1   shadow shadow-gray-200 p-4 gap-2
+ }
+ .service >div >input[type='text']{
+  @apply p-2 bg-gray-200 w-full
+ }
+ .service div textarea{
+  @apply bg-gray-200 p-2
+ }
+ 
+ .service div label{
+  @apply text-[1em] text-slate-500
+ } 
+ .service .location div{
+  @apply grid grid-cols-3 gap-4
+ } 
+ .service .location div label{
+  @apply  grid place-content-end 
+ } 
+ .service .location div input{
+  @apply  col-span-2 outline-none bg-white border-b-2 border-gray-400 shadow pt-2
+ } 
+ 
+}
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

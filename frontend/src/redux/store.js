@@ -1,10 +1,10 @@
 import { configureStore,getDefaultMiddleware } from "@reduxjs/toolkit";
-import { rtkQueryErrorLogger } from "./userSlice";
-import { userApi } from "./userSlice";
-import { categoryApi } from '../users/merchant/redux/categorySlice';
-import { serviceApi } from "../users/merchant/redux/serviceSlice";
-import profileReducer from '../users/merchant/redux/profileslice'
-import { catserviceApi } from "../users/merchant/redux/catservices";
+import { rtkQueryErrorLogger } from "../landing/authentication/redux/userSlice";
+import { userApi } from "../landing/authentication/redux/userSlice";
+import { categoryApi } from '../landing/users/service/redux/categorySlice';
+import { serviceApi } from "../landing/users/service/redux/serviceSlice";
+import profileReducer from '../landing/users/service/redux/profileslice'
+import { catserviceApi } from "../landing/users/service/redux/catservices";
 const middleware = getDefaultMiddleware({
   serializableCheck:{
     ignoreActions:['profile/basicDetails'],
