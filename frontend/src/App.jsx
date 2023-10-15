@@ -6,7 +6,8 @@ import SignIn from "./authentication/SignIn";
 import Home from "./home/Home";
 import Category from "./category/category";
 import CategoryId from './category/categoryId'
-import Profile from './profile/profile'
+import Profile from './profile/Profile'
+import EditProfile from "./profile/edit";
 import Setup from "./landing/users/service/category/services/create/setup";
 function App() {
   return (
@@ -17,8 +18,11 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/signUp" element={<SignUp />}></Route>
         <Route path="/signIn" element={<SignIn />}></Route>
-        <Route path="/user/*" element={<Home />}>
-          <Route path="profile" element={<Profile />}></Route>
+        <Route path="/user/*">
+          <Route path="profile/" element={<Profile/>}>
+           
+          </Route>
+          <Route path="profile/create" element={<EditProfile/>}/>
           <Route path="category" element/>
           <Route path="service/category" element={<Category />}>
             <Route path=":id" element={<CategoryId />} />

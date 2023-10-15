@@ -1,6 +1,5 @@
 import { configureStore,getDefaultMiddleware } from "@reduxjs/toolkit";
-import { rtkQueryErrorLogger } from "../landing/authentication/redux/userSlice";
-import { userApi } from "../landing/authentication/redux/userSlice";
+import { authApi } from "../authentication/AuthSlice";
 import { categoryApi } from '../landing/users/service/redux/categorySlice';
 import { serviceApi } from "../landing/users/service/redux/serviceSlice";
 import profileReducer from '../landing/users/service/redux/profileslice'
@@ -11,19 +10,17 @@ const middleware = getDefaultMiddleware({
     ignoredPaths: ['profile.basic.profile'],
   }
 }).concat(
-  userApi.middleware,
+  authApi.middleware,
   categoryApi.middleware,  
   serviceApi.middleware,
   catserviceApi.middleware,
-  rtkQueryErrorLogger
 );
 export const store = configureStore({
   reducer: {
-    [userApi.reducerPath]: userApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
     [categoryApi.reducerPath]:categoryApi.reducer,
     [serviceApi.reducerPath]:serviceApi.reducer,
     [catserviceApi.reducerPath]:catserviceApi.reducer,
-    profile:profileReducer,
   },
 
   middleware
