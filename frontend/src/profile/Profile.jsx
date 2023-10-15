@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../../images/logo.png";
+import logo from "../images/logo.png";
 import Edit from './edit'
 function Profile() {
   const [basic, setBasic] = useState(true);

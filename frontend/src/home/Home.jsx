@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Card from './card'
-import Naavbar from './Naavbar'
+import Naavbar from './Navbar'
 const Home = () => {
     const location=useLocation()
   return (

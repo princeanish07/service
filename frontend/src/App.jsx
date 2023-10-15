@@ -1,17 +1,17 @@
 // import './App.css'
 import { Routes, Route } from "react-router-dom";
-import Naavbar from "./home/Naavbar";
+import Navbar from "./home/Navbar";
 import SignUp from "./landing/authentication/signUp/create";
 import SignIn from "./landing/authentication/signIn/login";
 import Home from "./home/Home";
 import Category from "./category/category";
 import CategoryId from './category/categoryId'
-import Profile from "";
+import Profile from './profile/profile'
 import Setup from "./landing/users/service/category/services/create/setup";
 function App() {
   return (
     <>
-    <Naavbar/>
+    <Navbar/>
 
       <Routes>
         <Route path="/" element={<Home />}></Route>
@@ -20,7 +20,6 @@ function App() {
         <Route path="/user/*" element={<Home />}>
           <Route path="profile" element={<Profile />}></Route>
           <Route path="category" element/>
-          <Route path="service" element={<SHome />} />
           <Route path="service/category" element={<Category />}>
             <Route path=":id" element={<CategoryId />} />
           </Route>
