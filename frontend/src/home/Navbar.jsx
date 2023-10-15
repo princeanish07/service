@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import img2 from "../images/Technician.png";
-import { NavLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useLocation,useNavigate } from 'react-router-dom';
 
 import { FaSearch } from "react-icons/fa";
 
@@ -9,6 +8,7 @@ export default function Naavbar() {
 
     const logged=localStorage.getItem('logged')
     const navigate=useNavigate();
+    const location= useLocation();
   
   return (
          <nav className="flex sticky top-0 bg-[#6434FA] p-1  ">
@@ -41,10 +41,14 @@ export default function Naavbar() {
               {
                 !logged? (<>
                 <li>
-                <NavLink to='/signIn'>Sign In</NavLink>
+                <NavLink to='/signIn' state={{
+                  path:location.pathname
+                }}>Sign In</NavLink>
               </li>
               <li>
-                <NavLink to='/signup'>Sign Up</NavLink>
+                <NavLink to='/signup'  state={{
+                  path:location.pathname
+                }}>Sign Up</NavLink>
               </li>
               </>
               ):<>

@@ -47,7 +47,7 @@ console.log(message);
         localStorage.setItem("userId", response.id);
         localStorage.setItem("logged",1)
         setMessage(response.message)
-        navigate("/user/profile");
+        navigate("/", {replace:true});
       })
       .catch((error) => {
         error?.status === 422
@@ -64,7 +64,7 @@ console.log(message);
       {isError && error?.status != 422 ? (
         <Error error={error} />
       ) : (
-        <div className=" form  text-slate-800 grid place-content-center p-4">
+        <div className=" form  text-slate-800 grid place-content-center p-2">
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}

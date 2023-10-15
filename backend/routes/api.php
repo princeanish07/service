@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('user')->controller(UserController::class)->group(function () {
-    Route::post('/create/{id}', 'create');
-    Route::post('/login/{role}', 'login');
+    Route::post('/create', 'create');
+    Route::post('/login', 'login');
     Route::middleware('auth:sanctum')->get('/get', [UserController::class, 'get']);
     Route::get('/view', 'viewAll');
     Route::get('/view/{user}', 'viewById');

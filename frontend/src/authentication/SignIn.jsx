@@ -32,7 +32,7 @@ const SignIn = () => {
           ? (localStorage.setItem("logged", "1"),
             localStorage.setItem("userId", response.id),
             console.log(response),
-            navigate("/home"))
+            navigate("/",  {replace:true}))
           : null;
       })
       .catch((error) => {
@@ -49,17 +49,17 @@ const SignIn = () => {
       {isError && error?.status != 422 ? (
         <Error error={error} />
       ) : (
-        <div className=" grid  place-content-center  ">
-          <div className="flex w-[35Vw]  font-sans login ">
-              <div className="  text-gray-600 text-3xl  py-2 font-sans font-medium  text-center">
-                <span>Sign In User</span>
-              </div>
+        <div className=" grid  place-content-center p-5 text-[0.9em]  login ">
+              
               <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
               >
                 <Form>
+                <div className="  text-gray-600 text-3xl  py-2 font-sans font-medium  text-center">
+                <span>Sign In User</span>
+              </div>
                   <div>
                     <label htmlFor="email">
                       Email<span className="  text-2xl text-red-600">*</span>
@@ -128,7 +128,6 @@ const SignIn = () => {
                   </div>
                 </Form>
               </Formik>
-            </div>
         </div>
       )}
     </>

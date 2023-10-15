@@ -30,10 +30,8 @@ class useAuthRequest extends FormRequest
             switch ($action) {
                 case 'create':
                     return array_merge($this->commonRules(), [
-                        'email' => ['required', 'email',Rule::unique('users')->where(function($query){
-                            return $query->where('role_id',$this->id);
-                        })],
-                        'phone_number' => ['required', 'regex:/^[0-9]{10}$/', 'unique:users,phone_number'],
+                        'email' => ['required', 'email',Rule::unique('users')],
+                        
                     ]);
     
     
@@ -45,9 +43,7 @@ class useAuthRequest extends FormRequest
                     ]);
                 case 'login':
                     return [
-                        'email' => ['required', 'email', Rule::exists('users')->where(function($query){
-                           return  $query->where('role_id',$this->role);
-                        })],
+                        'email' => ['required', 'email', Rule::exists('users')],
                         'password' => 'required',
                     ];
                 default:

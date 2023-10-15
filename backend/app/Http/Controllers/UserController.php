@@ -12,11 +12,10 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    public function create(useAuthRequest $request,$id)
+    public function create(useAuthRequest $request)
     {   
         $validate=$request->validated();
-        $collection=collect($validate)->put('role_id',$id)->all();
-        $token = User::create($collection)->createToken('mytoken')->plainTextToken;
+        $token = User::create($validate)->createToken('mytoken')->plainTextToken;
         return response()->json([
             'token' => $token,
             'message' => 'Register successfully'
@@ -24,12 +23,12 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function login(useAuthRequest $request,$role)
+    public function login(useAuthRequest $request)
     {
         
       $validate= $request->validated();
 
-      $user=User::where('email',$validate['email'])->where('role_id',$role)->first();
+      $user=User::where('email',$validate['email'])->first();
 
    
         if (!Hash::check($validate['password'], $user->password))
@@ -40,10 +39,8 @@ class UserController extends Controller
         return response()->json([
             'message'=> 'Login successfully ',
             'id' => $user->id,
-            'role'=>$user->role_id,
             'status' => 200,
             'token' => $token,
-            'message' => 'successful'
         ]);
     }
 

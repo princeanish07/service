@@ -7,8 +7,7 @@ use Illuminate\Validation\Rule;
  trait users{
     public function commonRules(){
         return [
-        'first_name'=>['required','string'],
-        'last_name'=>['required','string'],
+        'name'=>['required','string'],
 
         'password'=>['required','min:3','confirmed'],
 

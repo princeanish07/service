@@ -1,8 +1,8 @@
 // import './App.css'
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./home/Navbar";
-import SignUp from "./landing/authentication/signUp/create";
-import SignIn from "./landing/authentication/signIn/login";
+import SignUp from "./authentication/SignUP";
+import SignIn from "./authentication/SignIn";
 import Home from "./home/Home";
 import Category from "./category/category";
 import CategoryId from './category/categoryId'
