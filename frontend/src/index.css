@@ -19,23 +19,30 @@
     @apply  text-gray-600 text-[1em] placeholder:text-[1em] focus:outline-none  my-1  hover:transition   hover:bg-gray-200  p-2 rounded-md border border-gray-400  ;
   }
   
+  .profileEdit {
+    @apply flex  flex-col gap-4
+  }
 
-   .profile >div{
-    @apply grid grid-cols-1 gap-4  border-2  shadow p-4
+   .profileEdit >div{
+    @apply grid grid-cols-1 gap-3
    }
-   .profile >div>div{
-    @apply grid grid-cols-2 gap-1
+   .profileEdit >div >div{
+    @apply grid grid-cols-3 gap-2
    }
-   .profile div label{
+   .profileEdit >div >div label{
+    @apply grid content-end
+   }
+   .profileEdit >div >div input{
+    @apply p-2 border-b-2 border-gray-400 hover:bg-gray-100 col-span-2
+   }
+   .profileEdit div label{
     @apply text-[1em] text-gray-600 font-medium
    }
 
-   .profile div input{
-    @apply  p-2 focus:outline-none bg-gray-200  text-[1em]
+   
+   .profileEdit >div >input{
+    @apply  p-2 focus:outline-none hover:bg-gray-100 border-2 border-gray-400 rounded-md 
    }
-  .profile>div ul li span{
-    @apply mr-3
-  } 
   
 
 }
@@ -58,9 +65,6 @@
     @apply focus:outline-none  p-3  w-full my-1 text-gray-600  hover:bg-gray-200 rounded-md border border-gray-400;
   }
 
-  .profile .navbar li {
-    @apply bg-gray-200 p-3 hover:bg-blue-400 transition rounded-sm shadow-sm border-2 text-center;
-  }
  
   .edit form > div {
     @apply  md:px-20 sm:px-10 lg:px-12 xl:px-20 py-8;
