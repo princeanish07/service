@@ -7,7 +7,7 @@ import Home from "./home/Home";
 import Category from "./category/category";
 import CategoryId from './category/categoryId'
 import Profile from './profile/Profile'
-import EditProfile from "./profile/edit";
+import Edit from "./profile/edit";
 import Setup from "./landing/users/service/category/services/create/setup";
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route path="profile/" element={<Profile/>}>
            
           </Route>
-          <Route path="profile/create" element={<EditProfile/>}/>
+          <Route path="profile/create" element={<Edit/>}/>
           <Route path="category" element/>
           <Route path="service/category" element={<Category />}>
             <Route path=":id" element={<CategoryId />} />

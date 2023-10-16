@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import logo from '../images/logo.png';
+import logo from "../images/logo.png";
 
 import {
   useUpdateUserMutation,
@@ -39,18 +39,25 @@ export default function Edit() {
       >
         <div className="box-border flex flex-col ">
           <div className="grid place-content-center">
-            <div 
-            onClick={()=>{
-              document.getElementById('image').click()
-            }}
-            className=" rounded-full"
+            <div
+              onClick={() => {
+                document.getElementById("image").click();
+              }}
+              className=" rounded-full"
             >
-            <img src={previewImage? URL.createObjectURL(previewImage) : logo} className=" object-cover object-top w-[300px] h-[300px] rounded-full border-2 border-gray-400" alt=""  />
-            </div> 
-            <input type="file" id="image"  className=" hidden" 
-            onChange={(e)=>{
-              setPreviewImage(e.target.files[0])
-            }}  
+              <img
+                src={previewImage ? URL.createObjectURL(previewImage) : logo}
+                className=" object-cover object-top w-[300px] h-[300px] rounded-full border-2 border-gray-400"
+                alt=""
+              />
+            </div>
+            <input
+              type="file"
+              id="image"
+              className=" hidden"
+              onChange={(e) => {
+                setPreviewImage(e.target.files[0]);
+              }}
             />
           </div>
 
@@ -103,11 +110,11 @@ export default function Edit() {
             </div>
           </div>
           <div className=" text-center flex-1 grid content-end  ">
-          <button className="bg-blue-600 p-2 text-white">Update Profile</button>
+            <button className="bg-blue-600 p-2 text-white">
+              Update Profile
+            </button>
+          </div>
         </div>
-        </div>
-
-      
       </form>
     </div>
   );
