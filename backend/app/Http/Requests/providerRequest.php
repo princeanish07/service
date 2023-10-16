@@ -11,7 +11,6 @@ class providerRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    use provider;
     public function authorize(): bool
     {
         return true;

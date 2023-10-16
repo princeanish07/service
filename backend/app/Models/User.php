@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Category;
+use App\Models\Profile;
 use App\Models\Catservice;
 
 
@@ -61,5 +62,9 @@ class User extends Authenticatable
     public function categories()
     {
         return $this->hasManyThrough(Category::class, CatService::class);
+    }
+    public function profile()
+    {
+        return $this->hasOne(Profile::class,'user_id');
     }
 }

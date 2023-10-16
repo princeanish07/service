@@ -30,12 +30,11 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::delete('/delete/{user}', 'delete');
 });
 Route::prefix('profile')->controller(ProfileController::class)->group(function () {
-    Route::post('/create/{id}', 'create');
 
     // Route::middleware('auth:sanctum')->get('/get',[UserController::class,'get']);
 
-    Route::get('/view/{profile}', 'viewById');
-    Route::put('/update/{profile}', 'update');
+    Route::get('/view/{id}', 'viewProfile');
+    Route::post('/edit/{id}', 'createOrUpdate');
     Route::delete('/delete/{profile}', 'delete');
 });
 

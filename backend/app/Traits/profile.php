@@ -1,24 +1,30 @@
 <?php
+
 namespace App\Traits;
 
 use Illuminate\Validation\Rule;
 
-trait profile{
-    public function commonRules(){
+trait profile
+{
+    public function commonRules()
+    {
         return [
-                'gender'=>['required',Rule::in(['Male','Female','others'])],
-                'date_of_birth'=>['required','date'],
-                'address.district'=>['required'],
-                'address.muncipility'=>['required'],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'string'],
+            'bio' => ['string', 'sometimes'],
 
-                'address.ward'=>['required'],
 
-                'address.chowk'=>['sometimes'],
+            'address.district' => ['required'],
+            'address.muncipility' => ['required'],
 
-                'bio'=>['string','sometimes'],
-                'photo'=>['required','file'],
-        
+            'address.ward' => ['required'],
+
+            'address.chowk' => ['sometimes'],
+
+
+
+            // 'photo'=>['required','file'],
+
         ];
     }
-
 }

@@ -14,10 +14,11 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $profile= $this->whenLoaded('profile');
         return [
             'name'=>$this->name,
             'email'=>$this->email,
-            'profile'=> new ProfileResource($this->whenLoaded('profile')),
+            'bio'=>$profile->bio,
                 
                 
         ];

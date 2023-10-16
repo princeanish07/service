@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\profileRequest;
+use App\Http\Resources\ProfileResource;
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -12,40 +14,44 @@ use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
-    public function create(profileRequest $request,$id)
+   
+
+
+    public function viewProfile($id)
     {
 
-        $validate=$request->validated();
-        // return $validate;
-        $file= $request->file('photo')->store('images');
-        $validate['photo']= $file;
-
-
-
-        $collection=collect($validate)->put('user_id',$id)->all();
-        Profile::create($collection);
-        return response()->json([
-            'message' => 'Profie Creation successfully'
-
-        ], 200);
+      $profile= User::with('profile')->find($id);
+        return  new ProfileResource($profile);
+       
     }
-
-
-    public function viewById(Profile $profile)
+    public function createOrUpdate(profileRequest $request, $id)
     {
 
-        return response()->json([
-            'data' =>$profile,
+        if($request->hasFile('photo')){
+            $file=$request->file('photo');
+            $extension= $file->getClientOriginalExtension();
+           $name= time().'.'.$extension;
+           $file->move('profile/image',$name);
+           $path='profile/image/'.$name;
+        }
+        $user= User::find($id);
+        $user->name=$request->input('name');
+        $user->email=$request->input('email');
+        $user->save();
 
-        ], 200);
-    }
-    public function update(profileRequest $request, Profile $profile)
-    {
-
-        $validate = $request->validated();
-        DB::transaction(function () use ($validate, $profile) {
-            $profile->fill($validate)->save();
-        });
+        $user->profile()->updateOrCreate(
+            ['user_id'=>$id],
+            ['bio'=>$request->bio,
+            'photo'=>$path || null, 
+            'phone_number'=>$request->phone_number,
+            'address'=>[
+                'district'=>$request->district,
+                'muncipility'=>$request->muncipility,
+                'ward'=>$request->ward,
+                'chowk'=>$request->chowk
+            ]
+            ]
+        );
         return response()->json([
             'message' => 'successfullly updated',
            
