@@ -14,12 +14,12 @@ trait profile
             'bio' => ['string', 'sometimes'],
 
 
-            'address.district' => ['required'],
-            'address.muncipility' => ['required'],
+            'district' => ['string','sometimes'],
+            'muncipility' => ['string','sometimes'],
 
-            'address.ward' => ['required'],
+            'ward' => ['sometimes'],
 
-            'address.chowk' => ['sometimes'],
+            'chowk' => ['string','sometimes'],
 
 
 

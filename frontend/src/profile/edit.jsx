@@ -1,33 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import logo from "../images/logo.png";
-
-import {
-  useUpdateUserMutation,
-  useEditUserQuery,
-} from "../authentication/AuthSlice";
+import { useViewProfileQuery } from "./ProfileApi";
+import { useEditProfileMutation } from "./ProfileApi";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
 export default function Edit() {
-  // const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
-  // const { , isLoading, isError, error } = useEditUserQuery(1);
+  const userId = localStorage.getItem("userId");
+  const [editProfile, { isLoading: isUpdating }] = useEditProfileMutation();
+  const { data: user, isLoading, isError, error } = useViewProfileQuery(userId);
 
-  console.log();
   const navigate = useNavigate();
+  const location=useLocation()
   const [previewImage, setPreviewImage] = useState(null);
 
   const form = useForm({});
-  const { register, handleSubmit } = form;
-  const onSubmit = async (values) => {
-    navigate("/profile/category");
+  const { register, handleSubmit, control, setValue } = form;
+  const onSubmit = async (user) => {
+    const id=localStorage.getItem('userId')
+    const formdata= new FormData()
+    formdata.append('userId',id)
+    formdata.append('name',user.name)
+    formdata.append('email',user.email)
+    formdata.append('bio',user?.bio || "")
+    formdata.append('photo',user.photo)
+    formdata.append('phone_number',user.phone_number)
+    formdata.append('district',user.district)
+    formdata.append('ward',user.ward)
+    formdata.append('muncipility',user.muncipility)
+    formdata.append('chowk',user.chowk)
+     await editProfile(formdata)
+     .unwrap()
+     .then((response)=>{
+     console.log(response);
+     navigate(location?.state?.path ,{replace:true})
+     })
+     .catch((error)=>{
+      console.log(error);
+     })
+
+    
   };
 
   const [show, showImage] = useState(false);
   const [image, isImage] = useState(false);
-  // if (isLoading) {
-  //   return <div>Loading</div>;
-  // }
+  if (isLoading || isUpdating) {
+    return <div>Loading</div>;
+  }
 
   return (
     <div className=" text-gray-700 grid place-content-center p-1 text-[1em] ">
@@ -45,35 +65,55 @@ export default function Edit() {
               }}
               className=" rounded-full"
             >
-              <img
-                src={previewImage ? URL.createObjectURL(previewImage) : logo}
-                className=" object-cover object-top w-[300px] h-[300px] rounded-full border-2 border-gray-400"
-                alt=""
+              <Controller
+              name="photo"
+                control={control}
+                render={({field}) => {
+                  return (
+                    <>
+                      <img
+                        src={
+                          previewImage
+                            ? URL.createObjectURL(previewImage)
+                            : (
+                              user?.photo? `http://localhost:8000/${user.photo}` : logo
+                            )
+                        }
+                        className=" object-cover object-top w-[300px] h-[300px] rounded-full border-2 border-gray-400"
+                        alt=""
+                      />
+                      <input
+                        type="file"
+                        id="image"
+                        className=" hidden"
+                        onChange={(e) => {
+                          setValue("photo", e.target.files[0]);
+                          setPreviewImage(e.target.files[0]);
+                        }}
+                      />
+                    </>
+                  );
+                }}
               />
             </div>
-            <input
-              type="file"
-              id="image"
-              className=" hidden"
-              onChange={(e) => {
-                setPreviewImage(e.target.files[0]);
-              }}
-            />
           </div>
 
           <div className="flex flex-col profileEdit">
             <div>
-              <label htmlFor=""> Name</label>
-              <input type="text" />
+              <label htmlFor="name"> Name</label>
+              <input type="text" 
+              {...register('name')}
+              defaultValue={user?.name}
+              />
             </div>
 
             <div className="grid grid-cols-1">
-              <label htmlFor="">Add Bio</label>
+              <label htmlFor="bio">Add Bio</label>
               <textarea
-                name=""
-                id=""
+            
                 rows={4}
                 {...register("bio")}
+                defaultValue={user?.bio}
                 className=" p-2 placeholder:text-[1em] hover:bg-gray-100 focus:outline-none border-2 border-gray-400 rounded-md text-gray-700 "
                 placeholder="Describe Yourself"
               ></textarea>
@@ -82,31 +122,47 @@ export default function Edit() {
         </div>
         <div className="flex profileEdit   box-border flex-col">
           <div>
-            <label htmlFor=""> Email</label>
-            <input type="text" />
+            <label htmlFor="email"> Email</label>
+            <input type="text" 
+            {...register('email')}
+            defaultValue={user?.email}
+            />
           </div>
 
           <div>
-            <label htmlFor=""> Phone Number</label>
-            <input type="text" />
+            <label htmlFor="phone_number"> Phone Number</label>
+            <input type="text" 
+            {...register('phone_number')}
+            defaultValue={user?.phone_number}
+            />
           </div>
           <div className="">
             <span className="font-medium">Address</span>
             <div className="">
-              <label htmlFor="">District</label>
-              <input type="text" name="" id="" />
+              <label htmlFor="district">District</label>
+              <input type="text" {...register('district')}
+              defaultValue={user?.address?.district} />
             </div>
             <div className="">
-              <label htmlFor="">Muncipility</label>
-              <input type="text" name="" id="" />
+              <label htmlFor="muncipility">Muncipility</label>
+              <input type="text" 
+              {...register('muncipility')}
+              defaultValue={user?.address?.muncipility}
+              />
             </div>
             <div className="">
-              <label htmlFor="">Ward No</label>
-              <input type="text" name="" id="" />
+              <label htmlFor="ward">Ward No</label>
+              <input type="text" 
+              {...register('ward')}
+              defaultValue={user?.address?.ward}
+              />
             </div>
             <div className="">
-              <label htmlFor="">Chowk</label>
-              <input type="text" name="" id="" />
+              <label htmlFor="chowk">Chowk</label>
+              <input type="text" 
+              {...register('chowk')}
+              defaultValue={user?.address?.chowk}
+              />
             </div>
           </div>
           <div className=" text-center flex-1 grid content-end  ">

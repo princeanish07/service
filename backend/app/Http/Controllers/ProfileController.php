@@ -26,13 +26,13 @@ class ProfileController extends Controller
     }
     public function createOrUpdate(profileRequest $request, $id)
     {
-
         if($request->hasFile('photo')){
             $file=$request->file('photo');
             $extension= $file->getClientOriginalExtension();
            $name= time().'.'.$extension;
            $file->move('profile/image',$name);
            $path='profile/image/'.$name;
+          
         }
         $user= User::find($id);
         $user->name=$request->input('name');
@@ -42,7 +42,7 @@ class ProfileController extends Controller
         $user->profile()->updateOrCreate(
             ['user_id'=>$id],
             ['bio'=>$request->bio,
-            'photo'=>$path || null, 
+            'photo'=>$path?$path:null, 
             'phone_number'=>$request->phone_number,
             'address'=>[
                 'district'=>$request->district,

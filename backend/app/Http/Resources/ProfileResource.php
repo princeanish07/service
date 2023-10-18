@@ -11,14 +11,14 @@ class ProfileResource extends JsonResource
     public function toArray(Request $request): array
     {
         $profile= $this->whenLoaded('profile');
+       
         return [
             'name'=>$this->name,
             'email'=>$this->email,
-            'bio'=>$profile->bio,
-            'photo'=>$profile->photo,
-            'bio'=>$profile->bio,
-            'phone_number'=>$profile->phone_number,
-            'address'=>$profile->address,
+            'bio'=> $profile? $profile->bio : null,
+            'photo'=>$profile?$profile->photo : null,
+            'phone_number'=>$profile?$profile->phone_number : null,
+            'address'=>$profile && $profile->address?$profile->address : null,
         ];
     }
 }

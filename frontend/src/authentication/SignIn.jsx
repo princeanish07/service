@@ -8,9 +8,8 @@ import { object, string } from "yup";
 import TextError from "../components/ErrorHandling/TextError";
 
 const SignIn = () => {
-  const email = localStorage.getItem("email");
   const initialValues = {
-    email: email ? email : "",
+    email:"",
     password: "",
   };
   const validationSchema = object({

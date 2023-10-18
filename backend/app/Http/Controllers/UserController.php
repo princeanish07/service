@@ -15,9 +15,11 @@ class UserController extends Controller
     public function create(useAuthRequest $request)
     {   
         $validate=$request->validated();
-        $token = User::create($validate)->createToken('mytoken')->plainTextToken;
+        $user=User::create($validate);
+        $token = $user->createToken('mytoken')->plainTextToken;
         return response()->json([
             'token' => $token,
+            'id'=>$user->id,
             'message' => 'Register successfully'
 
         ], 200);
