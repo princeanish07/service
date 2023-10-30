@@ -19,12 +19,9 @@ function App() {
         <Route path="/signUp" element={<SignUp />}></Route>
         <Route path="/signIn" element={<SignIn />}></Route>
         <Route path="/user/*">
-          <Route path="profile/" element={<Profile/>}>
-           
-          </Route>
-          <Route path="profile/create" element={<Edit/>}/>
-          <Route path="category" element/>
-          <Route path="service/category" element={<Category />}>
+          <Route path="profile/" element={<Profile/>}/>
+           <Route path="profile/create" element={<Edit/>}/>
+          <Route path="category" element={<Category />}>
             <Route path=":id" element={<CategoryId />} />
           </Route>
           <Route
