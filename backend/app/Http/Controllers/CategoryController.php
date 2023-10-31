@@ -13,13 +13,15 @@ class CategoryController extends Controller
     {
         $validate = $request->validate([
             'name' => ['required', 'unique:categories,name'],
+            'description'=>'sometimes',
+            'keywords'=>'required',
             'parent_id' => 'sometimes',
         ]);
 
 
         Category::create($validate);
         return response()->json([
-            'message' => 'successfullu create',
+            'message' => 'successfully create',
         ]);
     }
     public function subCategory(Request $request, $id)

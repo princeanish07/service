@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { useViewCategoryQuery } from "../landing/users/service/redux/categorySlice";
+import { useViewCategoryQuery } from "./categoryApi";
 import { FaChevronRight } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate, Outlet, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { saveCategory } from "../landing/users/service/redux/profileslice";
+import {viewCategory} from './categorySlice'
 export default function Category() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const selected = useSelector((state) => state.profile.saveCategory);
+  const selected = useSelector((state) => state.categorySlice.saveCategory);
 
   const {
     data: categories,
@@ -17,7 +17,7 @@ export default function Category() {
     isLoading: categoryLoading,
     error: cataegoryError,
   } = useViewCategoryQuery();
-
+// console.log(categories);
   const [Category, setCategory] = useState({});
   const [subCategory, setSubCategory] = useState({});
   const handleCategory = (category) => {
@@ -41,9 +41,9 @@ export default function Category() {
   return (
      
 
-      <section className="grid md:grid-cols-5 sm:grid-cols-3 text-slate-600 text-[0.9em] gap-5 p-1">
-        <div className="grid grid-cols-3  col-start-1 row-start-1 col-end-4 col-span-4 text-sm font-semibold ">
-          <div className="  bg-white    shadow overflow-hidden">
+        <div className="grid grid-cols-3 col-start-1 col-end-4 row-start-1 col-span-4 text-sm font-semibold  ">
+          
+              <div className="  bg-white    shadow overflow-hidden">
             <ul
               className=" box-border grid grid-cols-1 gap-1 p-3"
               onMouseLeave={() => handleToggle(true)}
@@ -60,6 +60,10 @@ export default function Category() {
                     }}
                     onMouseLeave={() => {
                       handleToggle(false);
+                    }}
+                    onClick={()=>{
+                      // console.log(category);
+                      dispatch(viewCategory(category))
                     }}
                     key={category.id}
                     className={`p-2  hover:cursor-pointer flex   ${
@@ -83,6 +87,8 @@ export default function Category() {
               })}
             </ul>
           </div>
+         
+         
           {Category.category && Category.category.length > 0 ? (
             <div className="   bg-white shadow z-10 ">
               <ul onMouseLeave={() => handleToggle(true)} className="p-3">
@@ -167,20 +173,6 @@ export default function Category() {
           ) : null}
         </div>
 
-        <div
-          className=" col-start-2  flex flex-col p-3 box-border bg-white  col-span-5 row-start-1  z-auto  hide-scrollbar scrolling-touch pr-1  "
-          onMouseEnter={() => {
-            handleCategory({});
-            handleSubCategory({});
-            handleToggle(false);
-          }}
-        >
-            <div className="flex place-content-end">
-              <button className="bg-blue-600 p-2 text-white">Add Category</button>
-            </div>
-            {" "}
-            <Outlet />
-          </div>
-      </section>
+       
   );
 }

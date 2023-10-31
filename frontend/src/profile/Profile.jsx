@@ -77,8 +77,8 @@ function Profile() {
         </div>
         <div className="flex-1 flex flex-col p-4   box-border gap-4">
           <div className=" mt-20">
-            <h2 className=" text-indigo-600  font-semibold text-2xl">
-              {user?.name}
+            <h2 className=" text-indigo-600  font-semibold text-3xl">
+              {user?.name.toUpperCase()}
             </h2>
           </div>
           {

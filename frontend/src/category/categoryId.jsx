@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { useGetCategoryServiceQuery } from "../landing/users/service/redux/categorySlice";
+import { useGetCategoryServiceQuery } from "./categoryApi";
 function CategoryId() {
   const { id } = useParams();
   const { data, isLoading } = useGetCategoryServiceQuery(id);

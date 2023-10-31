@@ -1,9 +1,9 @@
 import { configureStore,getDefaultMiddleware } from "@reduxjs/toolkit";
 import { authApi } from "../authentication/AuthSlice";
 import { ProfileApi } from "../profile/ProfileApi";
-import { categoryApi } from '../landing/users/service/redux/categorySlice';
+import { categoryApi } from "../category/categoryApi";
 import { serviceApi } from "../landing/users/service/redux/serviceSlice";
-import profileReducer from '../landing/users/service/redux/profileslice'
+import categorySliceReducer from '../category/categorySlice'
 import { catserviceApi } from "../landing/users/service/redux/catservices";
 const middleware = getDefaultMiddleware({
   serializableCheck:{
@@ -24,6 +24,7 @@ export const store = configureStore({
     [categoryApi.reducerPath]:categoryApi.reducer,
     [serviceApi.reducerPath]:serviceApi.reducer,
     [catserviceApi.reducerPath]:catserviceApi.reducer,
+    categorySlice:categorySliceReducer,
   },
 
   middleware

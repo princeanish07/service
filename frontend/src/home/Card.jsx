@@ -7,7 +7,7 @@ import { FaUser } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
-import { useViewCategoryQuery } from "../landing/users/service/redux/categorySlice";
+import { useViewCategoryQuery } from "../category/categoryApi";
 import { useGetAllServicesQuery } from "../landing/users/service/redux/serviceSlice";
 
 import { useState } from "react";
