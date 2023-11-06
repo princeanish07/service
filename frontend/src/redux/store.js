@@ -4,7 +4,7 @@ import { ProfileApi } from "../profile/ProfileApi";
 import { categoryApi } from "../category/categoryApi";
 import { serviceApi } from "../landing/users/service/redux/serviceSlice";
 import categorySliceReducer from '../category/categorySlice'
-import { catserviceApi } from "../landing/users/service/redux/catservices";
+import { catServiceAPi } from "../category/catServiceApi";
 const middleware = getDefaultMiddleware({
   serializableCheck:{
     ignoreActions:['profile/basicDetails'],
@@ -15,7 +15,7 @@ const middleware = getDefaultMiddleware({
   ProfileApi.middleware,
   categoryApi.middleware,  
   serviceApi.middleware,
-  catserviceApi.middleware,
+  catServiceAPi.middleware
 );
 export const store = configureStore({
   reducer: {
@@ -23,7 +23,7 @@ export const store = configureStore({
     [ProfileApi.reducerPath]: ProfileApi.reducer,
     [categoryApi.reducerPath]:categoryApi.reducer,
     [serviceApi.reducerPath]:serviceApi.reducer,
-    [catserviceApi.reducerPath]:catserviceApi.reducer,
+    [catServiceAPi.reducerPath]:catServiceAPi.reducer,
     categorySlice:categorySliceReducer,
   },
 

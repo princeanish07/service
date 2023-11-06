@@ -11,6 +11,7 @@ import CategoryId from "./category/categoryId";
 import Profile from "./profile/Profile";
 import Edit from "./profile/edit";
 import Setup from "./landing/users/service/category/services/create/setup";
+import EditCategory from "./category/EditCategory";
 function App() {
   return (
     <>
@@ -23,8 +24,12 @@ function App() {
         <Route path="/user/*">
           <Route path="profile/" element={<Profile />} />
           <Route path="profile/create" element={<Edit />} />
-          <Route path="category" element={<CategoryPage/>}>
-            <Route path="create" element={<AddCategory/>}/>
+          <Route path="category/" element={<CategoryPage/>}>
+            <Route path=":name" element={<EditCategory/>}/>
+            <Route path=":name/:subname" element={<EditCategory/>}/>
+            <Route path=":name/:subname/:child" element={<EditCategory/>}/>
+
+
             </Route>
             <Route path=":id" element={<CategoryId />} />
           <Route

@@ -1,6 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState={
-   category:{}
+   category:{},
+   subcategoryFirst:{},
+   subcategorySecond:{},
+   selectedCategory:{
+    parent:{},
+    subparent:{},
+    child:{},
+   },
+   path:'',
+   count:0,
+   
 
 }
 
@@ -13,9 +23,16 @@ reducers:{
         state.category=action.payload;
    },
 
-    // setSubcategory:(state,action)=>{
-    //     state.subcategory=action.payload;
-    // },
+    setSubcategoryFirst:(state,action)=>{
+        state.subcategoryFirst=action.payload;
+    },
+    setSubcategorySecond:(state,action)=>{
+        state.subcategorySecond=action.payload;
+    },
+    setPath:(state,action)=>{
+        state.path=action.payload
+    },
+   
     // setServices:(state,action)=>{
     //     state.services.push(action.payload)
     // },
@@ -28,10 +45,13 @@ reducers:{
     // saveCategory:(state,action)=>{
     //     state.saveCategory=action.payload
     // }
+    setSelectedCategory:((state,action)=>{
+        state.selectedCategory=action.payload
+    })
     
 
 }
 
 })
-export const {viewCategory}=categorySlice.actions
+export const {viewCategory,setSubcategoryFirst,setSubcategorySecond,setSelectedCategory,setPath}=categorySlice.actions
 export default categorySlice.reducer 

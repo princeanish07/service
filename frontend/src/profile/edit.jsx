@@ -9,7 +9,7 @@ import { ColorRing } from "react-loader-spinner";
 export default function Edit() {
   const userId = localStorage.getItem("userId");
   const [editProfile, { isLoading: isUpdating }] = useEditProfileMutation();
-  const { data: user, isLoading, isError, error } = useViewProfileQuery(userId);
+  const { data: user, isLoading, isError, error,refetch } = useViewProfileQuery(userId);
 
   const navigate = useNavigate();
   const location=useLocation()
@@ -34,6 +34,7 @@ export default function Edit() {
      .unwrap()
      .then((response)=>{
      console.log(response);
+     refetch()
      navigate(location?.state?.path ,{replace:true})
      })
      .catch((error)=>{

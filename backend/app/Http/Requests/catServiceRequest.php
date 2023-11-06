@@ -21,20 +21,23 @@ class catServiceRequest extends FormRequest
      */
     public function rules()
     {
-        $action=$this->route()->getActionMethod();
-        switch($action){
+        $action = $this->route()->getActionMethod();
+        switch ($action) {
             case 'create':
                 return [
-                    'name'=>'required',
-                    'description'=>'sometimes',
-                    'image'=>'sometimes'
+                    '*.name' => 'required',
+                    '*.description' => 'sometimes',
+                    '*.image' => 'sometimes',
+                    '*.category_id' => 'required'
                 ];
-                case 'update':
-                    return [
-                        'name'=>'required',
-                        'description'=>'sometimes',
-                        'image'=>'sometimes'
-                    ];
+            case 'update':
+                return [
+                    '*.name' => 'required',
+                    '*.description' => 'sometimes',
+                    '*.image' => 'sometimes',
+                    '*.category_id' => 'required'
+
+                ];
         }
     }
 }

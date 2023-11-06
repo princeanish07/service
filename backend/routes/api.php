@@ -47,6 +47,7 @@ Route::prefix('qualification')->controller(QualificationController::class)->grou
 Route::prefix('category')->controller(CategoryController::class)->group(function () {
     Route::post('create', 'category');
     Route::post('subcategory/create/{id}', 'subCategory');
+    Route::put('update/{id}','updateCategory');
     Route::get('view', 'viewCategory');
     Route::get('search', 'search');
     Route::get('services/{id}', 'getCategoryById');
@@ -55,7 +56,7 @@ Route::prefix('category')->controller(CategoryController::class)->group(function
 });
 
 Route::prefix('catservices')->controller(CatserviceController::class)->group(function () {
-    Route::post('create/{id}', 'create');
+    Route::post('create', 'create');
     Route::get('show/{service}', 'GetById');
     Route::put('update/{service}', 'update');
     Route::delete('delete/{service}', 'delete');

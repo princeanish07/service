@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\categoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -40,6 +41,19 @@ class CategoryController extends Controller
     {
         $value = Category::with('category:id,name,parent_id')->where('parent_id', null)->get(['id', 'name']);
         return response()->json($value);
+    }
+    public function updateCategory(Request $req, $id){
+        $validate = $req->validate([
+            'name' => ['required', 'unique:categories,name'],
+            'description'=>'sometimes',
+            'keywords'=>'required',
+        ]);
+        $category= Category::find($id)->first();
+        $category->fill($validate)->save();
+        return response()->json([
+            'message'=>'successfully updated'
+          ],200);
+
     }
 
     public function getCategoryById($id)
