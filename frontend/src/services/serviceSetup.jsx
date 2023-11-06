@@ -1,8 +1,8 @@
 import React from "react";
 import Services from "./services";
-import Time from "./create/availability/time";
+import Time from "./time";
 import { useParams,useNavigate } from "react-router-dom";
-import { useGetCatServiceByIdQuery, useGetOtherCatserviceQuery } from "../../redux/catservices";
+import { useGetCatServiceByIdQuery, useGetOtherCatserviceQuery } from "./catservices";
 import {useForm,Controller} from 'react-hook-form'
 export default function ServiceSetup() {
   const {id}=useParams()

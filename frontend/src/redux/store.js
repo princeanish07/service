@@ -2,7 +2,7 @@ import { configureStore,getDefaultMiddleware } from "@reduxjs/toolkit";
 import { authApi } from "../authentication/AuthSlice";
 import { ProfileApi } from "../profile/ProfileApi";
 import { categoryApi } from "../category/categoryApi";
-import { serviceApi } from "../landing/users/service/redux/serviceSlice";
+import { serviceApi } from "../services/serviceSlice";
 import categorySliceReducer from '../category/categorySlice'
 import { catServiceAPi } from "../category/catServiceApi";
 const middleware = getDefaultMiddleware({

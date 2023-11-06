@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Time from "./availability/time";
+import Time from "./time";
 import { useParams, useNavigate } from "react-router-dom";
-import Charge from "./price/charge";
+import Charge from "./charge";
 import {
   useGetCatServiceByIdQuery,
   useGetOtherCatserviceQuery,
-} from "../../../redux/catservices";
+} from "./catservices";
 import { useForm, Controller } from "react-hook-form";
 export default function SeviceSetup() {
   const { id } = useParams();
