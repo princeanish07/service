@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { useViewCategoryQuery } from "../redux/categorySlice";
+import { useViewCategoryQuery } from "../category/categoryApi";
 import { FaChevronRight } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate, Outlet, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { saveCategory } from "../redux/profileslice";
+// import { saveCategory } from "../redux/profileslice";
 export default function Category() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const selected = useSelector((state) => state.profile.saveCategory);
+  // const selected = useSelector((state) => state.profile.saveCategory);
 
   const {
     data: categories,

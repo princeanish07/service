@@ -56,7 +56,7 @@ const SignIn = () => {
                 onSubmit={onSubmit}
               >
                 <Form>
-                <div className="  text-gray-600 text-3xl  py-2 font-sans font-medium  text-center">
+                <div className="  text-gray-600 text-3xl  py-2 font-sans font-medium  text-center ">
                 <span>Sign In User</span>
               </div>
                   <div>

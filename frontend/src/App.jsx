@@ -5,13 +5,11 @@ import SignUp from "./authentication/SignUP";
 import SignIn from "./authentication/SignIn";
 import Home from "./home/Home";
 import { CategoryPage } from "./category/categoryPage";
-import { AddCategory } from "./category/AddCategory";
-// import Category from "./category/category";
 import CategoryId from "./category/categoryId";
 import Profile from "./profile/Profile";
 import Edit from "./profile/edit";
-import Setup from "./landing/users/service/category/services/create/setup";
 import EditCategory from "./category/EditCategory";
+import Service from "./category_services/home"
 function App() {
   return (
     <>
@@ -32,10 +30,13 @@ function App() {
 
             </Route>
             <Route path=":id" element={<CategoryId />} />
-          <Route
+          {/* <Route
             path="service/category/:id/service/:id"
             element={<Setup />}
-          ></Route>
+          ></Route> */}
+        </Route>
+        <Route path="service" element={<Service/>}>
+
         </Route>
       </Routes>
     </>

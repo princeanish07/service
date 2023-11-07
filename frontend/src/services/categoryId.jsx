@@ -4,19 +4,19 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { useGetCategoryServiceQuery } from "../redux/categorySlice";
+// import { useGetCategoryServiceQuery } from "../redux/categorySlice";
 function CategoryId() {
   const { id } = useParams();
-  const { data, isLoading } = useGetCategoryServiceQuery(id);
+  // const { data, isLoading } = useGetCategoryServiceQuery(id);
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const selected=useSelector((state)=>state.profile.saveCategory)
-  useEffect(()=>{
-    console.log(selected);
-    Object.keys(selected).length===0?navigate('/seller/category',{replace:true}):null;
-  },[selected])
+  // const selected=useSelector((state)=>state.profile.saveCategory)
+  // useEffect(()=>{
+  //   console.log(selected);
+  //   Object.keys(selected).length===0?navigate('/seller/category',{replace:true}):null;
+  // },[selected])
 
   const { register, handleSubmit, formState } = useForm({
     defaultValues: {
@@ -36,7 +36,7 @@ function CategoryId() {
 
   return (
     <div className=" grid grid-cols-2 grid-rows-3 auto-rows-min  gap-5    flex-1 ">
-      {data.map((service) => (
+      {/* {data.map((service) => (
         <div className="bg-white hover:cursor-pointer hover:scale-105 shadow-lg p-5 " onClick={()=>{
           navigate(`service/${service.id}`)
           
@@ -51,7 +51,7 @@ function CategoryId() {
             fugit doloribus eum optio odio.
           </p>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
