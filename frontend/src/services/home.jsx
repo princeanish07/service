@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
   const navigate=useNavigate();
   return (
-    <div className="grid grid-cols-3 gap-1 p-1 overflow-auto h-[90Vh] ">
-      <div className="  p-10 box-border shadow border-2 shadow-gray-400">
+    <div className="grid grid-cols-3 gap-1 box-border overflow-auto h-[90Vh] p-10 ">
+      <div className=" grid place-content-center  box-border shadow border-2 shadow-gray-400 bg-gray-100">
         <div
           className=" w-[300px] h-[300px] rounded-full border-2 border-[rgba(0,0,0,.3)]  "
           onClick={() => {
@@ -19,7 +19,6 @@ const Home = () => {
             src={logo}
             alt=""
           />
-        </div>
         <div>
           <input
             type="file"
@@ -31,16 +30,17 @@ const Home = () => {
             }}
           />
         </div>
+        </div>
 
         <div className="mt-5">
           <ul className=" flex flex-col gap-1">
-            <li className=" text-xl text-center mb-4">Bipin Kunwar</li>
-            <li className=" bg-[rgba(0,0,0,.1)] p-2">Edit Profile</li>
-            <li className=" bg-[rgba(0,0,0,.1)] p-2">Edit Qualification</li>
+            <li className=" text-xl text-center mb-4">BIPIN KUNWAR</li>
+            <li className=" bg-[rgba(0,0,0,.1)] p-3 text-center ">Edit Profile</li>
+            <li className=" bg-[rgba(0,0,0,.1)] p-3 text-center">Edit Qualification</li>
           </ul>
         </div>
       </div>
-      <div className="col-span-2 shadow flex flex-col ">
+      <div className="col-span-2 shadow flex flex-col bg-gray-100 ">
         <div className="flex  gap-4  text-slate-800 shadow border p-1">
           <div className=" flex    flex-1 rounded-sm ">
             <div className=" flex-1">
@@ -52,7 +52,7 @@ const Home = () => {
                 placeholder="Search Your Services"
               />
             </div>
-            <div className="  px-5 p-2 grid place-content-center bg-[#0118E6] rounded-sm">
+            <div className="  px-5 p-2 grid place-content-center bg-[#0118E6] rounded-sm ">
               <button>
                 <FaSearch className=" text-gray-300" />
               </button>

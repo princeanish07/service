@@ -5,11 +5,11 @@ import SignUp from "./authentication/SignUP";
 import SignIn from "./authentication/SignIn";
 import Home from "./home/Home";
 import { CategoryPage } from "./category/categoryPage";
-import CategoryId from "./category/categoryId";
 import Profile from "./profile/Profile";
 import Edit from "./profile/edit";
 import EditCategory from "./category/EditCategory";
-import Service from "./category_services/home"
+import Service from "./services/home"
+import Category from "./services/setup/category";
 function App() {
   return (
     <>
@@ -29,13 +29,16 @@ function App() {
 
 
             </Route>
-            <Route path=":id" element={<CategoryId />} />
+            {/* <Route path=":id" element={<CategoryId />} /> */}
           {/* <Route
             path="service/category/:id/service/:id"
             element={<Setup />}
           ></Route> */}
-        </Route>
         <Route path="service" element={<Service/>}>
+        </Route>
+        <Route path="service/category" element={<Category/>}>
+
+        </Route>
 
         </Route>
       </Routes>

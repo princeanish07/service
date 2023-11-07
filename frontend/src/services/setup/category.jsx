@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { useViewCategoryQuery } from "../category/categoryApi";
+import { useViewCategoryQuery } from "../../category/categoryApi";
 import { FaChevronRight } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate, Outlet, useParams } from "react-router-dom";
+import {setSelectedCategory} from '../../category/categorySlice'
 import { useSelector, useDispatch } from "react-redux";
 // import { saveCategory } from "../redux/profileslice";
 export default function Category() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  // const selected = useSelector((state) => state.profile.saveCategory);
+  const selected = useSelector((state) => state.category.selectedCategory);
 
   const {
     data: categories,
@@ -133,8 +134,8 @@ export default function Category() {
                       }}
                       className={`p-2 w-full hover:cursor-pointer flex ${
                         selected &&
-                        selected.Subparent &&
-                        selected.Subparent === subcategory.id
+                        selected.subparent &&
+                        selected.subparent === subcategory.id
                           ? "bg-blue-600 text-white"
                           : "  hover:bg-gray-200  hover:text-gray-700"
                       }`}
