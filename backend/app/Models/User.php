@@ -56,7 +56,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function catservices(){
+    public function services(){
         return  $this->belongsToMany(CatService::class,'catservice_user');
     }
     public function categories()

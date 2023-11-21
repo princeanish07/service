@@ -28,9 +28,10 @@ export default function SeviceSetup() {
     isLoading,
     isError,
   } = useGetCatServiceByIdQuery(serviceId);
-  const { data: others, isLoading: ohterLoading } = useGetOtherCatserviceQuery(
-    selected?.id
-  );
+  console.log(selected);
+  const { data: others, isLoading: ohterLoading } =
+    selected?.name !== "all" && useGetOtherCatserviceQuery(selected?.id);
+
   const navigate = useNavigate();
   const { register, control, handleSubmit, setValue } = useForm({
     defaultValues: {
@@ -40,7 +41,6 @@ export default function SeviceSetup() {
       offers: "No offers are available",
     },
   });
-  const [preview, setPreview] = useState(null);
 
   const onSubmit = async (values) => {
     console.log(values);
@@ -76,23 +76,23 @@ export default function SeviceSetup() {
     return <div>Loading...</div>;
   }
   return (
-    <div className="grid grid-cols-1 text-[1em] text-slate-500 box-border h-[90Vh] ">
-      <section className="   ">
-        {/* <div className="flex justify-end">
-            <button
-              className="w-[200px] text-center bg-blue-600 p-2 text-white"
-              onClick={() =>
-                navigate(`/seller/category/${service.category_id}`, {
-                  replace: true,
-                })
-              }
-            >
-              Goto Category
-            </button>
-        </div> */}
+    <section className="grid grid-cols-1 text-[1em] text-slate-500 box-border bg-[rgba(0,0,0,0.5)] p-10 gap-5 ">
+      <div className="flex justify-end">
+        <button
+          className="w-[200px] text-center bg-blue-600 p-2 text-white"
+          onClick={() =>
+            navigate(`/user/service/category/`, {
+              replace: true,
+            })
+          }
+        >
+          Goto Category
+        </button>
+      </div>
+      <div>
         <form
           action=""
-          className="   grid grid-cols-2 gap-10 font-medium text-[1.1em]   mt-3 bg-gray-100 p-10   box-border justify-self-center"
+          className="   grid grid-cols-2 gap-10 font-medium text-[1em]  bg-white p-10  box-border justify-self-center"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="service flex flex-col gap-4">
@@ -125,12 +125,11 @@ export default function SeviceSetup() {
             />
 
             <Charge
-             register={register}
-             Controller={Controller}
-             control={control}
-             setValue={setValue}
+              register={register}
+              Controller={Controller}
+              control={control}
+              setValue={setValue}
             />
-
           </div>
 
           <div className="flex flex-col service gap-4">
@@ -184,15 +183,6 @@ export default function SeviceSetup() {
                     <div>
                       <label htmlFor="">Add Images</label>
 
-                      <div className="grid   p-1 ">
-                        {preview && (
-                          <img
-                            src={URL.createObjectURL(preview)}
-                            className=" object-cover w-full h-[300px] object-top "
-                            alt=""
-                          />
-                        )}
-                      </div>
 
                       <div>
                         <input
@@ -200,8 +190,7 @@ export default function SeviceSetup() {
                           accept="image/*"
                           onChange={(e) => {
                             setValue("image", e.target.files[0]);
-                            setPreview(e.target.files[0]);
-                            console.log(e.target.files[0]);
+                         
                           }}
                         />
                       </div>
@@ -221,32 +210,35 @@ export default function SeviceSetup() {
             </div>
           </div>
         </form>
-      </section>
-      <section className=" flex justify-between p-16 ">
-        <div>
-          <p className="mb-2 bg-orange-600 p-2 text-white font-medium w-[40vw]">
-            Other Services
-          </p>
+      </div>
 
-          <ul className="    flex flex-col  text-[0.95em] w-[40Vw]">
-            {others
-              .filter((item) => item.id != serviceId)
-              .map((other, index) => (
-                <li
-                  key={other.id}
-                  className=" text-gray-100 border-gray-300 p-2 hover:bg-gray-300 hover:cursor-pointer"
-                  onClick={() => {
-                    dispatch(setServiceId(other?.id));
-                    navigate(`/user/service/${other?.name}/setup`, {
-                      replace: true,
-                    });
-                  }}
-                >
-                  {other?.name}
-                </li>
-              ))}
-          </ul>
-        </div>
+      <section className=" flex justify-between p-10 bg-white ">
+        {selected?.name != "all" && (
+          <div>
+            <p className="mb-2 bg-orange-600 p-2 text-white font-medium w-[40vw]">
+              Other Services
+            </p>
+
+            <ul className="    flex flex-col  text-[0.95em] w-[40Vw]">
+              {others
+                .filter((item) => item.id != serviceId)
+                .map((other, index) => (
+                  <li
+                    key={other.id}
+                    className=" text-gray-100 border-gray-300 p-2 hover:bg-gray-300 hover:cursor-pointer"
+                    onClick={() => {
+                      dispatch(setServiceId(other?.id));
+                      navigate(`/user/service/${other?.name}/setup`, {
+                        replace: true,
+                      });
+                    }}
+                  >
+                    {other?.name}
+                  </li>
+                ))}
+            </ul>
+          </div>
+        )}
         <div>
           <div className="flex flex-col">
             <label htmlFor="">Feecback</label>
@@ -258,6 +250,6 @@ export default function SeviceSetup() {
           </div>
         </div>
       </section>
-    </div>
+    </section>
   );
 }

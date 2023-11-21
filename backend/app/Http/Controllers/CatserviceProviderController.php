@@ -46,7 +46,7 @@ class CatserviceProviderController extends Controller
             $file->move('service/image', $name);
             $path = 'service/image/' . $name;
         }
-        $users->catservices()->attach($request['cid'], [
+        $users->services()->attach($request['cid'], [
             'description' => $request['description'],
             'days' => json_encode($request['days']),
             'time' => $request['time'],
@@ -66,7 +66,7 @@ class CatserviceProviderController extends Controller
     public function getAll()
     {
 
-        $requests = User::has('catservices')->with(['catservices', 'profile'])
+        $requests = User::has('services')->with(['services', 'profile'])
             ->get();
         return ProviderResource::collection($requests);
     }
@@ -74,9 +74,9 @@ class CatserviceProviderController extends Controller
 
     public function getByCategory($id)
     {
-        $services = User::whereHas('catservices', function ($query) use ($id) {
+        $services = User::whereHas('services', function ($query) use ($id) {
             $query->where('category_id', $id);
-        })->with(['catservices', 'profile'])->get();
+        })->with(['services', 'profile'])->get();
         // $services = Category::has('services')->with('services.users.profile')->find($id); uses for nested relationship 
         return ProviderResource::collection(($services));
     }
@@ -84,29 +84,37 @@ class CatserviceProviderController extends Controller
 
     public function getProviderServices($providersId)
     {
-        $services = User::find($providersId)->catservices()->withPivot('description', 'days', 'time', 'charge', 'offers', 'experience', 'image', 'address')->get();
+        $services = User::find($providersId)->services()->withPivot('description', 'days', 'time', 'charge', 'offers', 'experience', 'image', 'address')->get();
 
         // return $services;
         return  ServiceResource::collection($services);
     }
 
-    public function providerServiceByCategory($providerId,$categoryId){
-        $services = User::find($providerId)->catservices()->withPivot('description', 'days', 'time', 'charge', 'offers', 'experience', 'image', 'address')
-        ->where('category_id',$categoryId)
-        ->get();
+    public function providerServiceByCategory($providerId, $categoryId)
+    {
+        $services = User::find($providerId)->services()->withPivot('description', 'days', 'time', 'charge', 'offers', 'experience', 'image', 'address')
+            ->where('category_id', $categoryId)
+            ->get();
 
         return  ServiceResource::collection($services);
+    }
+    public function providerServiceById( $serviceId,$providerId)
+    {
+        $services = User::find($providerId)->services()->withPivot('description', 'days', 'time', 'charge', 'offers', 'experience', 'image', 'address')
+           ->findOrFail($serviceId);
+
+        return  new ServiceResource($services);
     }
 
     public function getProviderCategory($providersId)
     {
 
- 
+
         $user = User::find($providersId);
 
         $categories = Category::with(['category:id,name,parent_id', 'category' => function ($query) use ($user) {
-            $query->whereHas('catservices', function ($useQuery) use ($user) {
-                $useQuery->whereIn('id', $user->catservices->pluck('id'));
+            $query->whereHas('services', function ($useQuery) use ($user) {
+                $useQuery->whereIn('id', $user->services->pluck('id'));
             });
         }])
             ->where(function ($query) use ($user) {
@@ -116,19 +124,16 @@ class CatserviceProviderController extends Controller
                 })
                     ->orWhere(function ($subquery) use ($user) {
                         // Check for indirect relationship with user through service model only if no subcategories
-                        $subquery->whereDoesntHave('category')->whereHas('catservices', function ($userQuery) use ($user) {
-                            $userQuery->whereIn('id', $user->catservices->pluck('id'));
+                        $subquery->whereDoesntHave('category')->whereHas('services', function ($userQuery) use ($user) {
+                            $userQuery->whereIn('id', $user->services->pluck('id'));
                         });
                     });
-            })->where('parent_id',null)
+            })->where('parent_id', null)
             ->get(['id', 'name', 'parent_id']);
 
 
 
 
         return $categories;
-
-
-
     }
 }

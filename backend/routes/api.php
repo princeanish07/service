@@ -47,18 +47,18 @@ Route::prefix('qualification')->controller(QualificationController::class)->grou
 Route::prefix('category')->controller(CategoryController::class)->group(function () {
     Route::post('create', 'category');
     Route::post('subcategory/create/{id}', 'subCategory');
-    Route::put('update/{id}','updateCategory');
+    Route::put('update/{id}', 'updateCategory');
     Route::get('view', 'viewCategory');
     Route::get('search', 'search');
     Route::get('services/{id}', 'getCategoryById');
     Route::get('service/{id}', 'getServices');
-    Route::get('All/{id}','getAllCategory');
+    Route::get('All/{id}', 'getAllCategory');
 });
 
 Route::prefix('catservices')->controller(CatserviceController::class)->group(function () {
     Route::post('create', 'create');
     Route::get('show/{service}', 'GetById');
-    Route::get('all','GetAll');
+    Route::get('all', 'GetAll');
     Route::put('update/{service}', 'update');
     Route::delete('delete/{service}', 'delete');
     Route::get('other/{id}', 'otherServices');
@@ -68,9 +68,11 @@ Route::prefix('services')->controller(CatserviceProviderController::class)->grou
     Route::post('create/{id}', 'createServices');
     Route::get('providers', 'getAll');
     Route::get('provider/{providerId}', 'getProviderServices');
-    Route::get('provider/{providerId}/category/{categoryId}','providerServiceByCategory');
-    Route::get('category/{id}','getByCategory');
+    Route::get('provider/{providerId}/category/{categoryId}', 'providerServiceByCategory');
+    Route::get('{serviceId}/provider/{providerId}', 'providerServiceById');
+
+    Route::get('category/{id}', 'getByCategory');
     Route::put('update/{}service}', 'update');
     Route::delete('delete/{service}', 'delete');
-    Route::get('provider/category/{providerId}','getProviderCategory');
+    Route::get('provider/category/{providerId}', 'getProviderCategory');
 });

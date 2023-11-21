@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-// import {setServiceId} from "../home/cardSlice";
+import {setServiceId} from "./cat-Service/catServiceSlice";
 
 export default function Service({ services }) {
   console.log(services);
   const navigate = useNavigate();
-  const [serviceId, setServiceId] = useState();
-
+  const [serviceId, setserviceId] = useState();
+const dispatch=useDispatch()
   return (
-    <section className="grid  text-gray-300   text-[1.1em] gap-4 p-10 ">
+    <section className="grid  text-gray-300   text-[1em] gap-4 p-20 ">
       {services.map((service, index) => (
       
             <div
               key={service?.csid}
-              className=" p-20 box-border  shadow grid grid-cols-1    bg-white text-gray-600"
+              className=" p-10  box-border  shadow grid grid-cols-1    bg-white text-gray-600"
             >
-              <div className=" flex flex-col gap-2">
+              <div className=" flex flex-col gap-1">
                 <p className="font-semibold font-sans text-[1.3em] bg-blue-500 text-white p-2">
                   {service.name}
                 </p>
@@ -67,9 +67,9 @@ export default function Service({ services }) {
               
                 <div className="flex gap-5">
                   <button
-                    className="bg-gray-200 w-[200px] p-2"
+                    className="bg-orange-600 text-white w-[200px] p-2"
                     onClick={() => {
-                      setServiceId(!serviceId?service?.csid:(serviceId && serviceId!==service?.csid?service?.csid:null));
+                      setserviceId(!serviceId?service?.csid:(serviceId && serviceId!==service?.csid?service?.csid:null));
                     }}
                   >
                     {
@@ -79,12 +79,16 @@ export default function Service({ services }) {
                 <button
                   type="button"
                   className="font-bold font-sans text-[1em] bg-green-600 p-2 w-[200px]  text-white"
+                  onClick={()=>{
+                     dispatch(setServiceId(service?.csid))
+                     navigate(`/user/service/${service?.name}/setup`) 
+                  }}
                 >
                   Edit
                 </button>
                 <button
                   type="button"
-                  className="font-bold font-sans text-[1em] bg-green-600 p-2 w-[200px]  text-white"
+                  className="font-bold font-sans text-[1em] bg-blue-600 p-2 w-[200px]  text-white"
                 >
                   Delete
                 </button>
