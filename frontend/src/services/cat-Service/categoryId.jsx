@@ -19,9 +19,10 @@ function CategoryId() {
     : Object.keys(subparent).length != 0
     ? subparent
     : parent;
-    console.log(selected);
-    const { data, isLoading } = useGetCategoryServiceQuery(selected?.id);
+    console.log('selected',selected);
+    const { data, isLoading,isError,error } = useGetCategoryServiceQuery(selected?.id);
   const navigate = useNavigate();
+  console.log('data',data);
 
   const dispatch = useDispatch();
   // const selected=useSelector((state)=>state.profile.saveCategory)
@@ -45,12 +46,15 @@ function CategoryId() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-if(data.length<=0){
+if( data && data.length<=0){
   return(
     <div>
       No services are found
     </div>
   )
+}
+if(isError){
+  return <div>{error}</div>
 }
   return (
     <div className=" grid grid-cols-2 grid-rows-3 auto-rows-min  gap-5    flex-1 ">

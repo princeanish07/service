@@ -10,6 +10,7 @@ import {setOnOver} from '../home/cardSlice'
 const Home = () => {
   const navigate=useNavigate();
   const dispatch=useDispatch()
+
   return (
     <div className="grid grid-cols-5 gap-1 box-border p-1 ">
        <Category/>
@@ -19,7 +20,7 @@ const Home = () => {
               dispatch(setOnOver({parent:{},subparent:{},child:{}}))
                     }}
       >
-      <div className="flex  gap-4  text-slate-800  px-10 mt-10">
+      <div className="flex  gap-4  text-slate-800  px-20 mt-10">
       <div className=" flex    flex-1 rounded-sm ">
             <div className=" flex-1">
               <input

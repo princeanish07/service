@@ -19,9 +19,9 @@ class ProviderResource extends JsonResource
             'name'=>$this->name,
             'email'=>$this->email,
             'rating'=>5 ,
-            $this->mergeWhen($this->relationLoaded('catservices'), function () {
+            $this->mergeWhen($this->relationLoaded('services'), function () {
                 return [
-                    'category' => new CategoryResource($this->catservices->first()->category),
+                    'category' => new CategoryResource($this->services->first()->category),
                 ];
             }),
             'profile'=>new HomeprofileResource($this->whenLoaded('profile'))

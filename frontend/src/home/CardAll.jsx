@@ -13,7 +13,7 @@ const CardAll = () => {
     isLoading: cardsLoading,
     error: serviceError,
   } = useGetAllServicesQuery();
-
+  
   if (cardsLoading) {
     return <div>loading...</div>;
   }

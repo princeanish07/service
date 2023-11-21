@@ -6,6 +6,7 @@ import { FaStar } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 function Card({ cards }) {
+  console.log('card',cards);
   const navigate=useNavigate();
   return (
     <section className="grid grid-cols-2  gap-1  font-sans bg-[#679BE0] ">
@@ -29,7 +30,7 @@ function Card({ cards }) {
               <div className="flex flex-1 flex-col  p-2 box-border gap-1  ">
                 <div>
                   <h3 className=" text-center font-semibold font-sans text-[1.6em] ">
-                    {card.category.name.toUpperCase()}
+                    {card?.category?.name.toUpperCase()}
                   </h3>
                 </div>
                 <div className=" flex mt-2 place-content-center">

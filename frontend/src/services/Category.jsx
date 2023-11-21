@@ -41,7 +41,7 @@ const userId=localStorage.getItem('userId');
 
       useEffect(() => {
         Object.keys(selectedCatg).length !== 0 &&
-          navigate(`${selectedCatg?.name}`);
+          navigate(`${selectedCatg?.name}`,{replace:true});
          
       }, [selectedCatg]);
   if (categoryLoading) {

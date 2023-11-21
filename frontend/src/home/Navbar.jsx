@@ -11,7 +11,7 @@ export default function Naavbar() {
     const location= useLocation();
   
   return (
-         <nav className="flex sticky top-0 bg-[#6434FA] p-1  ">
+         <nav className="flex sticky top-0 bg-blue-600 p-1  ">
           <div className="  flex items-start ">
             <img src={img2} alt="" className=" h-[80px] w-[80px]" />
           </div>
@@ -71,6 +71,7 @@ export default function Naavbar() {
                 localStorage.removeItem('logged');
                 localStorage.removeItem('userId');
                 navigate('/',{replace:true})
+                window.location.href="/Category/All"
               }
                }}>Log Out</button>
               </li>
