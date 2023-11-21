@@ -2,8 +2,11 @@ import { configureStore,getDefaultMiddleware } from "@reduxjs/toolkit";
 import { authApi } from "../authentication/AuthSlice";
 import { ProfileApi } from "../profile/ProfileApi";
 import { categoryApi } from "../category/categoryApi";
-import { serviceApi } from "../services/serviceSlice";
+import { serviceApi } from "../services/serviceApi";
+import {cardApi} from '../home/cardApi'
 import categorySliceReducer from '../category/categorySlice'
+import catServiceSliceReducer from "../services/cat-Service/catServiceSlice";
+import cardSliceReducer from "../home/cardSlice";
 import { catServiceAPi } from "../category/catServiceApi";
 const middleware = getDefaultMiddleware({
   serializableCheck:{
@@ -15,7 +18,8 @@ const middleware = getDefaultMiddleware({
   ProfileApi.middleware,
   categoryApi.middleware,  
   serviceApi.middleware,
-  catServiceAPi.middleware
+  catServiceAPi.middleware,
+  cardApi.middleware
 );
 export const store = configureStore({
   reducer: {
@@ -24,7 +28,10 @@ export const store = configureStore({
     [categoryApi.reducerPath]:categoryApi.reducer,
     [serviceApi.reducerPath]:serviceApi.reducer,
     [catServiceAPi.reducerPath]:catServiceAPi.reducer,
+    [cardApi.reducerPath]:cardApi.reducer,
     categorySlice:categorySliceReducer,
+    catServiceSlice:catServiceSliceReducer,
+    cardSlice:cardSliceReducer,
   },
 
   middleware

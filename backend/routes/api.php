@@ -58,15 +58,19 @@ Route::prefix('category')->controller(CategoryController::class)->group(function
 Route::prefix('catservices')->controller(CatserviceController::class)->group(function () {
     Route::post('create', 'create');
     Route::get('show/{service}', 'GetById');
+    Route::get('all','GetAll');
     Route::put('update/{service}', 'update');
     Route::delete('delete/{service}', 'delete');
     Route::get('other/{id}', 'otherServices');
 });
 
 Route::prefix('services')->controller(CatserviceProviderController::class)->group(function () {
-    Route::post('create/{providerId}', 'createServices');
+    Route::post('create/{id}', 'createServices');
     Route::get('providers', 'getAll');
     Route::get('provider/{providerId}', 'getProviderServices');
+    Route::get('provider/{providerId}/category/{categoryId}','providerServiceByCategory');
+    Route::get('category/{id}','getByCategory');
     Route::put('update/{}service}', 'update');
     Route::delete('delete/{service}', 'delete');
+    Route::get('provider/category/{providerId}','getProviderCategory');
 });

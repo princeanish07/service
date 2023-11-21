@@ -12,7 +12,7 @@ export default function Time({ Controller, setValue, control }) {
   return (
     <>
       <div className="  text-slate-500 flex flex-col gap-2">
-        <span>Available Time</span>
+        <span>Service Time</span>
         <div className="">
           <div className=" ">
             <div>
@@ -20,59 +20,30 @@ export default function Time({ Controller, setValue, control }) {
                 name="time"
                 control={control}
                 defaultValue={{
-                  hours: true,
-                  set: {
+                  
                     start: "10:00",
                     end: "17:00",
-                  },
                 }}
                 render={({ field }) => {
                   console.log(field);
                   return (
                     <div className="flex flex-col gap-3">
                       <div className="grid gap-10 grid-cols-2">
-                        {Time.map((time) => (
-                          <button
-                            key={time}
-                            className={`p-2 w-full ${
-                              color === time
-                                ? "bg-blue-500 text-white"
-                                : " bg-gray-300 text-gray-800"
-                            }`}
-                            onClick={() => {
-                              if (time === "24 Hours") {
-                                setValue("time", { ...field, hours: true });
-                                setColor(time);
-                              }
-                              if (time === "Add Time") {
-                                setValue("time", {
-                                  ...field,
-                                  hours: false,
-                                });
-                                setColor(time);
-                              }
-                            }}
-                          >
-                            {time}
-                          </button>
-                        ))}
-                      </div>
-                      {!field.value.hours && (
-                        <div className="grid grid-cols-2 gap-10">
                           {addTime.map((add) => (
                             <input
                               key={add}
                               type="time"
                               defaultValue={add === "start" ? "10:00" : "17:00"}
-                              className="p-1.5 shadow-md border-2 border-gray-200 "
+                              className="p-1.5 border-2 border-gray-200 "
                               onChange={(e) => {
                                 const { value } = e.target;
-                                setValue(`time.set. ${add}`, value);
+                                setValue(`time. ${add}`, value);
                               }}
                             />
                           ))}
-                        </div>
-                      )}
+                   
+                      </div>
+                     
                     </div>
                   );
                 }}
@@ -83,10 +54,10 @@ export default function Time({ Controller, setValue, control }) {
       </div>
 
       <div className="bg-white flex flex-col  shadow shadow-gray-200 ">
-        <span>Available Days</span>
+        <span>Servicing Days</span>
         <div>
           <Controller
-            name="Days"
+            name="days"
             control={control}
             defaultValue={[]}
             render={({ field }) => {
@@ -102,9 +73,9 @@ export default function Time({ Controller, setValue, control }) {
                       }
                       onChange={(e) => {
                         weeks.length === field.value.length
-                          ? setValue("Days", [])
+                          ? setValue("days", [])
                           : setValue(
-                              "Days",
+                              "days",
                               weeks.map((day) => day)
                             );
                       }}
@@ -124,7 +95,7 @@ export default function Time({ Controller, setValue, control }) {
                             onChange={(e) => {
                               const { value, checked } = e.target;
                               setValue(
-                                "Days",
+                                "days",
                                 field.value.includes(value)
                                   ? field.value.filter((item) => item !== value)
                                   : [...field.value, value]

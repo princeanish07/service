@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class catservice_provider extends Model
+class catservice_provider extends Pivot
 {
     use HasFactory;
-    public $fillable=['availabe_data','period','duration','price','location','refund_Policy'];
-    public $casts=[
-        'location'=>'array'
+    public $fillable=['description,days,time'];
+    protected $casts=[
+        'days'=>'array',
+        'time'=>'array',
     ];
 }

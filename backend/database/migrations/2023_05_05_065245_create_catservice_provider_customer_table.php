@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('catservice_provider_customer', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('catservice_provider_id');
-            $table->foreign('catservice_provider_id')->references('id')->on('catservice_provider');
+            // $table->unsignedBigInteger('catservice_provider_id');
+            // $table->foreign('catservice_provider_id')->references('id')->on('catservice_provider');
             // $table->foreignId('catservice_provider_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->dateTime('shedule');

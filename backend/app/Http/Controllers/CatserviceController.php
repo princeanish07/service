@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\catServiceRequest;
+use App\Http\Resources\CatServiceResource;
 use App\Models\Category;
 use App\Models\Catservice;
 use Illuminate\Http\Request;
@@ -19,18 +20,7 @@ class CatserviceController extends Controller
     foreach($validate as $item){
       Catservice::create($item);
     }
-    // Catservice::create([
-    //   [
-    //     "name" => "Drainagr Cleaning",
-    //     "description" => "Pipe repareing is a technicial field of plumbing",
-    //     "category_id" => "1"
-    //   ],
-    //   [
-    //     "name" => "Drainagr Cleaning",
-    //     "description" => "Pipe repareing is a technicial field of plumbing",
-    //     "category_id" => "1"
-    //   ]
-    // ]);
+
     return response()->json([
       'message' => 'successfully created'
     ], 200);
@@ -43,6 +33,11 @@ class CatserviceController extends Controller
     );
   }
 
+  public function GetAll(){
+    $service=Catservice::all();
+    // return dd($service);
+    return  CatServiceResource::collection($service);
+  }
 
   public function update(catServiceRequest $request, Catservice $service)
   {
@@ -61,8 +56,7 @@ class CatserviceController extends Controller
   }
   public function otherServices($id)
   {
-    $data = Catservice::select('category_id')->find($id);
-    $item = Category::find($data->category_id)->services()->select('id', 'name')->get();
+    $item = Category::find($id)->services()->select('id', 'name')->get();
     return response()->json($item);
   }
 }

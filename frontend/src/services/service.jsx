@@ -1,58 +1,99 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+// import {setServiceId} from "../home/cardSlice";
 
-
-export default function Service() {
-  const services = useSelector((state) => state.profile.services);
-  const navigate = useNavigate();
+export default function Service({ services }) {
   console.log(services);
+  const navigate = useNavigate();
+  const [serviceId, setServiceId] = useState();
 
   return (
-    <div className=" bg-[#FCF9FE] mt-2 text-gray-300  grid grid-cols-1 text-[0.9em]">
-      <section className="grid grid-cols-5 gap-2 ">
-        <div className="">
-          <ul className=" box-border grid grid-cols-1 gap-1 ">
-            <li className="p-2 bg-red-600 ">SERVICES</li>
-            {services &&
-              services.map((service) => {
-                return (
-                  <li
-                    key={service.id}
-                    className="p-2 hover:cursor-pointer flex hover:bg-gray-200  hover:text-gray-700"
+    <section className="grid  text-gray-300   text-[1.1em] gap-4 p-10 ">
+      {services.map((service, index) => (
+      
+            <div
+              key={service?.csid}
+              className=" p-20 box-border  shadow grid grid-cols-1    bg-white text-gray-600"
+            >
+              <div className=" flex flex-col gap-2">
+                <p className="font-semibold font-sans text-[1.3em] bg-blue-500 text-white p-2">
+                  {service.name}
+                </p>
+                <table  className="table-auto  " cellSpacing={5}  cellPadding={10} >
+                  <thead  >
+                    <tr className="bg-gray-600 text-white "  >
+                      <th>Location</th>
+                      <th>Days</th>
+                      <th>Time</th>
+                      <th>Charge</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="bg-blue-600 text-white">
+                      <td>{service?.location}</td>
+                      <td>{service?.days}</td>
+                      <td>{`${service?.time?.start}-${service?.time?.end}`}</td>
+                      <td>{`${service?.charge?.min}-${service?.charge?.max}`}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                {
+                  serviceId === service?.csid ?(
+                    <div>
+
+                <div className="bg-gray-200 p-4">
+                  <p>
+                    {service?.offers}
+                  </p>
+                </div>
+                <div className="bg-gray-200 p-4">
+                  {
+                    service?.experience ? <p>
+
+                      {service?.experience}
+                    </p>: <p>No Experience</p>
+                  }
+                 
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <img src={`http://localhost:8000/${service?.image}`} className="h-[300px] w-full object-cover" alt="" />
+                </div>
+                </div>
+
+
+                  ):null
+                }
+              
+                <div className="flex gap-5">
+                  <button
+                    className="bg-gray-200 w-[200px] p-2"
                     onClick={() => {
-                      navigate(`${service.id}`);
+                      setServiceId(!serviceId?service?.csid:(serviceId && serviceId!==service?.csid?service?.csid:null));
                     }}
                   >
-                    {service.service}
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
-        
-        <div className=" box-border gap-3 col-span-3 col-start-2 row-start-1 flex-1 h-[88.8Vh] flex flex-col   ">
-            <div className=" ">
-              <button className=" w-[200px] text-center bg-red-600 p-2"> Share Information</button>
+                    {
+                      serviceId === service?.csid ? 'View Less' : 'View More'
+                    }
+                  </button>
+                <button
+                  type="button"
+                  className="font-bold font-sans text-[1em] bg-green-600 p-2 w-[200px]  text-white"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  className="font-bold font-sans text-[1em] bg-green-600 p-2 w-[200px]  text-white"
+                >
+                  Delete
+                </button>
+                </div>
+              </div>
+          
             </div>
-          <div className="overflow-y-auto hide-scrollbar scrolling-touch  ">
-            <Outlet />
-          </div>
-        </div>
-        <div className=" grid justify-center  ">
-          <div>
-            <p className=" text-[1.1em] text-center mb-5">
-              Categories Selected
-            </p>
-            <ul className=" grid grid-cols-1 gap-4">
-              <li>Plumbing</li>
-              <li>Painting</li>
-              <li>Repiring</li>
-              <li>Electrician</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </div>
+       
+      ))}
+    </section>
   );
 }

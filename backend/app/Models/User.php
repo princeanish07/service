@@ -57,7 +57,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function catservices(){
-        return  $this->belongsToMany(CatService::class,'catservice_provider');
+        return  $this->belongsToMany(CatService::class,'catservice_user');
     }
     public function categories()
     {

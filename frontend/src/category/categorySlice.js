@@ -10,6 +10,7 @@ const initialState={
    },
    path:'',
    count:0,
+   serviceId:0
    
 
 }
@@ -42,9 +43,7 @@ reducers:{
     //     state.categoryService.push(action.payload)
 
     // },
-    // saveCategory:(state,action)=>{
-    //     state.saveCategory=action.payload
-    // }
+   
     setSelectedCategory:((state,action)=>{
         state.selectedCategory=action.payload
     })

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('escrow_service');
             $table->string('currency');
             $table->string('payment_status');
-            $table->unsignedBigInteger('catservice_provider_customer_id');
-            $table->foreign('catservice_provider_customer_id')->references('id')->on('catservice_provider_customer');
+            // $table->unsignedBigInteger('catservice_provider_customer_id');
+            // $table->foreign('catservice_provider_customer_id')->references('id')->on('catservice_provider_customer');
             // $table->foreignId('category_service_service_provider_customer_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

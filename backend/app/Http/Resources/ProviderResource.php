@@ -16,17 +16,15 @@ class ProviderResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'first_name'=>$this->first_name,
-            'last_name'=>$this->last_name,
+            'name'=>$this->name,
             'email'=>$this->email,
-            'phone_number'=>$this->phone_number,
             'rating'=>5 ,
-            'photo'=>null,
             $this->mergeWhen($this->relationLoaded('catservices'), function () {
                 return [
                     'category' => new CategoryResource($this->catservices->first()->category),
                 ];
             }),
+            'profile'=>new HomeprofileResource($this->whenLoaded('profile'))
         ];
     }
     

@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('catservice_provider_scope', function (Blueprint $table) {
+        Schema::create('catservice_user_scope', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('catservice_provider_id');
-            $table->foreign('catservice_provider_id')->references('id')->on('catservice_provider');
+            $table->unsignedBigInteger('catservice_user_id');
+            $table->foreign('catservice_user_id')->references('id')->on('catservice_user');
             // $table->foreignId('catservice_provider_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('scope_id')->name("scope")->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->text('description');

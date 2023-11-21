@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_id')->nullable()->default(null);
             $table->text('description')->nullable();
             $table->binary('image')->nullable();
-            $table->json('keywords')->nullable();
+            $table->string('keywords')->nullable();
             $table->timestamps();
         });
     }

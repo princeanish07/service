@@ -2,7 +2,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 export const categoryApi = createApi({
   reducerPath: "category",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/category/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/category/" ,
+  prepareHeaders:(headers)=>{
+    // headers.set('Content-Type','multipart/form-data')
+    headers.set('Accept','application/json')
+    headers.set('Authorize',localStorage.getItem('token'))
+    return headers
+  }
+}),
   endpoints: (builder) => ({
     viewCategory: builder.query({
       query: () => "view",

@@ -3,16 +3,16 @@ namespace App\Traits;
  trait catservice_provider{
 public function commonRules(){
     return [
-        'service.*.id' => 'required',
-        'service.*.period' => 'required',
-        'service.*.duration' => 'required',
-        'service.*.price' => 'required|numeric',
-        'service.*.location' => 'required|array',
-        'service.*.location.province' => 'required',
-        'service.*.location.district' => 'required',
-        'service.*.location.muncipility' => 'required',
-        'service.*.status' => 'required|boolean',
-        'service.*.availabe_date' => 'required|date',
+        'cid' => 'required',
+        'description' => 'sometimes',
+        'days' => 'required',
+        'charge' => 'required',
+        'time' => 'required',
+        'offers' => 'sometimes',
+        'experience' => 'sometimes',
+        'image' => 'sometimes',
+        'address' => 'required',
+        // 'service.*.availabe_date' => 'required|date',
     ];
 }
 

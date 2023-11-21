@@ -16,7 +16,16 @@ class ServiceResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'csid'=>$this->id,
             'name'=>$this->name,
+            'description'=>$this->pivot->description,
+            'time'=>json_decode($this->pivot->time),
+            'days'=>json_decode($this->pivot->days),
+            'charge'=>json_decode($this->pivot->charge),
+            'offers'=>$this->pivot->offers,
+            'location'=>$this->pivot->address,
+            'expereince'=>$this->pivot->experience,
+            'image'=>$this->pivot->image,
 
            
         ];

@@ -4,11 +4,23 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-// import { useGetCategoryServiceQuery } from "../redux/categorySlice";
+import { useGetCategoryServiceQuery } from "../../category/categoryApi";
+import {setServiceId} from "./catServiceSlice"
 function CategoryId() {
-  const { id } = useParams();
-  // const { data, isLoading } = useGetCategoryServiceQuery(id);
+  const params=useParams()
+  console.log(params);
 
+  const { parent, subparent, child } = useSelector(
+    (state) => state.catServiceSlice.selectedOnClick
+    );
+    const selected =
+    Object.keys(child).length != 0
+    ? child
+    : Object.keys(subparent).length != 0
+    ? subparent
+    : parent;
+    console.log(selected);
+    const { data, isLoading } = useGetCategoryServiceQuery(selected?.id);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -33,12 +45,19 @@ function CategoryId() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
+if(data.length<=0){
+  return(
+    <div>
+      No services are found
+    </div>
+  )
+}
   return (
     <div className=" grid grid-cols-2 grid-rows-3 auto-rows-min  gap-5    flex-1 ">
-      {/* {data.map((service) => (
+      {data.map((service) => (
         <div className="bg-white hover:cursor-pointer hover:scale-105 shadow-lg p-5 " onClick={()=>{
-          navigate(`service/${service.id}`)
+          dispatch(setServiceId(service.id));
+          navigate(`/user/service/${service?.name}/setup`)
           
         }}
         key={service.id}
@@ -51,7 +70,8 @@ function CategoryId() {
             fugit doloribus eum optio odio.
           </p>
         </div>
-      ))} */}
+      ))}
+
     </div>
   );
 }
