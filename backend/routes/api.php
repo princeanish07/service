@@ -66,10 +66,13 @@ Route::prefix('catservices')->controller(CatserviceController::class)->group(fun
 
 Route::prefix('services')->controller(CatserviceProviderController::class)->group(function () {
     Route::post('create/{id}', 'createServices');
+    Route::post('edit/{providerId}', 'editProviderService');
     Route::get('providers', 'getAll');
     Route::get('provider/{providerId}', 'getProviderServices');
     Route::get('provider/{providerId}/category/{categoryId}', 'providerServiceByCategory');
     Route::get('{serviceId}/provider/{providerId}', 'providerServiceById');
+    Route::delete('{serviceId}/delete/{providerId}', 'deleteService');
+
 
     Route::get('category/{id}', 'getByCategory');
     Route::put('update/{}service}', 'update');

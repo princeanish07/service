@@ -144,7 +144,7 @@
 
 
  .service >div{
-  @apply grid grid-cols-1 gap-2 p-10 box-border bg-white shadow rounded-md
+  @apply grid grid-cols-1 gap-2 p-2 box-border
  }
  .service >div >input[type='text']{
   @apply p-2 border-2 border-gray-300 rounded-md w-full

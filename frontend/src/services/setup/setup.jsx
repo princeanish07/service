@@ -4,46 +4,54 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Charge from "./charge";
 import { setServiceId } from "../cat-Service/catServiceSlice";
-import { useSetupServicesMutation } from "../serviceApi";
 import {
-  useGetCatServiceByIdQuery,
-  useGetOtherCatserviceQuery,
-} from "../../category/catServiceApi";
+  useSetupServicesMutation,
+  useGetProviderServiceByIdQuery,
+  useEditServicesMutation,
+  useGetAllProviderServicesQuery,
+  useGetProviderServiceByCategoryQuery,
+} from "../serviceApi";
+import { useGetOtherCatserviceQuery } from "../../category/catServiceApi";
 import { useForm, Controller } from "react-hook-form";
 export default function SeviceSetup() {
   const dispatch = useDispatch();
+  const serviceId = useSelector((state) => state.catServiceSlice.serviceId);
+  const providerId = localStorage.getItem("userId");
+  const [setupService, { isLoading: isCreating }] = useSetupServicesMutation();
+  const [editService, { isLoading: isUpdating }] = useEditServicesMutation();
+
+  const { data: service, isLoading } = useGetProviderServiceByIdQuery({
+    serviceId,
+    providerId,
+  });
+
   const { parent, subparent, child } = useSelector(
     (state) => state.catServiceSlice.selectedOnClick
   );
-  const [setupService, { isLoading: isUpdating }] = useSetupServicesMutation();
   const selected =
     Object.keys(child).length != 0
       ? child
       : Object.keys(subparent).length != 0
       ? subparent
       : parent;
-  const serviceId = useSelector((state) => state.catServiceSlice.serviceId);
-  const {
-    data: service,
-    isLoading,
-    isError,
-  } = useGetCatServiceByIdQuery(serviceId);
-  console.log(selected);
+
   const { data: others, isLoading: ohterLoading } =
     selected?.name !== "all" && useGetOtherCatserviceQuery(selected?.id);
 
+  const { refetch} =
+      useGetProviderServiceByCategoryQuery({
+          providerId,
+          categoryId: selected?.id,
+        })
+
   const navigate = useNavigate();
-  const { register, control, handleSubmit, setValue } = useForm({
-    defaultValues: {
-      description: "",
-      experience: "",
-      address: "",
-      offers: "No offers are available",
-    },
-  });
+
+  const [button, setButton] = useState("");
+
+  const { register, control, handleSubmit, setValue, reset } = useForm();
 
   const onSubmit = async (values) => {
-    console.log(values);
+    console.log("vaue", values);
     const userId = localStorage.getItem("userId");
 
     const formdata = new FormData();
@@ -51,20 +59,38 @@ export default function SeviceSetup() {
     formdata.append("cid", values.cid);
     formdata.append("description", values.description);
     formdata.append("time", JSON.stringify(values.time));
-    formdata.append("days", values.days);
+    formdata.append("days", JSON.stringify(values.days));
     formdata.append("charge", JSON.stringify(values.charge));
     formdata.append("experience", values.experience);
     formdata.append("offers", values.offers);
     formdata.append("address", values.address);
     formdata.append("image", values.image);
-    await setupService(formdata)
-      .unwrap()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (button === "create") {
+      await setupService(formdata)
+        .unwrap()
+        .then((response) => {
+          console.log(response);
+          reset();
+          refetch();
+          navigate("/user/service");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    if (button === "update") {
+      await editService(formdata)
+        .unwrap()
+        .then((response) => {
+          console.log(response);
+          reset();
+          refetch();
+          navigate("/user/service");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   useEffect(() => {
@@ -72,11 +98,11 @@ export default function SeviceSetup() {
       ? navigate("/user/service/category")
       : null;
   }, [selected]);
-  if (isLoading || ohterLoading || isUpdating) {
+  if (isLoading || isCreating || ohterLoading || isUpdating) {
     return <div>Loading...</div>;
   }
   return (
-    <section className="grid grid-cols-1 text-[1em] text-slate-500 box-border bg-[rgba(0,0,0,0.5)] p-10 gap-5 ">
+    <section className="grid grid-cols-1 text-[1em] text-slate-500 box-border bg-[rgba(0,0,0,0.5)] p-14 gap-5 ">
       <div className="flex justify-end">
         <button
           className="w-[200px] text-center bg-blue-600 p-2 text-white"
@@ -92,13 +118,15 @@ export default function SeviceSetup() {
       <div>
         <form
           action=""
-          className="   grid grid-cols-2 gap-10 font-medium text-[1em]  bg-white p-10  box-border justify-self-center"
+          className="   grid grid-cols-2 gap-5 font-medium text-[1em]  bg-white p-10  box-border justify-self-center"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="service flex flex-col gap-4">
             <div className=" ">
               <span className="text-[1em]]">Service Name</span>
-              <p className="flex-1 font-medium text-[1.2em] ">{service.name}</p>
+              <p className="flex-1 font-medium text-[1.2em] ">
+                {service?.name}
+              </p>
               <input
                 type="text"
                 hidden={true}
@@ -113,8 +141,8 @@ export default function SeviceSetup() {
                 cols="50"
                 rows="2"
                 className="placeholder:text-[1em]  focus:outline-none "
-                placeholder="Your Service Description"
                 {...register("description")}
+                defaultValue={service?.pivot?.description}
               ></textarea>
             </div>
             <Time
@@ -122,6 +150,8 @@ export default function SeviceSetup() {
               Controller={Controller}
               control={control}
               setValue={setValue}
+              time={service?.pivot?.time}
+              days={service?.pivot?.days}
             />
 
             <Charge
@@ -129,13 +159,18 @@ export default function SeviceSetup() {
               Controller={Controller}
               control={control}
               setValue={setValue}
+              charge={service?.pivot?.charge}
             />
           </div>
 
           <div className="flex flex-col service gap-4">
             <div className="flex flex-col">
               <label htmlFor="">Service Place</label>
-              <input type="text" {...register("address")} />
+              <input
+                type="text"
+                {...register("address")}
+                defaultValue={service?.pivot?.location}
+              />
               {/*             
         <div className="location flex gap-2 flex-col">
         
@@ -168,11 +203,19 @@ export default function SeviceSetup() {
                 className="placeholder:text-[1em]   focus:outline-none "
                 placeholder="Your work experience"
                 {...register("experience")}
+                defaultValue={service?.pivot?.expereince}
               ></textarea>
             </div>
             <div className="flex flex-col">
               <label htmlFor="">Special Offers & Discounts</label>
-              <input type="text" className=" " {...register("offers")} />
+              <input
+                type="text"
+                className=" "
+                {...register("offers")}
+                defaultValue={
+                  service?.pivot?.offers || "No offers are available"
+                }
+              />
             </div>
             <div className="">
               <Controller
@@ -183,14 +226,12 @@ export default function SeviceSetup() {
                     <div>
                       <label htmlFor="">Add Images</label>
 
-
                       <div>
                         <input
                           type="file"
                           accept="image/*"
                           onChange={(e) => {
                             setValue("image", e.target.files[0]);
-                         
                           }}
                         />
                       </div>
@@ -201,12 +242,27 @@ export default function SeviceSetup() {
             </div>
 
             <div className="flex-1 place-content-end">
-              <button
-                type="submit"
-                className=" p-2 bg-blue-600 text-white px-10"
-              >
-                SUBMIT
-              </button>
+              {service?.pivot !== null ? (
+                <button
+                  type="submit"
+                  className=" p-2 bg-blue-600 text-white px-10"
+                  onClick={() => {
+                    setButton("update");
+                  }}
+                >
+                  Save Changes
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className=" p-2 bg-blue-600 text-white px-10"
+                  onClick={() => {
+                    setButton("create");
+                  }}
+                >
+                  Create Service
+                </button>
+              )}
             </div>
           </div>
         </form>

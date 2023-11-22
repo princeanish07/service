@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-export default function Time({ Controller, setValue, control }) {
+export default function Time({ Controller, setValue, control, time, days }) {
   const [color, setColor] = useState("24 Hours");
-  console.log(color);
 
   const Time = ["24 Hours", "Add Time"];
   const addTime = ["start", "end"];
@@ -20,30 +19,34 @@ export default function Time({ Controller, setValue, control }) {
                 name="time"
                 control={control}
                 defaultValue={{
-                  
-                    start: "10:00",
-                    end: "17:00",
+                  start: "10:00",
+                  end: "17:00",
                 }}
                 render={({ field }) => {
-                  console.log(field);
                   return (
                     <div className="flex flex-col gap-3">
                       <div className="grid gap-10 grid-cols-2">
-                          {addTime.map((add) => (
-                            <input
-                              key={add}
-                              type="time"
-                              defaultValue={add === "start" ? "10:00" : "17:00"}
-                              className="p-1.5 border-2 border-gray-200 "
-                              onChange={(e) => {
-                                const { value } = e.target;
-                                setValue(`time. ${add}`, value);
-                              }}
-                            />
-                          ))}
-                   
+                        <input
+                          type="time"
+                          className="p-1.5 border-2 border-gray-200 "
+                          onChange={(e) => {
+                            const { value } = e.target;
+                            setValue("time.start", value);
+                            
+                          }}
+                          defaultValue={ time && time?.start || "10:00"}
+                        />
+
+                        <input
+                          type="time"
+                          className="p-1.5 border-2 border-gray-200 "
+                          onChange={(e) => {
+                            const { value } = e.target;
+                            setValue("time.end", value);
+                          }}
+                          defaultValue={time && time?.end || "17:00"}
+                        />
                       </div>
-                     
                     </div>
                   );
                 }}
@@ -59,7 +62,7 @@ export default function Time({ Controller, setValue, control }) {
           <Controller
             name="days"
             control={control}
-            defaultValue={[]}
+            defaultValue={days ? days : []}
             render={({ field }) => {
               return (
                 <div className="flex flex-col gap-2">
