@@ -28,7 +28,7 @@ class catservice_providerRequest extends FormRequest
             case 'createServices':
                 return $this->commonRules();
 
-            case 'update':
+            case 'editProviderService':
                 return $this->commonRules();
         }
     }

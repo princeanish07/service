@@ -8,6 +8,7 @@ import categorySliceReducer from '../category/categorySlice'
 import catServiceSliceReducer from "../services/cat-Service/catServiceSlice";
 import cardSliceReducer from "../home/cardSlice";
 import { catServiceAPi } from "../category/catServiceApi";
+import serviceSliceReducer from "../services/serviceSlice";
 const middleware = getDefaultMiddleware({
   serializableCheck:{
     ignoreActions:['profile/basicDetails'],
@@ -32,6 +33,7 @@ export const store = configureStore({
     categorySlice:categorySliceReducer,
     catServiceSlice:catServiceSliceReducer,
     cardSlice:cardSliceReducer,
+    serviceSlice:serviceSliceReducer
   },
 
   middleware

@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class CatserviceUser extends Pivot
 {
     use HasFactory;
-    protected $casts=[
-        'days'=>'array',
-        'time'=>'array',
-    ];
+    // protected $casts=[
+    //     'days'=>'array',
+    //     'time'=>'array',
+    //     'charge'=>'array'
+    // ];
 }
