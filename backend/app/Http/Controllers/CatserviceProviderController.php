@@ -85,28 +85,17 @@ class CatserviceProviderController extends Controller
 
     public function getProviderServices($providersId)
     {
-<<<<<<< HEAD
-        $services = User::find($providersId)->services()->withPivot('description', 'days', 'time', 'charge', 'offers', 'experience', 'image', 'address')->get();
-=======
         $services = User::find($providersId)->services()->get();
->>>>>>> develop
 
         // return $services;
         return  ServiceResource::collection($services);
     }
 
-<<<<<<< HEAD
-    public function providerServiceByCategory($providerId,$categoryId){
-        $services = User::find($providerId)->services()->withPivot('description', 'days', 'time', 'charge', 'offers', 'experience', 'image', 'address')
-        ->where('category_id',$categoryId)
-        ->get();
-=======
     public function providerServiceByCategory($providerId, $categoryId)
     {
         $services = User::find($providerId)->services()
             ->where('category_id', $categoryId)
             ->get();
->>>>>>> develop
 
         return  ServiceResource::collection($services);
     }

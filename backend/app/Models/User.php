@@ -58,13 +58,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function services(){
-<<<<<<< HEAD
-        return  $this->belongsToMany(CatService::class,'catservice_user');
-=======
         return  $this->belongsToMany(CatService::class,'catservice_user')
         // ->using(CatserviceUser::class)
         ->withPivot('description', 'days', 'time', 'charge', 'offers', 'experience', 'image', 'address');
->>>>>>> develop
     }
   
     public function profile()
