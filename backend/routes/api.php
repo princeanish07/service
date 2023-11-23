@@ -73,7 +73,7 @@ Route::prefix('services')->controller(CatserviceProviderController::class)->grou
     Route::get('{serviceId}/provider/{providerId}', 'providerServiceById');
     Route::delete('{serviceId}/delete/{providerId}', 'deleteService');
 
-
+    Route::get('provider/details/{id}', 'getProviderDetails');
     Route::get('category/{id}', 'getByCategory');
     Route::put('update/{}service}', 'update');
     Route::delete('delete/{service}', 'delete');

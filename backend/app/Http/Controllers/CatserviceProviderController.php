@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\catservice_providerRequest;
+use App\Http\Resources\ProviderDetailsResource;
 use App\Http\Resources\ProviderResource;
 use App\Http\Resources\ServiceResource;
 use App\Models\Category;
@@ -185,5 +186,11 @@ class CatserviceProviderController extends Controller
 
 
         return $categories;
+    }
+
+    public function getProviderDetails($id){
+        $details = User::has('services')->with(['profile','services'])->find($id);
+
+            return new ProviderDetailsResource($details);
     }
 }

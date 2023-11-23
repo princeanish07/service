@@ -5,43 +5,47 @@ import { FaUser } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {setProviderId} from "./cardSlice"
 function Card({ cards }) {
   const navigate=useNavigate();
+  const dispatch=useDispatch();
   return (
-    <section className="grid grid-cols-2  gap-1  font-sans bg-[#679BE0] ">
+    <section className="  grid grid-cols-2 grid-flow-row gap-20  font-sans bg-white p-20 ">
       {cards &&
         cards.map((card) => {
           return (
             <div
               key={card.id}
-              className="flex   bg-[rgba(0,0,0,0.7)] text-white text-[1em] p-1 box-border hover:cursor-pointer "
+              className="grid w-[20Vw] justify-self-center  gap-4 rounded-md text-gray-600 text-[1em] p-3 shadow shadow-gray-500 box-border hover:cursor-pointer "
               onClick={()=>{
+                dispatch(setProviderId({id:card?.id,category:card?.category?.name}))
                 navigate(`/Category/${card?.category?.name}/${card?.name}`)
               }}
             >
-              <div className="w-full h-[210px]  box-border bg-white">
+              <div className="w-full h-[200px]  box-border bg-white">
                 <img
                   src={`http://localhost:8000/${card?.profile?.photo}`}
                   alt=""
-                  className=" w-full h-full object-cover"
+                  className=" w-full h-full object-cover rounded-md"
                 />
               </div>
-              <div className="flex flex-1 flex-col  p-2 box-border gap-1  ">
+              <div className="flex  flex-col gap-5   box-border  ">
                 <div>
-                  <h3 className=" text-center font-semibold font-sans text-[1.6em] ">
+                  <h3 className=" text-center font-semibold font-sans text-[1.4em] ">
                     {card.category.name.toUpperCase()}
                   </h3>
                 </div>
-                <div className=" flex mt-2 place-content-center">
+                <div className=" flex gap-5  place-content-center">
                   {Array(card.rating)
                     .fill()
                     .map((_, index) => (
                       <div key={index} className=" ">
-                        <FaStar className=" text-[#FA130C]" />
+                        <FaStar className=" text-[#FA130C] text-[1.8em]" />
                       </div>
                     ))}
                 </div>
-                <div className="grid place-content-center  ">
+                <div className="grid place-content-center gap-5  ">
                   <ul className=" text-center grid gap-2">
                     <li className=" ">
                       {" "}
@@ -57,38 +61,9 @@ function Card({ cards }) {
                       </ul>
                     </li>
 
-                    <li>
-                      {card?.profile?.address && (
-                        <ul className=" flex gap-2 place-content-center">
-                          <li className=" grid place-content-center">
-                            <i>
-                              <FaHome className=" text-blue-600 text-[1.3em]" />
-                            </i>
-                          </li>
-                          <li className=" italic">{`${card?.profile?.address?.chowk},${card?.profile?.address?.muncipility}-${card?.profile?.address?.ward},${card?.profile?.address?.district}`}</li>
-                        </ul>
-                      )}
-                    </li>
-                    <li>
-                      <div className="grid place-content-center">
-                        <button className="bg-[#FA130C] text-white p-2 w-[200px] text-[1em] rounded-md font-bold">
-                          CALL NOW
-                        </button>
-                      </div>
-                    </li>
-                    <li className="grid justify-end ">
-                    <ul className="flex gap-8 ">
-                    <li className=" ">
-                      {" "}
-                      <ul className=" flex gap-2 place-content-center">
-                        <li className=" grid place-content-center">
-                          <i>
-                            <FaEnvelope className=" text-blue-600 text-[1em]" />
-                          </i>
-                        </li>
-                        <li className=" italic text-[0.9em]">{card.email}</li>
-                      </ul>
-                    </li>
+                  
+                   
+                  
                     <li className=" ">
                       {card?.profile?.phone_number && (
                         <ul className=" flex gap-2 place-content-center">
@@ -97,15 +72,16 @@ function Card({ cards }) {
                               <FaPhoneAlt className=" text-blue-600 text-[1em]" />
                             </i>
                           </li>
-                          <li className="text-[0.9em]">
+                          <li className="text-[1em]">
                             {card?.profile?.phone_number}
                           </li>
                         </ul>
                       )}
                     </li>
                   </ul>
-                    </li>
-                  </ul>
+                  <div>
+                    <button className="bg-blue-600 text-white font-semibold p-2 w-full">CALL NOW</button>
+                  </div>
                 </div>
                 
               </div>

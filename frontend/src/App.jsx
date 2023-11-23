@@ -1,6 +1,6 @@
 // import './App.css'
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./home/Navbar";
+import Navbar from "./Navbar";
 import SignUp from "./authentication/SignUP";
 import SignIn from "./authentication/SignIn";
 import Home from "./home/Home";
@@ -21,7 +21,10 @@ import { ServiceById } from "./services/ServiceById";
 function App() {
   return (
     <>
-      <Navbar />
+     <header>
+        <Navbar/>
+     </header>
+   
 
       <Routes>
         <Route path="/" element={<Home />}>
@@ -71,6 +74,9 @@ function App() {
           <Route path="service/:service/setup" element={<ServiceSetUP />} />
         </Route>
       </Routes>
+      <div className="h-screen w-full bg-red-600">
+
+</div>
     </>
   );
 }

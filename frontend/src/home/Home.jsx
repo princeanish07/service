@@ -9,9 +9,9 @@ const Home = () => {
 const dispatch=useDispatch();
   const location = useLocation();
   return (
-    <section className=" grid grid-cols-5   p-3 text-[0.9em]  gap-1 ">
+    <section className=" grid grid-cols-5  p-1  text-[0.85em]  gap-1 ">
       <Category />
-      <div className=" col-start-2  flex flex-col px-4 gap-4 box-border  col-span-4 row-start-1 flex-1 z-auto overflow-y-auto hide-scrollbar scrolling-touch   "
+      <div className=" col-start-2  flex flex-col  gap-1 box-border  col-span-4 row-start-1 flex-1 z-auto overflow-y-auto hide-scrollbar scrolling-touch   "
       onMouseEnter={()=>{
         
 dispatch(setOnOver({parent:{},subparent:{},child:{}}))

@@ -12,6 +12,7 @@ function Profile() {
   const location =useLocation()
   const userId= localStorage.getItem('userId');
   const { data: user, isLoading, isError, error } = useViewProfileQuery(userId);
+  console.log(user);
 
  if(isLoading){
   return <div>loading profile</div>
@@ -23,7 +24,7 @@ function Profile() {
           <div className="  flex place-content-center  p-1 ">
             <img
               className="w-[260px] h-[260px] border-2 border-[rgba(0,0,0,.3)] rounded-full"
-              src={ user?.photo? `http://localhost:8000/${user.photo}`: logo}
+              src={  user?.photo ? `http://localhost:8000/${user.photo}`: logo}
               alt=""
             />
           </div>

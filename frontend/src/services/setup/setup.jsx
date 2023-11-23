@@ -38,11 +38,7 @@ export default function SeviceSetup() {
   const { data: others, isLoading: ohterLoading } =
     selected?.name !== "all" && useGetOtherCatserviceQuery(selected?.id);
 
-  const { refetch} =
-      useGetProviderServiceByCategoryQuery({
-          providerId,
-          categoryId: selected?.id,
-        })
+  
 
   const navigate = useNavigate();
 
@@ -71,7 +67,6 @@ export default function SeviceSetup() {
         .then((response) => {
           console.log(response);
           reset();
-          refetch();
           navigate("/user/service");
         })
         .catch((error) => {
@@ -84,7 +79,6 @@ export default function SeviceSetup() {
         .then((response) => {
           console.log(response);
           reset();
-          refetch();
           navigate("/user/service");
         })
         .catch((error) => {

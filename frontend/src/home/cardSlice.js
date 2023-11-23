@@ -15,7 +15,11 @@ const initialState={
         subparent:{},
         child:{}
     },
-    cardId:''
+    cardId:'',
+    provider:{
+        id:'',
+        category:''
+    }
 }
 
 export const cardSlice=createSlice({
@@ -30,8 +34,11 @@ reducers:{
     }),
     setServiceId:((state,actions)=>{
         state.cardId=actions.payload
+    }),
+    setProviderId:((state,actions)=>{
+        state.provider=actions.payload
     })
 }
 })
-export const {setOnClick,setOnOver,setServiceId}=cardSlice.actions
+export const {setOnClick,setOnOver,setServiceId,setProviderId}=cardSlice.actions
 export default cardSlice.reducer
