@@ -17,6 +17,9 @@ endpoints:(builder)=>({
     }),
     getCategoryServices:builder.query({
       query:(id)=>`/category/${id}`
+    }),
+    getProviderDetails:builder.query({
+      query:(id)=>`provider/details/${id}`
     })
   
 })
@@ -24,5 +27,6 @@ endpoints:(builder)=>({
 });
 export const {
  useGetAllServicesQuery,
- useGetCategoryServicesQuery
+ useGetCategoryServicesQuery,
+ useGetProviderDetailsQuery
 } = cardApi;

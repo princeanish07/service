@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import img2 from "../images/Technician.png";
+import img2 from "./images/Technician.png";
 import { NavLink, useLocation,useNavigate } from 'react-router-dom';
 
 import { FaSearch } from "react-icons/fa";

@@ -10,6 +10,7 @@ export const serviceApi = createApi({
       return headers;
     },
   }),
+  tagTypes:['Services'],
   endpoints: (builder) => ({
     getAllServices: builder.query({
       query: () => "providers",
@@ -23,6 +24,8 @@ export const serviceApi = createApi({
           body: formdata,
         };
       },
+      invalidatesTags: ['Services'],
+
     }),
     editServices: builder.mutation({
       query: (formdata) => {
@@ -34,6 +37,7 @@ export const serviceApi = createApi({
          
         };
       },
+      invalidatesTags: ['Services'],
     }),
     deleteServices: builder.mutation({
       query: ({serviceId,providerId}) => {
@@ -43,19 +47,38 @@ export const serviceApi = createApi({
          
         };
       },
+      invalidatesTags: ['Services'],
+
     }),
 
     getAllProviderServices: builder.query({
       query: (providerId) => `provider/${providerId}`,
+      providesTags:(result)=>
+        result ?
+        [ ...result.map(({ id }) => ({ type: 'Services', id })), 'Services']
+        :['Services'],
+      
     }),
     getProviderServiceByCategory: builder.query({
-      query: ({providerId,categoryId}) =>`provider/${providerId}/category/${categoryId}`
+      query: ({providerId,categoryId}) =>`provider/${providerId}/category/${categoryId}`,
+      providesTags:(result)=>
+        result ?
+        [ ...result.map(({ id }) => ({ type: 'Services', id })), 'Services']
+        :['Services'],
+      
     }),
     getProviderServiceById: builder.query({
-      query: ({serviceId,providerId}) =>`${serviceId}/provider/${providerId}`
+      query: ({serviceId,providerId}) =>`${serviceId}/provider/${providerId}`,
+      providesTags:['Services'],
+
     }),
     getAllProviderCategory: builder.query({
       query: (providerId) => `provider/category/${providerId}`,
+      providesTags:(result)=>
+      result ?
+      [ ...result.map(({ id }) => ({ type: 'Services', id })), 'Services']
+      :['Services'],
+
     }),
   }),
 });

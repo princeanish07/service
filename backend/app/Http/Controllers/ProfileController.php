@@ -26,6 +26,7 @@ class ProfileController extends Controller
     }
     public function createOrUpdate(profileRequest $request, $id)
     {
+        $path=null;
         if($request->hasFile('photo')){
             $file=$request->file('photo');
             $extension= $file->getClientOriginalExtension();
@@ -42,7 +43,7 @@ class ProfileController extends Controller
         $user->profile()->updateOrCreate(
             ['user_id'=>$id],
             ['bio'=>$request->bio,
-            'photo'=>$path?$path:null, 
+            'photo'=>$path , 
             'phone_number'=>$request->phone_number,
             'address'=>[
                 'district'=>$request->district,

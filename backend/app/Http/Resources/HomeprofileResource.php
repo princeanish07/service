@@ -17,7 +17,8 @@ class HomeprofileResource extends JsonResource
         return [
             'phone_number'=>$this->phone_number,
             'address'=>$this->address,
-            'photo'=>$this->photo
+            'photo'=>$this->photo,
+            'bio'=>$this->bio
         ];
     }
 }

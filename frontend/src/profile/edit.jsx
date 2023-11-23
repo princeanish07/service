@@ -51,10 +51,10 @@ export default function Edit() {
   }
 
   return (
-    <div className=" text-gray-700 grid place-content-center p-1 text-[1em] ">
+    <div className=" text-gray-700 grid place-content-center  text-[1em] bg-[rgba(0,0,0,0.5)] p-4 ">
       <form
         action=""
-        className={`  bg-white w-[65Vw]  grid grid-cols-2 gap-12 p-6  `}
+        className={`  bg-white w-[65Vw]  grid grid-cols-2 gap-12 p-6 box-border `}
         encType="multipart/form-"
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -77,7 +77,7 @@ export default function Edit() {
                           previewImage
                             ? URL.createObjectURL(previewImage)
                             : (
-                              user?.photo? `http://localhost:8000/${user.photo}` : logo
+                               user?.photo? `http://localhost:8000/${user.photo}` : logo
                             )
                         }
                         className=" object-cover object-top w-[300px] h-[300px] rounded-full border-2 border-gray-400"
