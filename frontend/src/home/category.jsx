@@ -20,6 +20,7 @@ export default function Category() {
     error: cataegoryError,
   } = useViewCategoryQuery();
 
+  console.log('category',categories);
   const handleCategory = (category) => {
     dispatch(
       setOnOver({ ...selected, parent: category, subparent: {}, child: {} })

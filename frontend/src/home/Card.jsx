@@ -33,13 +33,8 @@ function Card({ cards }) {
               </div>
               <div className="flex  flex-col gap-5   box-border  ">
                 <div>
-<<<<<<< HEAD
-                  <h3 className=" text-center font-semibold font-sans text-[1.6em] ">
-                    {card?.category?.name.toUpperCase()}
-=======
                   <h3 className=" text-center font-semibold font-sans text-[1.4em] ">
                     {card.category.name.toUpperCase()}
->>>>>>> develop
                   </h3>
                 </div>
                 <div className=" flex gap-5  place-content-center">
