@@ -1,24 +1,25 @@
 import React from 'react'
-import { useGetCategoryServicesQuery } from './cardApi'
-import Card from './card';
+import { useGetAllServicesQuery } from "../Api/cardApi";
+import { useGetSubCategoryByIdQuery } from "../Api/subCategoryApi";
 import { useSelector } from 'react-redux';
+import CardSection from '../components/cardSection';
 export const CardId = () => {
-  const clicked=useSelector((state)=>state.cardSlice.clicked)
-  const selectedCatg =
-  Object.keys(clicked?.child).length != 0
-  ? clicked?.child
-  : Object.keys(clicked?.subparent).length != 0
-  ? clicked?.subparent
-  : clicked?.parent;
-  const {data:cards,isLoading,isError,error}=useGetCategoryServicesQuery(selectedCatg?.id);
-  if(isLoading){
+  const selected = useSelector((state) => state.cardSlice.category);
+  const {
+    data: subcategories,
+    isLoading
+  } =  useGetSubCategoryByIdQuery(selected?.id);
+  const {
+    data: cards,
+    isError: serviceIsError,
+    isLoading: cardsLoading,
+    error: serviceError,
+  } = useGetAllServicesQuery();
+  if(isLoading || cardsLoading){
     return <div>Loading...</div>
   }
-  if (isError) {
-   return <div>{error}</div> 
-  }
-return (
-<Card cards={cards}/>
-)
+  
+  return <CardSection subcategories={subcategories} cards={cards}/>;
+
  
 }

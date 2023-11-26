@@ -169,6 +169,77 @@
  .charge {
   @apply flex gap-10 bg-red-500
  }
+ .service-card{
+  @apply w-[30%] p-4 rounded-lg transition-all text-center hover:scale-105 shadow shadow-gray-300 
+ }
+ .service-card img{
+  @apply h-[200px] w-full object-cover
+ }
+
+ .service-title{
+@apply font-bold text-[1.1em] mt-2
+ }
+
+ .service-description{
+  @apply text-[#666] mt-2 h-[60px]
+   }
+   .learn-more-btn{
+    @apply inline-block p-2 w-[200px] rounded-md mt-3 hover:transition hover:bg-red-700  bg-red-600 text-white
+   }
+
+   .testimonial{
+    @apply w-[30%] p-4 rounded-lg transition-all text-center hover:scale-105 shadow shadow-gray-300 mb-4
+
+   }
+   .client-avatar{
+    @apply w-[80px] h-[80px] mb-2 rounded-full object-cover
+   }
+   .client-name{
+    @apply text-[1.1em] font-bold mb-1 flex-1 grid place-content-center
+   }
+   .client-position{
+    @apply text-[#666]
+   }
+
+   .featured-providers{
+    @apply max-w-[800px] m-5  bg-[#fff]  rounded-lg flex gap-10
+   }
+   .provider-card{
+    @apply flex flex-col mb-5 p-4 border border-[#ddd] rounded-md hover:transition-all hover:scale-105
+   }
+   .provider-image{
+    @apply w-[100%] max-w-[200px] rounded-md mb-3
+   }
+
+   .provider-name{
+    @apply text-lg font-bold mb-1 
+   }
+   .provider-profession{
+    @apply text-[#666] mb-3 
+   }
+   .provider-description{
+    @apply mb-3
+   }
+
+   .view-profile-btn{
+    @apply  p-[8px_12px] rounded-md mt-3 transition hover:bg-[#2980b9]  bg-[#3498db]  text-white
+
+   }
+
+   .question{
+    @apply text-lg font-semibold mb-3 text-blue-600
+   }
+   .answer{
+    @apply mb-5 text-gray-600
+   }
+   .contact-info h4, .quick-links h4,  .legal-info h4, .social-media h4{
+    @apply text-orange-600 font-bold 
+   }
+
+   .contact-info ul li, .quick-links ul li,  .legal-info ul li, .social-media ul li{
+    @apply mb-3 mt-3 
+   }
+
 }
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -195,11 +266,11 @@ body {
   margin: 0;
    display: grid;
    box-sizing: border-box;
-  background-color:#679BE0;
   min-width: 320px;
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
+  padding: 0;
 }
 
 h1 {

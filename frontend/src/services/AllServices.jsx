@@ -1,6 +1,6 @@
 import React from 'react'
 import Service from './service';
-import {useGetAllProviderServicesQuery} from "./serviceApi"
+import {useGetAllProviderServicesQuery} from "../Api/serviceApi"
 const AllServices = () => {
     const userId=localStorage.getItem('userId');
     const {data:services,isError,isLoading}=useGetAllProviderServicesQuery(userId)

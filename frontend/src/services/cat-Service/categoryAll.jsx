@@ -1,8 +1,8 @@
 import React from 'react'
-import {useGetAllCatservicesQuery} from "../../category/catServiceApi"
+import {useGetAllCatservicesQuery} from "../../Api/catServiceApi"
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import {setServiceId} from "./catServiceSlice"
+import {setServiceId} from "../../redux/catServiceSlice"
 const categoryAll = () => {
     const dispatch=useDispatch();
     const navigate=useNavigate();

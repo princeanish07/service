@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { CardId } from "./CardId";
 import { useSelector } from "react-redux";
-import { useGetProviderDetailsQuery } from "./cardApi";
+import { useGetProviderDetailsQuery } from "../Api/cardApi";
 const Provider = () => {
   const {id,category}=useSelector(state=>state.cardSlice.provider);
   const { data, isLoading, isSuccess } = useGetProviderDetailsQuery(id);

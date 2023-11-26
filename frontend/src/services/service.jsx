@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {setServiceId} from "./cat-Service/catServiceSlice";
-import {useDeleteServicesMutation} from "./serviceApi";
+import {setServiceId} from "../redux/catServiceSlice";
+import {useDeleteServicesMutation} from "../Api/serviceApi";
 export default function Service({ services }) {
   console.log(services);
   const navigate = useNavigate();

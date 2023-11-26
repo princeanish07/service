@@ -1,253 +1,57 @@
 import React, { useEffect, useState } from "react";
-import { useViewCategoryQuery } from "./categoryApi";
-import { FaChevronRight } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
-import { useNavigate, Outlet, useParams , useLocation} from "react-router-dom";
+import { useNavigate, Outlet, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedCategory, setPath} from "./categorySlice";
-export default function Category() {
+import image from "../images/Plumber.jpg"
+import Button from "../components/button";
+import { setCategoryAciton ,setCategory,setSubcategory} from "../redux/categorySlice";
+export default function Category({categories,selected}) {
   const navigate = useNavigate();
-const location=useLocation();
   const dispatch = useDispatch();
-  const selected = useSelector((state) => state.categorySlice.selectedCategory);
-  const {
-    data:categories,
-    isError: categoryIsError,
-    isLoading: categoryLoading,
-    error: cataegoryError,
-  } = useViewCategoryQuery();
-  // console.log(categories);
 
-  if (categoryLoading) {
-    return <div>loading...</div>;
-  }
+  const ButtonComponent = () => {
+    return (
+      <div className="flex justify-evenly">
+        <button className=" hover:text-green-500">View</button>
+        <button className=" hover:text-green-500">Edit</button>
+        <button className=" hover:text-green-500">Delete</button>
+      </div>
+    );
+  };
   return (
-    <div className="w-[20Vw] text-sm bg-white">
-      <p className="p-2 text-red-500 ">CATEGORIES</p>
-      <ul className=" box-border grid grid-cols-1 gap-1 p-1 ">
-        {categories.map((category) => {
-          return (
-            <li key={category.id} className="">
-              <p
-                className={`p-2  hover:cursor-pointer flex  rounded-sm  shadow    ${
-                  selected?.parent?.id === category.id
-                    ? "bg-blue-600 text-white"
-                    : "hover:bg-gray-200  hover:text-gray-700"
-                }`}
-                onClick={() => {
-                  dispatch(
-                    setSelectedCategory(
-                      selected?.parent && selected?.parent?.id != category.id
-                        ? { parent: category, subparent: {},child:{} }
-                        : { parent: {}, subparent: {}, child:{} }
-                    )
-                    
-                  );
-                  // dispatch(setPath(location.pathname))
-                  navigate(`${category.name}`)
-                }}
-              >
-                {category.name}
-              </p>
+    <section className="grid shadow-sm shadow-gray-200  m-5 p-5 ">
+      <section className="flex w-full overflow-y-scroll">
 
-              <ul className="flex flex-col  gap-1 ml-5">
-                {category.category.length > 0 &&
-                  category.category.map((subcategory) => {
-                    
-                    return (
-                      selected?.parent?.id === subcategory.parent_id &&
-                          <li key={subcategory.id} className=" ">
-                            <p
-                              className={`p-2  hover:cursor-pointer flex shadow m-1  ${
-                                selected?.subparent?.id === subcategory.id
-                                  ? "bg-orange-600 text-white"
-                                  : "hover:bg-gray-200  hover:text-gray-700"
-                              }`}
-                              onClick={() => {
-                                dispatch(
-                                  setSelectedCategory(
-                                    selected?.subparent && selected?.subparent?.id != subcategory.id
-                                      ? { ...selected, subparent: subcategory, child: {} }
-                                      : { ...selected, subparent: {}, child: {} }
-                                  )
-                                );
-                             Object.keys( selected?.subparent).length===0? navigate(`${selected?.parent?.name}/${subcategory.name}`,{state:{
-                                  path:location.pathname
-                                }}):navigate(`${selected?.parent.name}`)
-                              }}
-                            >
-                              {subcategory.name}
-                            </p>
+      {
+        categories.map((category)=>{
+          return <div key={category?.id} className={`px-5 ${selected?.id===category?.id && ' bg-green-500 rounded-lg text-white p-2 '}`}
+          onClick={()=>{
+            dispatch(setCategory(category))
+            dispatch(setSubcategory({}))
 
-                            <ul className="flex flex-col gap-1 ml-10">
-                              {subcategory.category.length > 0 &&
-                                subcategory.category.map((childCategory,index) => {
-                                  return (
-                                    
-                                      selected?.subparent?.id ===
-                                        childCategory.parent_id && 
-                                        <li key={childCategory.id}>
-                                          <p
-                                            className={`p-2  hover:cursor-pointer flex rounded-sm shadow m-1 ${
-                                              selected?.child?.id ===
-                                              childCategory.id
-                                                ? "bg-green-600 text-white"
-                                                : "hover:bg-gray-200  hover:text-gray-700"
-                                            }`}
-                                            onClick={() => {
-                                              dispatch(
-                                                setSelectedCategory({
-                                                  ...selected,
-                                                  child: childCategory,
-                                                })
-                                              );
-                                navigate(`${selected?.parent?.name}/${selected?.subparent?.name}/${childCategory.name}`)
+          }}
 
-                                            }}
-                                          >
-                                            {childCategory.name}
-                                          </p>
-                                        </li>
-                                      
-                                    
-                                  );
-                                })}
-                            </ul>
-                          </li>
-                       
-                    )
-                    
-                  })}
-              </ul>
-            </li>
-          );
+          
+          >
+            <div className="max-w-[150px] m-5  box-border hover:cursor-pointer hover:scale-105 transition">
+            <img src={image} className="max-w-[120px] h-[120px] rounded-full border border-gray-300 mb-5 " alt="" />
+            <p className="text-center mt-5 text-gray-600 font-semibold ">{category?.name}</p>
+
+            </div>
+       {
+        selected?.id===category?.id && <ButtonComponent/>
+       }
+          </div>
         })
       }
-      </ul>
-
-      {/* <div className="  bg-white    shadow overflow-hidden">
-        <ul
-          className=" box-border grid grid-cols-1 gap-1 p-3"
-          onMouseLeave={() => handleToggle(true)}
-        >
-          <li className="p-2 text-red-500 ">CATEGORIES</li>
-          {categories.map((category) => {
-            return (
-              <li
-                onMouseEnter={() => {
-                  handleCategory(category);
-                  handleCategoryToggle(false);
-                  handleToggle(true);
-                  setSelectedCategory({ ...categoryId, parent: category.id });
-                }}
-                onMouseLeave={() => {
-                  handleToggle(false);
-                }}
-                key={category.id}
-                className={`p-2  hover:cursor-pointer flex   ${
-                  selected && selected.parent && selected.parent === category.id
-                    ? "bg-blue-600 text-white"
-                    : "hover:bg-gray-200  hover:text-gray-700"
-                }`}
-              >
-                <p className="flex-1">{category.name}</p>
-                {category.category &&
-                  category.category.length > 0 &&
-                  Category.id === category.id && (
-                    <span className="text-[#0118E6]">
-                      <FaChevronRight />
-                    </span>
-                  )}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      {Category.category && Category.category.length > 0 ? (
-        <div className="   bg-white shadow z-10 ">
-          <ul onMouseLeave={() => handleToggle(true)} className="p-3">
-            <li className="p-3 text-red-500">SUB CATEGORIES</li>
-            <li>{""}</li>
-            {Category.category.map((subcategory) => {
-              return (
-                <li
-                  key={subcategory.id}
-                  onMouseEnter={() => {
-                    handleSubCategory(subcategory);
-                    handleToggle(true);
-                    handleCategoryToggle(true);
-                    setSelectedCategory({
-                      ...categoryId,
-                      Subparent: subcategory.id,
-                    });
-                  }}
-                  onMouseLeave={() => {
-                    handleToggle(false);
-                  }}
-                  className={`p-2 w-full hover:cursor-pointer flex ${
-                    selected &&
-                    selected.Subparent &&
-                    selected.Subparent === subcategory.id
-                      ? "bg-blue-600 text-white"
-                      : "  hover:bg-gray-200  hover:text-gray-700"
-                  }`}
-                >
-                  <p className="flex-1">{subcategory.name}</p>
-                  {subcategory.category &&
-                    subcategory.category.length > 0 &&
-                    toggle &&
-                    subCategory.id === subcategory.id && (
-                      <span className="text-[#0118E6]">
-                        <FaChevronRight />
-                      </span>
-                    )}
-                </li>
-              );
-            })}
-          </ul>
+      </section>
+    
+    <div className="flex place-content-center mt-8 gap-10">
+          <Button name="View All" bg_color="green-600" text_color="white"></Button>
+          <button type="button" className="p-2 px-8 rounded-full bg-orange-600 text-white" onClick={()=>{
+            dispatch(setCategoryAciton("create"));
+          }}>Add More</button>
         </div>
-      ) : null}
-      {subCategory.category &&
-      subCategory.category.length > 0 &&
-      toggle &&
-      toggleCatg ? (
-        <div
-          className=" bg-white  shadow p-2 z-10 "
-          onMouseLeave={() => handleSubCategory({})}
-        >
-          <ul className="">
-            <li className="p-2 text-red-500">SUB CATEGORIES</li>
-            {subCategory.category.map((subcategory) => {
-              return (
-                <li
-                  key={subcategory.id}
-                  className={`p-2  ${
-                    selected &&
-                    selected.child &&
-                    selected.child === subcategory.id
-                      ? "hover:cursor-pointer bg-blue-600 text-gray-100"
-                      : " hover:bg-gray-200  hover:text-gray-700"
-                  }`}
-                  onClick={() => {
-                    handleToggle(false);
-                    handleCategoryToggle(false);
-                    dispatch(
-                      setSelectedCategory({
-                        ...categoryId,
-                        child: subcategory.id,
-                      })
-                    );
-
-                    navigate(`${subcategory.id}`);
-                  }}
-                >
-                  {subcategory.name}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ) : null} */}
-    </div>
+     
+    </section>
   );
 }

@@ -16,7 +16,6 @@ class CategoryController extends Controller
             'name' => ['required', 'unique:categories,name'],
             'description'=>'sometimes',
             'keywords'=>'required',
-            'parent_id' => 'sometimes',
         ]);
 
 
@@ -25,23 +24,13 @@ class CategoryController extends Controller
             'message' => 'successfully create',
         ]);
     }
-    public function subCategory(Request $request, $id)
-    {
-        $validate = $request->validate([
-            'name' => ['required', 'unique:categories,name'],
-        ]);
-        $collection = collect($validate)->put('parent_id', $id)->all();
 
-        Category::create($collection);
-        return response()->json([
-            'message' => 'successfulluy create sub category',
-        ]);
-    }
     public function viewCategory()
     {
-        $value = Category::with('category:id,name,parent_id')->where('parent_id', null)->get(['id', 'name']);
+        $value = Category::all();
         return response()->json($value);
     }
+   
     public function updateCategory(Request $req, $id){
         $validate = $req->validate([
             'name' => ['required', 'unique:categories,name'],

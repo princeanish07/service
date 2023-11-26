@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import Service from './service';
 import { useSelector,useDispatch } from 'react-redux';
-import {useGetProviderServiceByCategoryQuery} from "./serviceApi"
-import {setCategoryRefetch} from "./serviceSlice"
+import {useGetProviderServiceByCategoryQuery} from "../Api/serviceApi"
+import {setCategoryRefetch} from "../redux/serviceSlice"
 export const ServiceById = () => {
   const dispatch=useDispatch();
     const {parent,subparent,child}=useSelector((state)=>state.cardSlice.clicked)

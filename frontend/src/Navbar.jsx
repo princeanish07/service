@@ -1,21 +1,138 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import img2 from "./images/Technician.png";
-import { NavLink, useLocation,useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import { FaSearch } from "react-icons/fa";
 
-export default function Naavbar() {
+import { useDispatch, useSelector } from "react-redux";
+import { setRoute } from "./redux/RouteSlice";
 
-    const logged=localStorage.getItem('logged')
-    const navigate=useNavigate();
-    const location= useLocation();
-  
+export default function Naavbar() {
+  const logged = localStorage.getItem("logged");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const { customer, provider } = useSelector((state) => state.routeSlice.route);
+console.log(customer);
   return (
+<<<<<<< HEAD
          <nav className="flex sticky top-0 bg-blue-600 p-1  ">
           <div className="  flex items-start ">
             <img src={img2} alt="" className=" h-[80px] w-[80px]" />
           </div>
           <div className={`flex-1 place-self-center grid grid-cols-2 ${logged ? 'grid-cols-2' : 'grid-cols-3'}`}>
+=======
+    <>
+      <nav className="flex sticky top-0 px-20 py-6 tracking-widest z-10 bg-[#004840] border-b-2 border-gray-400">
+        <div className="  flex ">
+          <p className="text-[1.3em] text-[#EF351B] font-bold">
+            SERVICE MARKET PLACE
+          </p>
+        </div>
+        <div className="flex-1 grid place-items-center gap-10 text-[0.8em] ">
+          <ul className="text-white flex gap-8 font-semibold ">
+            <li className="">
+              <NavLink to="/">HOME</NavLink>
+            </li>
+            <li
+          
+            >
+              <NavLink
+                to="/customer"
+                onClick={()=>{
+
+                  dispatch(setRoute({ customer: true, provider: false }));
+                }}
+              >
+                FIND A SERVICE
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                onClick={() => {
+                  dispatch(setRoute({ customer: false, provider: true }));
+                }}
+              >
+                PROVIDER HUB
+              </NavLink>
+            </li>
+            <li>
+              <NavLink>ABOUT US</NavLink>
+            </li>
+            <li>
+              <NavLink>HOW IT WORKS</NavLink>
+            </li>
+            {
+              !logged ? <li>
+              <NavLink to="/signIn">SIGN IN</NavLink>
+            </li>:
+               <li>
+               <NavLink onClick={()=>{
+               const value= confirm('Are you sure tha you want to log out form this session');
+              if(value){
+                localStorage.removeItem('logged');
+                localStorage.removeItem('userId');
+                navigate('/',{replace:true})
+              }
+               }}>SIGN OUT</NavLink>
+              </li>
+            }
+          </ul>
+
+          {
+            logged && customer &&
+            <ul className="text-white flex gap-10 font-bold">
+               <li>
+              <NavLink>MY ORDERS</NavLink>
+            </li>
+            <li>
+              <NavLink>NOTIFICATION</NavLink>
+            </li>
+            <li>
+              <NavLink to="/signIn">MY PROFILE</NavLink>
+            </li>
+            </ul>
+          }
+          
+          {
+           logged && provider  &&
+            <ul className="text-white flex gap-10 font-bold">
+               <li>
+              <NavLink>RECEIVED ORDERS</NavLink>
+            </li>
+           
+            <li>
+
+                <NavLink to='/user/service'>MY SERVICES</NavLink>
+            </li>
+            <li>
+              <NavLink to="/user/profile">MY PROFILE</NavLink>
+            </li>
+           
+              <li>
+                <NavLink to='/user/order'>RECEIVED ORDERS</NavLink>
+              </li>
+              <li>
+                <NavLink to='/user/category'>CATEGORY</NavLink>
+              </li>
+            
+            </ul>
+          }
+        </div>
+        <div className="w-[300px] ">
+          {
+         !logged && <NavLink
+            className="bg-[#EF351B] p-2  px-10 rounded-full text-white "
+            to="register"
+          >
+            REGISTER
+          </NavLink>
+
+          }
+        </div>
+
+        {/* <div className={`flex-1 place-self-center grid grid-cols-2 ${logged ? 'grid-cols-2' : 'grid-cols-3'}`}>
+>>>>>>> develop
           <div className={`flex   rounded-sm justify-self-center bg-white ${!logged? 'col-span-2' : ''}`}>
                 <div className=" w-[25Vw] ">
                   <input
@@ -64,6 +181,7 @@ export default function Naavbar() {
               <li>
                 <NavLink to='/user/service'>Services</NavLink>
               </li>
+<<<<<<< HEAD
               <li>
                <button onClick={()=>{
                const value= confirm('Are you sure tha you want to log out form this session');
@@ -75,12 +193,16 @@ export default function Naavbar() {
               }
                }}>Log Out</button>
               </li>
+=======
+          
+>>>>>>> develop
               </>
               }
             </ul>
             </div>
 
-          </div>
-        </nav>
-  )
+          </div> */}
+      </nav>
+    </>
+  );
 }

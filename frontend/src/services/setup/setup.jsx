@@ -3,15 +3,15 @@ import Time from "./time";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Charge from "./charge";
-import { setServiceId } from "../cat-Service/catServiceSlice";
+import { setServiceId } from "../../redux/catServiceSlice";
 import {
   useSetupServicesMutation,
   useGetProviderServiceByIdQuery,
   useEditServicesMutation,
   useGetAllProviderServicesQuery,
   useGetProviderServiceByCategoryQuery,
-} from "../serviceApi";
-import { useGetOtherCatserviceQuery } from "../../category/catServiceApi";
+} from "../../Api/serviceApi";
+import { useGetOtherCatserviceQuery } from "../../Api/catServiceApi";
 import { useForm, Controller } from "react-hook-form";
 export default function SeviceSetup() {
   const dispatch = useDispatch();

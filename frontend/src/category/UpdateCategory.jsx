@@ -1,7 +1,7 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import { useState,useEffect } from 'react';
-import { useUpdateCategoryMutation,useViewCategoryQuery } from './categoryApi';
+import { useUpdateCategoryMutation,useViewCategoryQuery } from '../Api/categoryApi';
 export const UpdateCategory = ({selectedCatg}) => {
   const [updateCategory,{data,isLoading,isError,error}]=useUpdateCategoryMutation()
   const {refetch}=useViewCategoryQuery()

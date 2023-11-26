@@ -1,49 +1,69 @@
 import React from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {setOnOver} from './cardSlice'
-import Category from "./category";
+import Categories from "../components/category";
+import { useViewCategoryQuery } from "../Api/categoryApi";
+import SearchBox from "../components/searchBox";
+import { setCategory } from "../redux/cardSlice";
+import CardAll from "./CardAll";
+import { CardId } from "./CardId";
+import photo from "../images/plumber.jpg";
 const Home = () => {
-  const selected = useSelector((state) => state.cardSlice.hovered);
-  console.log(selected);
-const dispatch=useDispatch();
-  const location = useLocation();
+  const selected = useSelector((state) => state.cardSlice.category);
+  console.log("selected", selected);
+  const {
+    data: categories,
+    isError: categoryIsError,
+    isLoading: categoryLoading,
+    error: cataegoryError,
+  } = useViewCategoryQuery();
+  if (categoryLoading ) {
+    return <div>Loading..</div>;
+  }
   return (
-    <section className=" grid grid-cols-5  p-1  text-[0.85em]  gap-1 ">
-      <Category />
-      <div className=" col-start-2  flex flex-col  gap-1 box-border  col-span-4 row-start-1 flex-1 z-auto overflow-y-auto hide-scrollbar scrolling-touch   "
-      onMouseEnter={()=>{
-        
-dispatch(setOnOver({parent:{},subparent:{},child:{}}))
-      }}
-      >
-      <div className="flex gap-2 px-1 text-slate-800">
-                <div className="w-[40Vw] grid grid-cols-3 gap-2 text-xs">
-                  <div>
-                    <select name="" id="" className=" p-2 w-full font-medium">
-                      <option value="">Location</option>
-                    </select>
-                  </div>
-                  <div>
-                    <select name="" id="" className=" p-2 w-full font-medium ">
-                      <option value="">Price</option>
-                    </select>
-                  </div>
-                  <div>
-                    <select name="" id="" className=" p-2 w-full font-medium   ">
-                      <option value="">Types</option>
-                    </select>
-                  </div>
-                </div>
-
-              
-            </div>
-        <div className=" flex-1 flex flex-col">
-          {" "}
-          <Outlet />
+    <section className="  p-1  text-[1em]  ">
+      {/* Banner Promotion Serction  */}
+      <section className="promotinal-banner  bg-white  text-gray-400 p-5">
+        <div className="promo-banner m-2 grid grid-cols-7 border border-gray-300 p-5">
+          <img
+            src={photo}
+            alt="Promotion "
+            className=" h-[80px] max-w-[80px] object-cover justify-self-center "
+          />
+          <p className="text-lg font-bold col-span-3 place-self-center">
+            Special Offer: 20% off on selected services!
+          </p>
+          <p className="flex place-self-center text-green-500 font-bold">
+            $4000
+          </p>
+          <div className="grid place-content-center">
+            <button className="bg-orange-600 text-white p-1 px-4 rounded-full">
+              Shop Now
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
 
+      {/* Search Section  */}
+      <section>
+       <SearchBox/>
+      </section>
+
+      {/* Category Section */}
+      <Categories
+        categories={categories}
+        setCategory={setCategory}
+        selected={selected}
+      />
+   
+
+
+
+      {/* service Section  */}
+      {
+        Object.keys(selected).length===0 ? <CardAll/> : <CardId/>
+      }
+     
     </section>
   );
 };

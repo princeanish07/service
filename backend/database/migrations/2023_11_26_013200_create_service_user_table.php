@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('catservice_user', function (Blueprint $table) {
+        Schema::create('service_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('catservice_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('user_id');     
+            $table->unsignedBigInteger('service_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('service_id')->references('id')->on('services');
             // $table->date('availabe_date');
             // $table->time('period');
             // $table->integer('duration');
@@ -41,9 +43,6 @@ return new class extends Migration
             $table->string('image')->nullable()->default(null);
             $table->string('address')->nullable()->default(null);
             $table->timestamps();
-
-
-            
         });
     }
 
@@ -52,6 +51,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('catservice_provider');
+        Schema::dropIfExists('service_user');
     }
 };

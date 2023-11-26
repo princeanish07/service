@@ -2,19 +2,9 @@ import React from 'react'
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
-    hovered:{
-        parent:{},
-        subparent:{},
-        child:{}
-    },
-    clicked:{
-        parent:{
-            name:"All",
-            category:''
-        },
-        subparent:{},
-        child:{}
-    },
+   
+    category:{},
+    subcategory:{},
     cardId:'',
     provider:{
         id:'',
@@ -26,11 +16,11 @@ export const cardSlice=createSlice({
 name:'cardSlice',
 initialState,
 reducers:{
-    setOnOver:((state,actions)=>{
-        state.hovered=actions.payload
+    setCategory:((state,actions)=>{
+        state.category=actions.payload
     }),
-    setOnClick:((state,actions)=>{
-        state.clicked=actions.payload
+    setSubCategory:((state,actions)=>{
+        state.subcategory=actions.payload
     }),
     setServiceId:((state,actions)=>{
         state.cardId=actions.payload
@@ -40,5 +30,5 @@ reducers:{
     })
 }
 })
-export const {setOnClick,setOnOver,setServiceId,setProviderId}=cardSlice.actions
+export const {setCategory,setSubCategory, setServiceId,setProviderId}=cardSlice.actions
 export default cardSlice.reducer
