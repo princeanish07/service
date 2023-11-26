@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRegisterUserMutation } from "./AuthSlice";
+import { useRegisterUserMutation } from "../Api/AuthSlice";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 
 import Error from "../components/ErrorHandling/error";
@@ -64,7 +64,7 @@ console.log(message);
       {isError && error?.status != 422 ? (
         <Error error={error} />
       ) : (
-        <div className=" form  text-slate-800 grid place-content-center p-2">
+        <div className=" form  text-slate-800 grid place-content-center bg-[#004840] p-2">
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}

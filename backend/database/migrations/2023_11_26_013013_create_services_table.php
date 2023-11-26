@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('service_scopes', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('description')->nullable()->default(null);
+            $table->binary('picture')->nullable()->default(null);
+            $table->foreignId('subcategory_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('service_scopes');
+        Schema::dropIfExists('services');
     }
 };

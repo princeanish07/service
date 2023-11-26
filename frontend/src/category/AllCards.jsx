@@ -1,10 +1,7 @@
 import React from "react";
 import img from "../images/Plumber.png";
-import Card from "./card";
-
-import { useGetAllServicesQuery } from "../Api/cardApi";
+import CardSection from "./cardSection";
 import {useGetAllSubCategoryQuery} from "../Api/subCategoryApi";
-import CardSection from "../components/cardSection";
 const CardAll = () => {
   const id = localStorage.getItem("user");
   const {
@@ -13,18 +10,13 @@ const CardAll = () => {
     isLoading,
     error: subcataegoryError,
   } = useGetAllSubCategoryQuery(); 
-  const {
-    data: cards,
-    isError: serviceIsError,
-    isLoading: cardsLoading,
-    error: serviceError,
-  } = useGetAllServicesQuery();
+ 
 
-  if (cardsLoading || isLoading) {
+  if (  isLoading) {
     return <div>loading...</div>;
   }
 
-  return <CardSection subcategories={subcategories} cards={cards}/>;
+  return <CardSection subcategories={subcategories} />;
 };
 
 export default CardAll;

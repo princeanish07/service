@@ -4,8 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { useGetCategoryServiceQuery } from "../../category/categoryApi";
-import {setServiceId} from "./catServiceSlice"
+import { useGetCategoryServiceQuery } from "../../Api/categoryApi";
+import {setServiceId} from "../../redux/catServiceSlice"
 function CategoryId() {
   const params=useParams()
   console.log(params);

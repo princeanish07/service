@@ -11,17 +11,14 @@ class Category extends Model
 {
     use HasFactory;
     public $fillable = ['name', 'parent_id','description','keywords'];
-    public function category()
+    public function subcategories()
     {
-        return $this->hasMany(Category::class, 'parent_id')->with('category:id,name,parent_id');
+        return $this->hasMany(Subcategory::class, 'category_id');
     }
     public function parentCategory(){
         return $this->belongsTo(Category::class,'parent_id')->with('category:id,name,parent_id');
     }
-    public function services()
-    {
-        return $this->hasMany(Catservice::class,'category_id');
-    }
+ 
     
     // public function users()
     // {

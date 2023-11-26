@@ -6,7 +6,7 @@ import { FaStar } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {setProviderId} from "./cardSlice"
+import {setProviderId} from "../redux/cardSlice"
 function Card({ cards }) {
   const navigate=useNavigate();
   const dispatch=useDispatch();

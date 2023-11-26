@@ -12,6 +12,9 @@ prepareHeaders:(headers)=>{
     return headers
   }}),
 endpoints:(builder)=>({
+  getAllSubCategory:builder.query({
+    query:()=>'providers'
+}),
     getAllServices:builder.query({
         query:()=>'providers'
     }),

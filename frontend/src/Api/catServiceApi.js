@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 export const catServiceAPi = createApi({
   reducerPath: "catService",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/catservices/",
+    baseUrl: "http://localhost:8000/api/services/",
     prepareHeaders:(headers)=>{
       // headers.set('Content-Type','multipart/form-data')
       headers.set('Accept','application/json')

@@ -1,14 +1,16 @@
 import { configureStore,getDefaultMiddleware } from "@reduxjs/toolkit";
-import { authApi } from "../authentication/AuthSlice";
-import { ProfileApi } from "../profile/ProfileApi";
-import { categoryApi } from "../category/categoryApi";
-import { serviceApi } from "../services/serviceApi";
-import {cardApi} from '../home/cardApi'
-import categorySliceReducer from '../category/categorySlice'
-import catServiceSliceReducer from "../services/cat-Service/catServiceSlice";
-import cardSliceReducer from "../home/cardSlice";
-import { catServiceAPi } from "../category/catServiceApi";
-import serviceSliceReducer from "../services/serviceSlice";
+import { authApi } from "./Api/AuthSlice";
+import { subCategoryApi } from "./Api/subCategoryApi";
+import { ProfileApi } from "./Api/ProfileApi";
+import { categoryApi } from "./Api/categoryApi";
+import { serviceApi } from "./Api/serviceApi";
+import {cardApi} from './Api/cardApi'
+import categorySliceReducer from './redux/categorySlice'
+import catServiceSliceReducer from "./redux/catServiceSlice";
+import cardSliceReducer from "./redux/cardSlice";
+import { catServiceAPi } from "./Api/catServiceApi";
+import serviceSliceReducer from "./redux/serviceSlice";
+import RouteSliceReducer from "./redux/RouteSlice";
 const middleware = getDefaultMiddleware({
   serializableCheck:{
     ignoreActions:['profile/basicDetails'],
@@ -20,7 +22,8 @@ const middleware = getDefaultMiddleware({
   categoryApi.middleware,  
   serviceApi.middleware,
   catServiceAPi.middleware,
-  cardApi.middleware
+  cardApi.middleware,
+  subCategoryApi.middleware
 );
 export const store = configureStore({
   reducer: {
@@ -30,10 +33,12 @@ export const store = configureStore({
     [serviceApi.reducerPath]:serviceApi.reducer,
     [catServiceAPi.reducerPath]:catServiceAPi.reducer,
     [cardApi.reducerPath]:cardApi.reducer,
+    [subCategoryApi.reducerPath]:subCategoryApi.reducer,
     categorySlice:categorySliceReducer,
     catServiceSlice:catServiceSliceReducer,
     cardSlice:cardSliceReducer,
-    serviceSlice:serviceSliceReducer
+    serviceSlice:serviceSliceReducer,
+    routeSlice:RouteSliceReducer
   },
 
   middleware

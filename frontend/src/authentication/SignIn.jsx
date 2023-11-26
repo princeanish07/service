@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useLoginUserMutation } from "./AuthSlice";
+import { useLoginUserMutation } from "../Api/AuthSlice";
 import { ColorRing } from "react-loader-spinner";
 import Error from "../components/ErrorHandling/error";
 import { Formik, Form, Field, ErrorMessage, FastField } from "formik";
@@ -48,7 +48,7 @@ const SignIn = () => {
       {isError && error?.status != 422 ? (
         <Error error={error} />
       ) : (
-        <div className=" grid  place-content-center p-5 text-[0.9em]  login ">
+        <div className=" grid  place-content-center p-5 text-[0.9em] bg-[#004840]  login ">
               
               <Formik
                 initialValues={initialValues}

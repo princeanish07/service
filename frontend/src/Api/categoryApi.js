@@ -31,13 +31,7 @@ export const categoryApi = createApi({
         body: category,
       }),
     }),
-    addSubCategory: builder.mutation({
-      query: ({ id, ...subcategory }) => ({
-        url: `subcategory/create/${id}`,
-        method: "post",
-        body: subcategory,
-      }),
-    }),
+  
     addCatgService:builder.mutation({
       query:({id,...service})=>({
         url:`service/create/${id}`,
@@ -51,7 +45,6 @@ export const {
   useViewCategoryQuery,
   useGetCategoryServiceQuery,
   useAddCategoryMutation,
-  useAddSubCategoryMutation,
   useUpdateCategoryMutation,
   useAddCatgServiceMutation
 } = categoryApi;

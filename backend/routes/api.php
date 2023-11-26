@@ -6,6 +6,8 @@ use App\Http\Controllers\CatserviceProviderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QualificationController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,7 +48,6 @@ Route::prefix('qualification')->controller(QualificationController::class)->grou
 });
 Route::prefix('category')->controller(CategoryController::class)->group(function () {
     Route::post('create', 'category');
-    Route::post('subcategory/create/{id}', 'subCategory');
     Route::put('update/{id}', 'updateCategory');
     Route::get('view', 'viewCategory');
     Route::get('search', 'search');
@@ -54,8 +55,13 @@ Route::prefix('category')->controller(CategoryController::class)->group(function
     Route::get('service/{id}', 'getServices');
     Route::get('All/{id}', 'getAllCategory');
 });
+Route::prefix('subcategory')->controller(SubCategoryController::class)->group(function () {
+    Route::post('create/{id}', 'create');
+    Route::get('viewAll', 'getAll');
+    Route::get('view/{id}', 'getById');
+});
 
-Route::prefix('catservices')->controller(CatserviceController::class)->group(function () {
+Route::prefix('services')->controller(ServiceController::class)->group(function () {
     Route::post('create', 'create');
     Route::get('show/{service}', 'GetById');
     Route::get('all', 'GetAll');

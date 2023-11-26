@@ -5,7 +5,7 @@ import Service from "./service";
 import Category from "./Category"
 import { FaSearch } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import {setOnOver} from '../home/cardSlice'
+import {setCategory} from '../redux/cardSlice'
 
 const Home = () => {
   const navigate=useNavigate();
@@ -16,7 +16,7 @@ const Home = () => {
       <section className="col-span-4 col-start-2 col-end-6 row-start-1 shadow flex flex-col bg-[rgba(0,0,0,0.6)] "
             onMouseEnter={()=>{
         
-              dispatch(setOnOver({parent:{},subparent:{},child:{}}))
+              dispatch(setCategory({parent:{},subparent:{},child:{}}))
                     }}
       >
       <div className="flex  gap-4  text-slate-800  px-10 mt-10">

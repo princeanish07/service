@@ -1,17 +1,17 @@
 
 import React, { useEffect, useState } from "react";
-import {useGetAllProviderCategoryQuery} from "./serviceApi"
+import {useGetAllProviderCategoryQuery} from "../Api/serviceApi"
 import { FaChevronRight } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate, Outlet, useParams } from "react-router-dom";
-import { setOnClick, setOnOver } from "../home/cardSlice";
+import { setCategory } from "../redux/cardSlice";
 import { useSelector, useDispatch } from "react-redux";
 export default function Category() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const selected = useSelector((state) => state.cardSlice.hovered);
-  const clicked = useSelector((state) => state.cardSlice.clicked);
+  const selected = useSelector((state) => state.cardSlice.category);
+  const clicked = useSelector((state) => state.cardSlice.subcategory);
 const userId=localStorage.getItem('userId');
   const {
     data: categories,
@@ -20,30 +20,30 @@ const userId=localStorage.getItem('userId');
     error: cataegoryError,
   } = useGetAllProviderCategoryQuery(userId);
 
-  const handleCategory = (category) => {
-    dispatch(
-      setOnOver({ ...selected, parent: category, subparent: {}, child: {} })
-    );
-  };
-  const handleSubCategory = (category) => {
-    dispatch(setOnOver({ ...selected, subparent: category, child: {} }));
-  };
+  // const handleCategory = (category) => {
+  //   dispatch(
+  //     setCategory({ ...selected, parent: category, subparent: {}, child: {} })
+  //   );
+  // };
+  // const handleSubCategory = (category) => {
+  //   dispatch(setCategory({ ...selected, subparent: category, child: {} }));
+  // };
   const [toggle, setToggle] = useState(false);
   const [toggleCatg, setToggleCatg] = useState(false);
   const handleToggle = (toggle) => setToggle(toggle);
   const handleCategoryToggle = (toggle) => setToggleCatg(toggle);
-  const selectedCatg =
-    Object.keys(clicked?.child).length != 0
-      ? clicked?.child
-      : Object.keys(clicked?.subparent).length != 0
-      ? clicked?.subparent
-      : clicked?.parent;
+  // const selectedCatg =
+  //   Object.keys(clicked?.child).length != 0
+  //     ? clicked?.child
+  //     : Object.keys(clicked?.subparent).length != 0
+  //     ? clicked?.subparent
+  //     : clicked?.parent;
 
-      useEffect(() => {
-        Object.keys(selectedCatg).length !== 0 &&
-          navigate(`${selectedCatg?.name}`);
+  //     useEffect(() => {
+  //       Object.keys(selectedCatg).length !== 0 &&
+  //         navigate(`${selectedCatg?.name}`);
          
-      }, [selectedCatg]);
+  //     }, [selectedCatg]);
   if (categoryLoading) {
     return <div>loading...</div>;
   }
@@ -63,7 +63,7 @@ const userId=localStorage.getItem('userId');
             }`}
             onClick={() => {
               dispatch(
-                setOnClick({
+                setCategory({
                   ...clicked,
                   parent: { name: "All", category: [] },
                   subparent: {},
@@ -88,7 +88,7 @@ const userId=localStorage.getItem('userId');
                 onClick={() => {
                   Object.keys(category?.category).length === 0 &&
                     (dispatch(
-                      setOnClick({
+                      setCategory({
                         ...clicked,
                         parent: category,
                         subparent: {},
@@ -137,7 +137,7 @@ const userId=localStorage.getItem('userId');
                   onClick={() => {
                     Object.keys(subcategory?.category).length === 0 &&
                       (dispatch(
-                        setOnClick({
+                        setCategory({
                           ...clicked,
                           parent: selected?.parent,
                           subparent: subcategory,
@@ -188,9 +188,9 @@ const userId=localStorage.getItem('userId');
                       : "hover:cursor-pointer hover:bg-gray-200  hover:text-gray-700"
                   }`}
                   onClick={() => {
-                    dispatch(setOnOver({ ...selected, child: childcategory }));
+                    dispatch(setCategory({ ...selected, child: childcategory }));
                     dispatch(
-                      setOnClick({
+                      setCategory({
                         ...clicked,
                         parent: selected?.parent,
                         subparent: selected?.subparent,

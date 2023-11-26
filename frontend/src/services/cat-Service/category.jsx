@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useViewCategoryQuery } from "../../category/categoryApi";
+import { useViewCategoryQuery } from "../../Api/categoryApi";
 import { FaChevronRight } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate, Outlet, useParams } from "react-router-dom";
-import {setSelectedCategory} from '../../category/categorySlice'
-import {setSelectedOnClick} from './catServiceSlice'
+import {setSelectedCategory} from '../../redux/categorySlice'
+import {setSelectedOnClick} from '../../redux/catServiceSlice'
 import { useSelector, useDispatch } from "react-redux";
 // import { saveCategory } from "../redux/profileslice";
 export default function Category() {
