@@ -63,14 +63,10 @@ class User extends Authenticatable
         // ->using(CatserviceUser::class)
         ->withPivot('description', 'days', 'time', 'charge', 'offers', 'experience', 'image', 'address');
     }
-<<<<<<< HEAD
-  
-=======
     // public function categories()
     // {
     //     return $this->hasManyThrough(Category::class, Service::class);
     // }
->>>>>>> develop
     public function profile()
     {
         return $this->hasOne(Profile::class,'user_id');

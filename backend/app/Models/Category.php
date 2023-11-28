@@ -15,18 +15,10 @@ class Category extends Model
     {
         return $this->hasMany(Subcategory::class, 'category_id');
     }
-<<<<<<< HEAD
-   
-    public function services()
-    {
-        return $this->hasMany(Catservice::class,'category_id');
-    }
-=======
     public function parentCategory(){
         return $this->belongsTo(Category::class,'parent_id')->with('category:id,name,parent_id');
     }
  
->>>>>>> develop
     
     
 }
