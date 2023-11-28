@@ -10,7 +10,7 @@ const serviceCard = ({ cards }) => {
       <section className="grid place-content-center p-20">
         <div>
           <h2>No Service Are Found</h2>
-          {selected?.id &&  (
+          {selected && (
             <button
               className="bg-gray-400 p-2 px-8 rounded-md m-5"
               onClick={() => {
@@ -25,26 +25,47 @@ const serviceCard = ({ cards }) => {
     );
   }
   return (
-    <section>
-      {cards.map((card) => {
-        return (
-          <div
-            class="featured-services  m-5  bg-[#fff]  rounded-lg flex gap-10"
-            key={card?.id}
+    <section className=" ">
+      <div className="flex justify-end">
+        {selected && (
+          <button
+            className="bg-blue-600 p-2 px-8 rounded-full text-white"
+            onClick={() => {
+              dispatch(setCategoryAciton("service"));
+            }}
           >
-            <div class="service-card">
-              <img src={image1} alt="" />
-              <div class="service-title">Graphic Design</div>
-              <div class="service-description">
-                Eye-catching visuals for your brand.
+            Add Services
+          </button>
+        )}
+      </div>
+      <section className="grid grid-cols-4 p-5 box-border ">
+        {cards.map((card) => {
+          return (
+            <div
+              className="    m-5 bg-[#fff] p-3 rounded-lg transition-all text-center hover:scale-105 shadow shadow-gray-300 "
+              key={card?.id}
+            >
+              <img
+                src={image1}
+                alt=""
+                className="h-[200px] w-full object-cover mb-3"
+              />
+              <div className="text-lg font-bold text-[#666] mb-3">
+                {card?.name}
               </div>
-              <a href="#" class="learn-more-btn">
-                Learn More
-              </a>
+              <div className="">{card?.description}</div>
+              <div className="flex justify-between p-5">
+                <button className="text-green-600">View</button>
+                <button className="text-green-600">Edit</button>
+
+                <button className="text-green-600">Delete</button>
+
+              
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </section>
     </section>
   );
 };

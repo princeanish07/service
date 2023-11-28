@@ -1,6 +1,5 @@
 import React from 'react'
 import SubCategory from './subcategory'
-import Card from '../home/card'
 const cardSection = ({subcategories,cards}) => {
 
   return (

@@ -16,23 +16,26 @@ const SubCategory = ({subcategories}) => {
     </div>
   }
   
-  const selected = useSelector((state) => state.categorySlice.category);
-console.log('selected',selected);
+  const catg = useSelector((state) => state.categorySlice.category);
+  const subcatg = useSelector((state) => state.categorySlice.subcategory);
+
   return (
-    <div className="flex flex-col font-semibold shadow h-[90Vh] shadow-gray-400   ">
+    <div className="flex flex-col font-semibold shadow min-h-screen shadow-gray-400   ">
     <ul className="flex flex-col mb-8 border-b p-5 border-gray-300 ">
       <li>Departments</li>
       {
         subcategories.map((subcategory)=>{
-          return  <ul className="m-1 flex gap-3 hover:bg-gray-200 hover:cursor-pointer p-2 rounded-md" key={subcategory?.id} 
+          return  <ul className={`m-1 flex gap-3 hover:bg-gray-200 hover:cursor-pointer p-2 rounded-md ${subcatg===subcategory?.id && "bg-gray-200"}`} key={subcategory?.id} 
           
           >
             <li className='flex-1' 
-            onClick={()=>{
-              dispatch(setSubcategory(subcategory))
-            }}
+           
             >
-            {subcategory?.name.toUpperCase()}
+            <button 
+             onClick={()=>{
+              dispatch(setSubcategory(subcategory?.id))
+            }}
+            >{subcategory?.name.toUpperCase()}</button>
 
             </li>
             <li >
@@ -52,7 +55,7 @@ console.log('selected',selected);
       
     </ul>
     {
-    selected?.id && <AddSubCategory/> 
+    catg && <AddSubCategory/> 
     }
     </div>
   )

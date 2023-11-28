@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import image from "../images/Plumber.jpg"
 import Button from "../components/button";
 import { setCategoryAciton ,setCategory,setSubcategory} from "../redux/categorySlice";
-export default function Category({categories,selected}) {
+export default function Category({categories}) {
+  const selected=useSelector((state)=>state.categorySlice.category)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -23,10 +24,10 @@ export default function Category({categories,selected}) {
 
       {
         categories.map((category)=>{
-          return <div key={category?.id} className={`px-5 ${selected?.id===category?.id && ' bg-green-500 rounded-lg text-white p-2 '}`}
+          return <div key={category?.id} className={`px-5 ${selected===category?.id && ' bg-green-500 rounded-lg text-white p-2 '}`}
           onClick={()=>{
-            dispatch(setCategory(category))
-            dispatch(setSubcategory({}))
+            dispatch(setCategory(category?.id))
+            dispatch(setSubcategory(null))
 
           }}
 
@@ -38,7 +39,7 @@ export default function Category({categories,selected}) {
 
             </div>
        {
-        selected?.id===category?.id && <ButtonComponent/>
+        selected===category?.id && <ButtonComponent/>
        }
           </div>
         })

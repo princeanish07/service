@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { useEffect } from "react";
+
 
 export const cardApi = createApi({
   reducerPath: "cards",
@@ -11,6 +13,7 @@ prepareHeaders:(headers)=>{
     headers.set('Authorize',localStorage.getItem('token'))
     return headers
   }}),
+
 endpoints:(builder)=>({
   getAllSubCategory:builder.query({
     query:()=>'providers'

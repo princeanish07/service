@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import logo from "../images/logo.png";
-import { useViewProfileQuery } from "../Api/ProfileApi";
+import { useViewProfileQuery, useEditProfileMutation} from "../Api/ProfileApi";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
 export default function Edit() {

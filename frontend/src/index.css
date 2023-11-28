@@ -139,22 +139,22 @@
   @apply  p-1 focus:outline-none text-[0.9em]
  }
  .service-label label{
-  @apply text-gray-600
+  @apply text-gray-800
  }
 
 
  .service >div{
-  @apply grid grid-cols-1 gap-2 p-2 box-border
+  @apply grid grid-cols-1 gap-2 p-2 
  }
  .service >div >input[type='text']{
-  @apply p-2 border-2 border-gray-300 rounded-md w-full
+  @apply p-2   rounded-md w-full shadow shadow-gray-200
  }
  .service div textarea{
-  @apply border-2 border-gray-300 rounded-md p-2
+  @apply rounded-md p-2 shadow shadow-gray-200
  }
  
  .service div label{
-  @apply text-[1em] text-slate-500
+  @apply  text-slate-800 text-[1.1em]
  } 
  .service .location div{
   @apply grid grid-cols-3 gap-4
@@ -163,7 +163,7 @@
   @apply  grid place-content-end 
  } 
  .service .location div input{
-  @apply  col-span-2 outline-none bg-white border-b-2 border-gray-400  pt-2
+  @apply  col-span-2 outline-none bg-white border-b-2   pt-2 shadow-lg shadow-gray-700
  } 
 
  .charge {

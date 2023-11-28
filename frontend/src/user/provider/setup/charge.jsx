@@ -7,7 +7,7 @@ const Charge = ({ register, setValue, Controller, control,charge }) => {
 
   return (
     <>
-      <div className="  text-slate-500 flex flex-col gap-2">
+      <div className="  text-slate-800 text-[1.1em]  flex flex-col gap-2">
         <span>Service Charge</span>
 
         <div>

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState={
-   category:{},
-  subcategory:{},
+   category:null,
+  subcategory:null,
    
    serviceId:0,
    subCatgButton:"",

@@ -1,211 +1,45 @@
-
 import React, { useEffect, useState } from "react";
-import {useGetAllProviderCategoryQuery} from "../Api/serviceApi"
-import { FaChevronRight } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
 import { useNavigate, Outlet, useParams } from "react-router-dom";
-import { setCategory } from "../redux/cardSlice";
 import { useSelector, useDispatch } from "react-redux";
-export default function Category() {
+import image from "../images/Plumber.jpg"
+import Button from "../components/button";
+import { setCategoryAciton ,setCategory,setSubcategory} from "../redux/categorySlice";
+export default function Category({categories}) {
+  const selected=useSelector((state)=>state.categorySlice.category)
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
-  const selected = useSelector((state) => state.cardSlice.category);
-  const clicked = useSelector((state) => state.cardSlice.subcategory);
-const userId=localStorage.getItem('userId');
-  const {
-    data: categories,
-    isError: categoryIsError,
-    isLoading: categoryLoading,
-    error: cataegoryError,
-  } = useGetAllProviderCategoryQuery(userId);
 
-  // const handleCategory = (category) => {
-  //   dispatch(
-  //     setCategory({ ...selected, parent: category, subparent: {}, child: {} })
-  //   );
-  // };
-  // const handleSubCategory = (category) => {
-  //   dispatch(setCategory({ ...selected, subparent: category, child: {} }));
-  // };
-  const [toggle, setToggle] = useState(false);
-  const [toggleCatg, setToggleCatg] = useState(false);
-  const handleToggle = (toggle) => setToggle(toggle);
-  const handleCategoryToggle = (toggle) => setToggleCatg(toggle);
-  // const selectedCatg =
-  //   Object.keys(clicked?.child).length != 0
-  //     ? clicked?.child
-  //     : Object.keys(clicked?.subparent).length != 0
-  //     ? clicked?.subparent
-  //     : clicked?.parent;
 
-  //     useEffect(() => {
-  //       Object.keys(selectedCatg).length !== 0 &&
-  //         navigate(`${selectedCatg?.name}`);
-         
-  //     }, [selectedCatg]);
-  if (categoryLoading) {
-    return <div>loading...</div>;
-  }
   return (
-    <div className="grid grid-cols-3  col-start-1 row-start-1 col-end-4 col-span-4 text-sm font-semibold ">
-      <div className="  bg-white shadow overflow-hidden">
-        <ul
-          className=" box-border grid grid-cols-1 gap-1 p-1"
-          onMouseLeave={() => handleToggle(true)}
-        >
-          <li className="p-2 text-red-500 ">CATEGORIES</li>
-          <li
-            className={`p-2  hover:cursor-pointer ${
-              clicked?.parent?.name === "All"
-                ? "bg-blue-600 text-white"
-                : " hover:bg-gray-200  hover:text-gray-700"
-            }`}
-            onClick={() => {
-              dispatch(
-                setCategory({
-                  ...clicked,
-                  parent: { name: "All", category: [] },
-                  subparent: {},
-                  child: {},
-                })
-              );
-            }}
-            onMouseEnter={() => {
-              handleCategoryToggle(false);
-              handleToggle(false);
-            }}
+    <section className="grid shadow-sm shadow-gray-200  m-5 p-5 ">
+      <section className="flex w-full overflow-y-scroll p-5">
+
+      {
+        categories.map((category)=>{
+          return <div key={category?.id} className={`px-5 ${selected===category?.id && ' shadow shadow-gray-600 rounded-lg text-white p-2 '}`}
+          onClick={()=>{
+            dispatch(setCategory(category?.id))
+            dispatch(setSubcategory(null))
+
+          }}
+
+          
           >
-            All
-          </li>
-          {categories.map((category) => {
-            return (
-              <li
-                onMouseEnter={() => {
-                  handleCategory(category);
+            <div className="max-w-[150px] m-5  box-border hover:cursor-pointer hover:scale-105 transition">
+            <img src={image} className="max-w-[120px] h-[120px] rounded-full border border-gray-300 mb-5 " alt="" />
+            <p className="text-center mt-5 text-gray-600 font-semibold ">{category?.name}</p>
 
-                }}
-                onClick={() => {
-                  Object.keys(category?.category).length === 0 &&
-                    (dispatch(
-                      setCategory({
-                        ...clicked,
-                        parent: category,
-                        subparent: {},
-                        child: {},
-                      })
-                    ),
-                    handleToggle(false),
-                    handleCategoryToggle(false));
-                }}
-                key={category.id}
-                className={`p-2  hover:cursor-pointer flex  ${
-                  clicked &&
-                  clicked.parent &&
-                  clicked.parent?.id === category.id
-                    ? "bg-blue-600 text-white"
-                    : "hover:bg-gray-200  hover:text-gray-700"
-                }`}
-              >
-                <p className="flex-1">{category.name}</p>
-                {category.category &&
-                  category.category.length > 0 &&
-                  selected?.parent?.id === category.id && (
-                    <span className="text-[#0118E6]">
-                      <FaChevronRight />
-                    </span>
-                  )}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      {Object.keys(selected?.parent).length > 0 &&
-      Object.keys(selected?.parent?.category).length > 0 ? (
-        <div className=" grid  bg-white shadow p-2 z-10 ">
-          <ul className="">
-            <li className="p-2 text-red-500">SUB CATEGORIES</li>
-            {selected?.parent?.category.map((subcategory) => {
-              return (
-                <li
-                  key={subcategory.id}
-                  onMouseEnter={() => {
-                    handleSubCategory(subcategory);
-
-                   
-                  }}
-                  onClick={() => {
-                    Object.keys(subcategory?.category).length === 0 &&
-                      (dispatch(
-                        setCategory({
-                          ...clicked,
-                          parent: selected?.parent,
-                          subparent: subcategory,
-                          child: {},
-                        })
-                      ),
-                      handleToggle(false),
-                      handleCategoryToggle(false));
-                  }}
-                  className={`p-2 w-full hover:cursor-pointer flex ${
-                    clicked &&
-                    clicked.subparent &&
-                    clicked.subparent?.id === subcategory.id
-                      ? "bg-blue-600 text-white"
-                      : "  hover:bg-gray-200  hover:text-gray-700"
-                  }`}
-                >
-                  <p className="flex-1">{subcategory.name}</p>
-                  {selected?.subparent &&
-                    Object.keys(selected?.subparent).length > 0 &&
-                    selected?.subparent?.id === subcategory.id &&
-                    Object.keys(selected?.subparent?.category).length > 0 && (
-                      <span className="text-[#0118E6]">
-                        <FaChevronRight />
-                      </span>
-                    )}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ) : null}
-      {Object.keys(selected?.subparent).length != 0 &&
-      Object.keys(selected?.subparent?.category).length > 0 ? (
-        <div
-          className=" bg-white  shadow p-2 z-10 "
-          onMouseLeave={() => handleSubCategory({})}
-        >
-          <ul className="">
-            <li className="p-2 text-red-500">SUB CATEGORIES</li>
-            {selected?.subparent?.category.map((childcategory) => {
-              return (
-                <li
-                  key={childcategory.id}
-                  className={`p-2  ${
-                    clicked?.child && clicked?.child?.id === childcategory.id
-                      ? "hover:cursor-pointer bg-blue-600 text-gray-100"
-                      : "hover:cursor-pointer hover:bg-gray-200  hover:text-gray-700"
-                  }`}
-                  onClick={() => {
-                    dispatch(setCategory({ ...selected, child: childcategory }));
-                    dispatch(
-                      setCategory({
-                        ...clicked,
-                        parent: selected?.parent,
-                        subparent: selected?.subparent,
-                        child: childcategory,
-                      })
-                    );
-                  }}
-                >
-                  {childcategory.name}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ) : null}
+            </div>
     </div>
+        })
+      }
+      </section>
+    
+    <div className="flex place-content-center mt-8 gap-10">
+          <Button name="View All" bg_color="green-600" text_color="white"></Button>
+          
+        </div>
+     
+    </section>
   );
 }

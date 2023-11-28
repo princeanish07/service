@@ -3,9 +3,8 @@ import SubCategory from "./subcategory"
 import { useSelector } from 'react-redux'
 
 import ServiceCard from './serviceCard'
-const cardSection = ({subcategories,cards}) => {
+const cardSection = ({subcategories,children}) => {
 const selected=useSelector((state)=>state.categorySlice.subcategory);
-console.log('cardsection',selected);
   return (
 
     <section className="service-section grid grid-cols-4   gap-1">
@@ -15,11 +14,13 @@ console.log('cardsection',selected);
 
 
     {/* Provider-Card Section */}
-    <section className=" col-start-2   gap-1 box-border  col-span-4 row-start-1 flex-1 z-auto overflow-y-auto hide-scrollbar scrolling-touch   ">
+    <section className=" col-start-2   gap-1 box-border  col-span-4 row-start-1 flex-1   ">
       {/* {
         Object.keys(selected).length===0 ? <AllSevice /> : <ServiceById/>
       } */}
-      <ServiceCard cards={cards}/>
+      {
+        children 
+      }
     </section>
 
 

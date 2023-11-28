@@ -2,79 +2,207 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\providerRequest;
-use App\Models\Provider;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+use App\Http\Requests\catservice_providerRequest;
+use App\Http\Resources\ProviderDetailsResource;
+use App\Http\Resources\ProviderResource;
+use App\Http\Resources\ServiceResource;
+use App\Models\Category;
+use App\Models\Service;
+use App\Models\Subcategory;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class ServiceProviderController extends Controller
 {
-    public function create(providerRequest $request)
+
+    public function createServices(catservice_providerRequest $request, $id)
     {
 
-        $token = Provider::create($request->validated())->createToken('mytoken')->plainTextToken;
+        $users = User::find($id);
+        // return dd($service);
+
+        // This code is used when we setup multiple services
+        // $collection = [];
+        // foreach ($data['service'] as $request) {
+        //     $collection[$request['id']] = [
+        //         'availabe_date' => $request['availabe_date'],
+        //         'period' => $request['period'],
+        //         'duration' => $request['duration'],
+        //         'price' => $request['price'],
+        //         'location' => json_encode($request['location']),
+        //         'status' => $request['status'],
+        //     ];
+        // }
+
+        $path = null;
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $name = time() . '.' . $extension;
+            $file->move('service/image', $name);
+            $path = 'service/image/' . $name;
+        }
+        $users->services()->attach($request['sid'], [
+            'description' => $request['description'],
+            'days' => $request['days'],
+            'time' => $request['time'],
+            'charge' => $request['charge'],
+            'offers' => $request['offers'],
+            'experience' => $request['experience'],
+            'image' => $path,
+            'address' => $request['address'],
+        ]);
+
+
         return response()->json([
-            'token' => $token,
-            'message' => 'Register successfully'
-
-        ], 200);
-    }
-
-    public function login(providerRequest $request)
-    {
-        $validate = $request->validated();
-        $user = Provider::where('email', $validate['email'])->first();
-
-        if (!$user || !Hash::check($validate['password'], $user->password))
-            throw ValidationException::withMessages([
-                'password' => 'Wrong password',
-            ]);
-        $token = $user->createToken('mytoken')->plainTextToken;
-        return response()->json([
-            'message' => 'Login successfully ',
-            'id' => $user->id,
-            'status' => 200,
-            'token' => $token,
-            'message' => 'successful'
+            'message' => 'successfully added'
         ]);
     }
 
 
-    public function edit(Provider $provider)
+
+
+
+
+    public function getServicesByPorviderId($providersId)
     {
+        $services = User::find($providersId)->services()->get();
+        if ($services) {
 
-        return response()->json([
-            'data' => collect($provider)->except('password'),
-            'status' => 200
-
-        ], 200);
+            return  ServiceResource::collection($services);
+        }
     }
-    public function update(providerRequest $request, Provider $provider)
+
+    public function getServiceById($providerId,$serviceId)
+    {
+        $services = User::find($providerId)->services->find($serviceId);
+        if ($services) {
+            
+            return new ServiceResource($services);
+        }
+    }
+
+    public function getServicesByCategory($providerId, $categoryId)
+    {
+        $category = Category::find($categoryId);
+        $user = User::find($providerId);
+
+        if ($category && $user) {
+            $services = $user->services()
+                ->whereHas('subcategory', function ($query) use ($categoryId) {
+                    $query->where('category_id', $categoryId);
+                })
+                ->get();
+
+            // Now $services contains the services for the given Category Id and User Id.
+        }
+        if ($services) {
+
+            return  ServiceResource::collection($services);
+        }
+    }
+    public function getServicesBySubCategory($providerId, $subcategoryId)
     {
 
-        $validate = $request->validated();
-        $token = null;
-        $email = null;
-        DB::transaction(function () use ($validate, $provider, &$token, &$email) {
-            $provider->fill($validate)->save();
-            $token = $provider->createToken('mytoken')->plainTextToken;
-            $email = $provider->email;
-        });
-        return response()->json([
-            'status' => 200,
-            'message' => 'successfullly updated',
-            'email' => $email,
-            'token' => $token
+        $services = User::find($providerId)->services()
+            ->where('subcategory_id', $subcategoryId)
+            ->get();
+        if ($services) {
+
+            return  ServiceResource::collection($services);
+        }
+    }
+    
+    public function editProviderService(Request $request, $providerId)
+    {
+        $users = User::find($providerId);
+        
+        $path = null;
+        
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $name = time() . '.' . $extension;
+            $file->move('service/image', $name);
+            $path = 'service/image/' . $name;
+        }
+        $users->services()->updateExistingPivot($request['sid'], [
+            'description' => $request['description'],
+            'days' => $request['days'],
+            'time' => $request['time'],
+            'charge' => $request['charge'],
+            'offers' => $request['offers'],
+            'experience' => $request['experience'],
+            'image' => $path,
+            'address' => $request['address'],
         ]);
-    }
-    public function delete(Provider $provider)
-    {
-        $provider->delete();
+        
+        
         return response()->json([
-            'status' => 200,
-            'message' => 'successfullly deleted',
+            'message' => 'successfully updated'
+        ]);
+        return $users;
+    }
+    
+    public function deleteService($serviceId, $providerId)
+    {
+        $user = User::find($providerId);
+        $user->services()->detach($serviceId);
+        return response()->json([
+            'message' => 'successfully deleted'
             
         ]);
     }
+    
+
+        
+    public function getAllProvider()
+    {
+
+        $providers = User::has('services')->with(['services','profile'])
+            ->get();
+        if ($providers) {
+
+            return ProviderResource::collection($providers);
+        }
+    }
+
+
+    public function getProviderByCategory($categoryId)
+    {
+        $providers = User::whereHas('services', function ($query) use ($categoryId) {
+            $query->whereHas('subcategory',function($subquery) use ($categoryId){
+                $subquery->where('category_id',$categoryId);
+            });
+        })->with(['services','profile'])->get();
+        if ($providers) {
+
+            return ProviderResource::collection(($providers));
+        }
+    }
+
+    public function getProviderBySubCategory($subcategoryId)
+    {
+        $providers = User::whereHas('services', function ($query) use ($subcategoryId) {
+            $query->where('subcategory_id', $subcategoryId);
+        })->with(['services','profile'])->get();
+        if ($providers) {
+
+            return ProviderResource::collection(($providers));
+        }
+    }
+
+
+    
+  
+public function getProviderDetails($providerId){
+    $user=User::with(['services','profile'])->find($providerId);
+    if($user){
+        return new ProviderDetailsResource($user);
+    }
+}
+
+    
+   
 }

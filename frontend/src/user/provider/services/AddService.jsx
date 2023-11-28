@@ -1,6 +1,6 @@
 import React from "react";
-import {useAddCatServicesMutation} from '../Api/catServiceApi'
-import Form from "./Form";
+import {useAddCatServicesMutation} from '../../../Api/catServiceApi'
+import Form from "../form/Form";
 import { useSelector } from "react-redux";
 const AddService = () => {
   const [addService, { data, isLoading, isError,error }] =

@@ -9,7 +9,7 @@ import AllForm from "./AllForm";
 import CardSection from "./cardSection";
 import { useGetSubCategoryQuery } from "../Api/subCategoryApi";
 import { useGetServicesQuery } from "../Api/catServiceApi";
-export const CategoryPage = () => {
+export const ServicePage = () => {
   const category = useSelector((state) => state.categorySlice.category);
   const subcategory = useSelector((state) => state.categorySlice.subcategory);
   const {
@@ -17,7 +17,7 @@ export const CategoryPage = () => {
     isError,
     isLoading: subcategoryLoading,
     error: subcataegoryError,
-  } = useGetSubCategoryQuery(category);
+  } = useGetSubCategoryQuery({ category },{category});
   const {
     data: services,
     isError: serviceIsError,
@@ -41,7 +41,7 @@ export const CategoryPage = () => {
 
   return (
     <>
-      <div className="relative">
+      <div className="">
         <section className="m-8">
           <SearchBox />
         </section>
@@ -55,9 +55,7 @@ export const CategoryPage = () => {
         <section>
           <CardSection subcategories={subcategories} cards={services} />
         </section>
-        <section>
-          <AllForm />
-        </section>
+      
       </div>
     </>
   );

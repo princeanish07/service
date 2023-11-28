@@ -7,7 +7,7 @@ const AddSubCategory = () => {
 const selected=useSelector((state)=>state.categorySlice.category);
   const [addSubCategory,{data,isLoading,isError,error}]=useAddSubCategoryMutation()
     const submitForm= async(values)=>{
-      await addSubCategory({...values,id:selected?.id})
+      await addSubCategory({...values,id:selected})
       .unwrap()
       .then((response)=>{
         reset()

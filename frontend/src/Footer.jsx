@@ -3,8 +3,8 @@ import React from 'react'
 const Footer = () => {
   return (
     <footer className='bg-[rgba(0,0,0,0.8)] text-gray-100 p-20 grid grid-cols-1 '>
-    <div class=" grid grid-cols-4 justify-items-center">
-      <div class="contact-info">
+    <div className=" grid grid-cols-4 justify-items-center">
+      <div className="contact-info">
         <h4>Contact Us</h4>
         <ul>
             
@@ -14,7 +14,7 @@ const Footer = () => {
         </ul>
       </div>
       
-      <div class="quick-links">
+      <div className="quick-links">
         <h4>Quick Links</h4>
         <ul>
           <li><a href="#home">Home</a></li>
@@ -26,7 +26,7 @@ const Footer = () => {
         </ul>
       </div>
       
-      <div class="legal-info">
+      <div className="legal-info">
         <h4>Legal</h4>
         <ul>
           <li><a href="#terms">Terms of Service</a></li>
@@ -35,16 +35,16 @@ const Footer = () => {
         </ul>
       </div>
       
-      <div class="social-media">
+      <div className="social-media">
         <h4>Connect With Us</h4>
         <ul>
             <li>
 
-        <a href="#" target="_blank" title="Follow us on Facebook"><img src="facebook-icon.png" alt="Facebook"/></a>
+        <a href="#" target="_blank" title="Follow us on Facebook"><img src="" alt="Facebook"/></a>
             </li>
             <li>
 
-        <a href="#" target="_blank" title="Follow us on Twitter"><img src="twitter-icon.png" alt="Twitter"/></a>
+        <a href="#" target="_blank" title="Follow us on Twitter"><img src="" alt="Twitter"/></a>
 
             </li>
         </ul>

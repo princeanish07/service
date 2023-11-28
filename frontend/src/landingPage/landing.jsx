@@ -28,7 +28,7 @@ const landing = () => {
               <img
                 src={image}
                 className="h-[40Vh] w-full object-contain"
-                w
+                
                 alt=""
               />
             </div>
@@ -62,7 +62,6 @@ const landing = () => {
               <img
                 src={image1}
                 className="max-h-[30Vh] w-full object-cover"
-                w
                 alt=""
               />
             </div>
@@ -73,38 +72,38 @@ const landing = () => {
           <h2 className=" text-[1.2em] font-bold  m-8 text-center text-green-400 ">
             DISCOVER SERVICES
           </h2>
-          <div class="featured-services  m-5  bg-[#fff]  rounded-lg flex gap-10">
-            <div class="service-card">
+          <div className="featured-services  m-5  bg-[#fff]  rounded-lg flex gap-10">
+            <div className="service-card">
               <img src={image1} alt="" />
-              <div class="service-title">Graphic Design</div>
-              <div class="service-description">
+              <div className="service-title">Graphic Design</div>
+              <div className="service-description">
                 Eye-catching visuals for your brand.
               </div>
-              <a href="#" class="learn-more-btn">
+              <a href="#" className="learn-more-btn">
                 Learn More
               </a>
             </div>
 
-            <div class="service-card">
+            <div className="service-card">
               <img src={image1} alt="" />
 
-              <div class="service-title">Web Development</div>
-              <div class="service-description">
+              <div className="service-title">Web Development</div>
+              <div className="service-description">
                 Build your online presence with expert developers.
               </div>
-              <a href="#" class="learn-more-btn">
+              <a href="#" className="learn-more-btn">
                 Learn More
               </a>
             </div>
 
-            <div class="service-card">
+            <div className="service-card">
               <img src={image1} alt="" />
 
-              <div class="service-title">Content Writing</div>
-              <div class="service-description">
+              <div className="service-title">Content Writing</div>
+              <div className="service-description">
                 Engaging content tailored to your audience.
               </div>
-              <a href="#" class="learn-more-btn  ">
+              <a href="#" className="learn-more-btn  ">
                 Learn More
               </a>
             </div>
@@ -116,38 +115,38 @@ const landing = () => {
             EXPLORE LEADING SERVICE EXPERTS
           </h2>
 
-          <div class="featured-providers">
-            <div class="provider-card">
-              <img class="provider-image" src={image1} alt="Provider 1 Image" />
-              <div class="provider-name">John Doe</div>
-              <div class="provider-profession">Graphic Designer</div>
-              <div class="provider-description">
+          <div className="featured-providers">
+            <div className="provider-card">
+              <img className="provider-image" src={image1} alt="Provider 1 Image" />
+              <div className="provider-name">John Doe</div>
+              <div className="provider-profession">Graphic Designer</div>
+              <div className="provider-description">
                 Experienced graphic designer with a passion for creating
                 visually stunning designs.
               </div>
-              <button class="view-profile-btn">View Profile</button>
+              <button className="view-profile-btn">View Profile</button>
             </div>
 
-            <div class="provider-card">
-              <img class="provider-image" src={image1} alt="Provider 2 Image" />
-              <div class="provider-name">Jane Smith</div>
-              <div class="provider-profession">Marketing Consultant</div>
-              <div class="provider-description">
+            <div className="provider-card">
+              <img className="provider-image" src={image1} alt="Provider 2 Image" />
+              <div className="provider-name">Jane Smith</div>
+              <div className="provider-profession">Marketing Consultant</div>
+              <div className="provider-description">
                 Strategic marketing consultant specializing in digital marketing
                 and brand development.
               </div>
-              <button class="view-profile-btn">View Profile</button>
+              <button className="view-profile-btn">View Profile</button>
             </div>
 
-            <div class="provider-card">
-              <img class="provider-image" src={image1} alt="Provider 2 Image" />
-              <div class="provider-name">Jane Smith</div>
-              <div class="provider-profession">Marketing Consultant</div>
-              <div class="provider-description">
+            <div className="provider-card">
+              <img className="provider-image" src={image1} alt="Provider 2 Image" />
+              <div className="provider-name">Jane Smith</div>
+              <div className="provider-profession">Marketing Consultant</div>
+              <div className="provider-description">
                 Strategic marketing consultant specializing in digital marketing
                 and brand development.
               </div>
-              <button class="view-profile-btn">View Profile</button>
+              <button className="view-profile-btn">View Profile</button>
             </div>
           </div>
         </article>
@@ -156,43 +155,43 @@ const landing = () => {
           <h2 className=" text-[1.2em] font-semibold m-8   text-center text-green-400">
             SUCCESS STORIES
           </h2>
-          <div class="m-5  bg-[#fff]  rounded-lg flex gap-10 ">
-            <div class="testimonial">
+          <div className="m-5  bg-[#fff]  rounded-lg flex gap-10 ">
+            <div className="testimonial">
               <div className="flex">
-                <img src={image1} alt="Client 1" class="client-avatar" />
-                <div class="client-name">
+                <img src={image1} alt="Client 1" className="client-avatar" />
+                <div className="client-name">
                   <p>John Doe</p>
                 </div>
               </div>
-              <div class="client-position">CEO, Company XYZ</div>
+              <div className="client-position">CEO, Company XYZ</div>
               <p>
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
                 vel mauris nec risus pharetra condimentum."
               </p>
             </div>
 
-            <div class="testimonial">
+            <div className="testimonial">
               <div className="flex">
-                <img src={image1} alt="Client 2" class="client-avatar" />
-                <div class="client-name">
+                <img src={image1} alt="Client 2" className="client-avatar" />
+                <div className="client-name">
                   <p>Jane Smith</p>
                 </div>
               </div>
-              <div class="client-position">Marketing Director, ABC Inc.</div>
+              <div className="client-position">Marketing Director, ABC Inc.</div>
               <p>
                 "Nullam vel efficitur ligula, nec scelerisque ligula. Sed vel
                 erat vel justo malesuada rhoncus at vitae elit."
               </p>
             </div>
 
-            <div class="testimonial">
+            <div className="testimonial">
               <div className="flex">
-                <img src={image1} alt="Client 2" class="client-avatar" />
-                <div class="client-name">
+                <img src={image1} alt="Client 2" className="client-avatar" />
+                <div className="client-name">
                   <p>Jane Smith</p>
                 </div>
               </div>
-              <div class="client-position">Marketing Director, ABC Inc.</div>
+              <div className="client-position">Marketing Director, ABC Inc.</div>
               <p>
                 "Nullam vel efficitur ligula, nec scelerisque ligula. Sed vel
                 erat vel justo malesuada rhoncus at vitae elit."
@@ -200,12 +199,12 @@ const landing = () => {
             </div>
           </div>
         </article>
-        <section class="bg-white p-10">
+        <section className="bg-white p-10">
           <h2 className="text-lg font-semibold text-center text-green-400">Frequently Asked Questions</h2>
-          <div class=" mt-5 ">
-            <div class="faq-item">
-              <div class="question">What is [Your Marketplace Name]?</div>
-              <div class="answer">
+          <div className=" mt-5 ">
+            <div className="faq-item">
+              <div className="question">What is [Your Marketplace Name]?</div>
+              <div className="answer">
                 [Your Marketplace Name] is an online platform that connects
                 service providers with individuals or businesses seeking various
                 services. Whether you need a freelancer, consultant, or other
@@ -214,9 +213,9 @@ const landing = () => {
               </div>
             </div>
 
-            <div class="faq-item">
-              <div class="question">How can I join as a service provider?</div>
-              <div class="answer">
+            <div className="faq-item">
+              <div className="question">How can I join as a service provider?</div>
+              <div className="answer">
                 Joining as a service provider on [Your Marketplace Name] is
                 easy. Simply click on the "Sign Up" button and follow the
                 registration process. Once registered, you can create a profile,
@@ -224,9 +223,9 @@ const landing = () => {
               </div>
             </div>
 
-            <div class="faq-item">
-              <div class="question">How does the payment process work?</div>
-              <div class="answer">
+            <div className="faq-item">
+              <div className="question">How does the payment process work?</div>
+              <div className="answer">
                 The payment process on [Your Marketplace Name] is secure and
                 straightforward. Clients can make payments through various
                 methods, including credit/debit cards or other supported payment

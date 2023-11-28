@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Subcategory;
 class Service extends Model
 {
     use HasFactory;
-    public $fillable = ['name', 'description', 'image', 'category_id'];
+    public $fillable = ['name', 'description', 'image', 'subcategory_id'];
    
-    public function category()
+    public function subcategory()
     {
-        return $this->belongsTo(Category::class,'category_id');
+        return $this->belongsTo(Subcategory::class,'subcategory_id');
     }
     public function users()
     {
