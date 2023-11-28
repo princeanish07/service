@@ -25,6 +25,16 @@ addSubCategory: builder.mutation({
     body: subcategory,
   }),
 }),
+getSubCategory:builder.query({
+  query:(categoryId)=>{
+    return !categoryId? "viewAll" : `view/${categoryId}`
+  }
+}),
+getProviderSubCategory:builder.query({
+  query:({categoryId,providerId})=>{
+    return !categoryId ? `provider/${providerId}` : `provider/${providerId}/category/${categoryId}`
+  }
+})
   
 })
  
@@ -32,5 +42,7 @@ addSubCategory: builder.mutation({
 export const {
  useGetAllSubCategoryQuery,
  useGetSubCategoryByIdQuery,
- useAddSubCategoryMutation
+ useAddSubCategoryMutation,
+ useGetSubCategoryQuery,
+ useGetProviderSubCategoryQuery
 } = subCategoryApi;

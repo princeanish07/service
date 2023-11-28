@@ -9,6 +9,7 @@ import categorySliceReducer from './redux/categorySlice'
 import catServiceSliceReducer from "./redux/catServiceSlice";
 import cardSliceReducer from "./redux/cardSlice";
 import { catServiceAPi } from "./Api/catServiceApi";
+import { providerApi } from "./Api/providerApi";
 import serviceSliceReducer from "./redux/serviceSlice";
 import RouteSliceReducer from "./redux/RouteSlice";
 const middleware = getDefaultMiddleware({
@@ -23,7 +24,8 @@ const middleware = getDefaultMiddleware({
   serviceApi.middleware,
   catServiceAPi.middleware,
   cardApi.middleware,
-  subCategoryApi.middleware
+  subCategoryApi.middleware,
+  providerApi.middleware
 );
 export const store = configureStore({
   reducer: {
@@ -34,6 +36,7 @@ export const store = configureStore({
     [catServiceAPi.reducerPath]:catServiceAPi.reducer,
     [cardApi.reducerPath]:cardApi.reducer,
     [subCategoryApi.reducerPath]:subCategoryApi.reducer,
+    [providerApi.reducerPath]:providerApi.reducer,
     categorySlice:categorySliceReducer,
     catServiceSlice:catServiceSliceReducer,
     cardSlice:cardSliceReducer,

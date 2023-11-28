@@ -17,6 +17,9 @@ export const categoryApi = createApi({
     getCategoryService: builder.query({
       query: (id) => `service/${id}`,
     }),
+    getProviderCategory: builder.query({
+      query: (providerId) => `provider/${providerId}`,
+    }),
     addCategory: builder.mutation({
       query: (category) => ({
         url: "create",
@@ -46,5 +49,6 @@ export const {
   useGetCategoryServiceQuery,
   useAddCategoryMutation,
   useUpdateCategoryMutation,
-  useAddCatgServiceMutation
+  useAddCatgServiceMutation,
+  useGetProviderCategoryQuery
 } = categoryApi;

@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CatserviceController;
-use App\Http\Controllers\CatserviceProviderController;
+use App\Http\Controllers\CusotmerProviderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QualificationController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceProviderController;
 use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,34 +55,38 @@ Route::prefix('category')->controller(CategoryController::class)->group(function
     Route::get('services/{id}', 'getCategoryById');
     Route::get('service/{id}', 'getServices');
     Route::get('All/{id}', 'getAllCategory');
+    Route::get('provider/{id}','getCategoryByProviderId');
 });
 Route::prefix('subcategory')->controller(SubCategoryController::class)->group(function () {
     Route::post('create/{id}', 'create');
     Route::get('viewAll', 'getAll');
     Route::get('view/{id}', 'getById');
+    Route::get('provider/{providerId}/category/{categoryId}','getSubCategoryByProviderCategoryId');
+    Route::get('provider/{providerId}','getSubCategoryByProviderId');
 });
 
 Route::prefix('services')->controller(ServiceController::class)->group(function () {
-    Route::post('create', 'create');
-    Route::get('show/{service}', 'GetById');
-    Route::get('all', 'GetAll');
-    Route::put('update/{service}', 'update');
-    Route::delete('delete/{service}', 'delete');
-    Route::get('other/{id}', 'otherServices');
+    Route::post('create/{id}', 'create');
+    Route::get('all','getAll');
+    Route::get('{id}','getById');
+    Route::get('category/{id}','getByCategory');
+ 
 });
 
-Route::prefix('services')->controller(CatserviceProviderController::class)->group(function () {
-    Route::post('create/{id}', 'createServices');
-    Route::post('edit/{providerId}', 'editProviderService');
-    Route::get('providers', 'getAll');
-    Route::get('provider/{providerId}', 'getProviderServices');
-    Route::get('provider/{providerId}/category/{categoryId}', 'providerServiceByCategory');
-    Route::get('{serviceId}/provider/{providerId}', 'providerServiceById');
-    Route::delete('{serviceId}/delete/{providerId}', 'deleteService');
+Route::prefix('provider')->controller(ServiceProviderController::class)->group(function () {
+    Route::post('services/create/{id}', 'createServices');
+    Route::get('{providerId}/services', 'getServicesByPorviderId');
+    Route::get('{providerId}/category/{categoryId}', 'getServicesByCategory');
+    Route::get('{providerId}/subcategory/{subcategoryid}', 'getServicesBySubCategory');
+    Route::post('services/update/{providerId}', 'editProviderService');
+    Route::delete('{providerId}/delete/{serviceId}', 'deleteServiceByServiceId');
+    Route::get('{providerId}/services/{serviceId}', 'getServiceById');
 
-    Route::get('provider/details/{id}', 'getProviderDetails');
-    Route::get('category/{id}', 'getByCategory');
-    Route::put('update/{}service}', 'update');
-    Route::delete('delete/{service}', 'delete');
-    Route::get('provider/category/{providerId}', 'getProviderCategory');
+    Route::get('all', 'getAllProvider');
+    Route::get('category/{categoryId}', 'getProviderByCategory');
+    Route::get('subcategory/{subcategoryid}', 'getProviderBySubCategory');
+    Route::get('{providerId}/details', 'getProviderDetails');
+
+
 });
+

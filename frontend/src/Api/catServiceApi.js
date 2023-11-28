@@ -3,17 +3,17 @@ export const catServiceAPi = createApi({
   reducerPath: "catService",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8000/api/services/",
-    prepareHeaders:(headers)=>{
+    prepareHeaders: (headers) => {
       // headers.set('Content-Type','multipart/form-data')
-      headers.set('Accept','application/json')
-      headers.set('Authorize',localStorage.getItem('token'))
-      return headers
-    }
+      headers.set("Accept", "application/json");
+      headers.set("Authorize", localStorage.getItem("token"));
+      return headers;
+    },
   }),
   endpoints: (build) => ({
     addCatServices: build.mutation({
-      query: (service) => ({
-        url: "create",
+      query: ({ service, id }) => ({
+        url: `create/${id}`,
         method: "post",
         body: service,
       }),
@@ -22,14 +22,26 @@ export const catServiceAPi = createApi({
       query: (id) => `show/${id}`,
     }),
     getCatServiceById: build.query({
-      query: (id) => `show/${id}`,
+      query: (id) => `${id}`,
     }),
     getOtherCatservice: build.query({
       query: (id) => `other/${id}`,
     }),
-    getAllCatservices:build.query({
-      query:()=>'all'
-    })
+    getAllCatservices: build.query({
+      query: () => "all",
+    }),
+    getServicesByCategory: build.query({
+      query: (id) => `category/${id}`,
+    }),
+    getServices: build.query({
+      query: ({ category, subcategory }) => {
+        return !category && !subcategory
+          ? "all"
+          : category && !subcategory
+          ? `category/${category}`
+          : `${subcategory}`;
+      },
+    }),
   }),
 });
 export const {
@@ -38,4 +50,6 @@ export const {
   useGetOtherCatserviceQuery,
   useViewCategoryServicesQuery,
   useGetAllCatservicesQuery,
+  useGetServicesByCategoryQuery,
+  useGetServicesQuery
 } = catServiceAPi;

@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\Profile;
 use App\Models\Catservice;
 use App\Models\CatserviceUser;
+use App\Models\Service;
 
 
 class User extends Authenticatable
@@ -58,11 +59,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function services(){
-        return  $this->belongsToMany(CatService::class,'catservice_user')
+        return  $this->belongsToMany(Service::class,'service_user')
         // ->using(CatserviceUser::class)
         ->withPivot('description', 'days', 'time', 'charge', 'offers', 'experience', 'image', 'address');
     }
+<<<<<<< HEAD
   
+=======
+    // public function categories()
+    // {
+    //     return $this->hasManyThrough(Category::class, Service::class);
+    // }
+>>>>>>> develop
     public function profile()
     {
         return $this->hasOne(Profile::class,'user_id');

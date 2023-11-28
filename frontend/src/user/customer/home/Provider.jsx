@@ -1,5 +1,5 @@
 import React from "react";
-import plumber from "../images/plumber.jpg";
+import plumber from "../../../images/plumber.jpg";
 import { FaEnvelope } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { CardId } from "./CardId";
 import { useSelector } from "react-redux";
-import { useGetProviderDetailsQuery } from "../Api/cardApi";
+import { useGetProviderDetailsQuery } from "../../../Api/cardApi";
 const Provider = () => {
   const {id,category}=useSelector(state=>state.cardSlice.provider);
   const { data, isLoading, isSuccess } = useGetProviderDetailsQuery(id);

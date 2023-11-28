@@ -1,8 +1,8 @@
 import React from 'react'
-import { useGetAllServicesQuery } from "../Api/cardApi";
-import { useGetSubCategoryByIdQuery } from "../Api/subCategoryApi";
+import { useGetAllServicesQuery } from "../../../Api/cardApi";
+import { useGetSubCategoryByIdQuery } from "../../../Api/subCategoryApi";
 import { useSelector } from 'react-redux';
-import CardSection from '../components/cardSection';
+import CardSection from '../../../components/cardSection';
 export const CardId = () => {
   const selected = useSelector((state) => state.cardSlice.category);
   const {

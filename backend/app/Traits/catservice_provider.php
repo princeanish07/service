@@ -3,7 +3,7 @@ namespace App\Traits;
  trait catservice_provider{
 public function commonRules(){
     return [
-        'cid' => 'required',
+        'sid' => 'required',
         'description' => 'sometimes',
         'charge' => 'required',
         'time' => 'required',

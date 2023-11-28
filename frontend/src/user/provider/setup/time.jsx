@@ -10,7 +10,7 @@ export default function Time({ Controller, setValue, control, time, days }) {
 
   return (
     <>
-      <div className="  text-slate-500 flex flex-col gap-2">
+      <div className="  text-slate-800 text-[1.1em] flex flex-col gap-2">
         <span>Service Time</span>
         <div className="">
           <div className=" ">
@@ -56,7 +56,7 @@ export default function Time({ Controller, setValue, control, time, days }) {
         </div>
       </div>
 
-      <div className="bg-white flex flex-col  shadow shadow-gray-200 ">
+      <div className=" flex flex-col text-slate-800 text-[1.1em]  ">
         <span>Servicing Days</span>
         <div>
           <Controller

@@ -11,7 +11,7 @@ class serviceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,10 +25,9 @@ class serviceRequest extends FormRequest
         switch ($action) {
             case 'create':
                 return [
-                    '*.name' => 'required',
-                    '*.description' => 'sometimes',
-                    '*.image' => 'sometimes',
-                    '*.category_id' => 'required'
+                    'name' => 'required',
+                    'description' => 'sometimes',
+                    'image' => 'sometimes',
                 ];
             case 'update':
                 return [

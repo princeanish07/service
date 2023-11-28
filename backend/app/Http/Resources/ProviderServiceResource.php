@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProviderResource extends JsonResource
+class ProviderServiceResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,14 +16,7 @@ class ProviderResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name'=>$this->name,
-            'email'=>$this->email,
-            'rating'=>5 ,
-            'services'=>ProviderServiceResource::collection($this->whenLoaded('services')),
-            'profile'=>new HomeprofileResource($this->whenLoaded('profile'))
+            'name'=>$this->name
         ];
     }
-    
-   
-
 }

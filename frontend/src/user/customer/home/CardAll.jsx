@@ -1,10 +1,9 @@
 import React from "react";
-import img from "../images/Plumber.png";
-import Card from "./card";
 
-import { useGetAllServicesQuery } from "../Api/cardApi";
-import {useGetAllSubCategoryQuery} from "../Api/subCategoryApi";
-import CardSection from "../components/cardSection";
+
+import { useGetAllServicesQuery } from "../../../Api/cardApi";
+import {useGetAllSubCategoryQuery} from "../../../Api/subCategoryApi";
+import CardSection from "../../../components/cardSection";
 const CardAll = () => {
   const id = localStorage.getItem("user");
   const {

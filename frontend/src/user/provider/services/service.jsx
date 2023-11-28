@@ -1,0 +1,69 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate, Outlet, useParams, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setCategory } from "../../../redux/categorySlice";
+import Category from "../../../services/category";
+import SearchBox from "../../../components/searchBox";
+import CardSection from "../../../services/cardSection";
+import { useGetProviderCategoryQuery } from "../../../Api/categoryApi";
+import { useGetProviderSubCategoryQuery } from "../../../Api/subCategoryApi";
+import {useGetProviderServiceQuery} from "../../../Api/providerApi"
+import ServiceCard from "./card";
+const Services = () => {
+    const categoryId = useSelector((state) => state.categorySlice.category);
+    const subcategoryId = useSelector((state) => state.categorySlice.subcategory);
+    const providerId=localStorage.getItem("userId");
+    const {
+      data: subcategories,
+      isError,
+      isLoading: subcategoryLoading,
+      error: subcataegoryError,
+    } = useGetProviderSubCategoryQuery({providerId, categoryId });
+    console.log('subcategory',subcategories);
+    const {
+      data: cards,
+      isError: serviceIsError,
+      isLoading: serviceLoading,
+      error: serviceError,
+    } = useGetProviderServiceQuery({ providerId,categoryId, subcategoryId });
+  
+    const navigate = useNavigate();
+    const {
+      data: categories,
+      isError: categoryIsError,
+      isLoading: categoryLoading,
+      error: cataegoryError,
+    } = useGetProviderCategoryQuery(providerId);
+  
+  
+  
+    if (categoryLoading || subcategoryLoading || serviceLoading ) {
+      return <div>loading...</div>;
+    }
+  return (
+    <>
+    <div className="">
+      <section className="m-8">
+        <SearchBox />
+      </section>
+      <section className="shadow ">
+        <Category
+          categories={categories}
+          setCategory={setCategory}
+          selected={categoryId}
+        />
+      </section>
+      <section>
+        <CardSection subcategories={subcategories}>
+          <ServiceCard cards={cards}/>
+          </CardSection>
+      </section>
+    
+    </div>
+  </>
+  )
+}
+
+export default Services
+
+

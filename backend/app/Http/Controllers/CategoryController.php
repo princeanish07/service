@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\categoryRequest;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -65,7 +66,24 @@ class CategoryController extends Controller
         $item=Category::find($id)->services()->select('id','name')->get();
         return response()->json($item);
     }
-    public function getAllCategory(){
-        return 'hello';
+  
+
+    public function getCategoryByProviderId($id)
+    {
+
+
+        $user = User::find($id)->services->pluck('id');
+        if ($user) {
+
+            $categories = Category::whereHas('subcategories', function ($query) use ($user) {
+                $query->whereHas('services', function ($subquery) use ($user) {
+                    $subquery->whereIn('id', $user);
+                });
+            })
+                ->get(['id', 'name']);
+            if ($categories) {
+                return response()->json($categories);
+            }
+        }
     }
 }

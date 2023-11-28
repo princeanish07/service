@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import img2 from "./images/Technician.png";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
@@ -12,196 +12,192 @@ export default function Naavbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const { customer, provider } = useSelector((state) => state.routeSlice.route);
-console.log(customer);
+  const [dropdown, setdropdown] = useState("");
+  const customers = [
+    {
+      id: 1,
+      link: "View Services",
+      to: "/customer",
+    },
+    {
+      id: 1,
+      link: "My Orders",
+      to: "/",
+    },
+    {
+      id: 1,
+      link: "Notifications",
+      to: "/",
+    },
+    {
+      id: 1,
+      link: "Know More",
+      to: "/",
+    },
+  ];
+
+  const providers = [
+    {
+      id: 1,
+      link: "Manage Services",
+      to: "/provider",
+    },
+    {
+      id: 1,
+      link: "My Services",
+      to: "/provider/services",
+    },
+    {
+      id: 1,
+      link: "Received Orders",
+      to: "/",
+    },
+    {
+      id: 1,
+      link: "Notification",
+      to: "/",
+    },
+  ];
+
+  const profiles = [
+    {
+      id: 1,
+      link: "Profile",
+      to: "/user/profile",
+    },
+    {
+      id: 1,
+      link: "Sign Out",
+      to: "/provider/services",
+    },
+  ];
   return (
-<<<<<<< HEAD
-         <nav className="flex sticky top-0 bg-blue-600 p-1  ">
-          <div className="  flex items-start ">
-            <img src={img2} alt="" className=" h-[80px] w-[80px]" />
-          </div>
-          <div className={`flex-1 place-self-center grid grid-cols-2 ${logged ? 'grid-cols-2' : 'grid-cols-3'}`}>
-=======
     <>
-      <nav className="flex sticky top-0 px-20 py-6 tracking-widest z-10 bg-[#004840] border-b-2 border-gray-400">
+      <nav className="flex sticky top-0 p-6 tracking-widest z-10 bg-[#004840] border-b-2 border-gray-400 ">
         <div className="  flex ">
           <p className="text-[1.3em] text-[#EF351B] font-bold">
             SERVICE MARKET PLACE
           </p>
         </div>
-        <div className="flex-1 grid place-items-center gap-10 text-[0.8em] ">
-          <ul className="text-white flex gap-8 font-semibold ">
+        <div className="flex-1 flex  text-[0.9em] ">
+          <ul
+            className="text-white flex-1 flex justify-evenly ml-5  mr-[14Vw] font-semibold  "
+            onMouseLeave={() => {
+              setdropdown("");
+            }}
+          >
             <li className="">
-              <NavLink to="/">HOME</NavLink>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li
-          
+              className="relative"
+              onMouseEnter={() => {
+                setdropdown("customer");
+              }}
             >
-              <NavLink
-                to="/customer"
-                onClick={()=>{
-
-                  dispatch(setRoute({ customer: true, provider: false }));
-                }}
-              >
-                FIND A SERVICE
-              </NavLink>
+              FindAService
+              {logged && dropdown === "customer" && (
+                <ul className="text-white flex flex-col w-[180px] font-bold absolute top-7 left-1  bg-black">
+                  {customers.map((customer) => (
+                    <li
+                      key={customer?.id}
+                      className="text-white border-b-2 p-3 hover:bg-red-700 border-gray-400"
+                    >
+                      <NavLink to={customer.to} className="">
+                        {" "}
+                        {customer.link}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+            <li
+              className="relative"
+              onMouseEnter={() => {
+                setdropdown("provider");
+              }}
+            >
+              Provider Hub
+              {logged && dropdown === "provider" && (
+                <ul className="text-white flex flex-col w-[180px]   font-bold absolute top-7 left-1  bg-black">
+                  {providers.map((provider) => (
+                    <li
+                      key={provider?.id}
+                      className="text-white border-b-2 p-3 hover:bg-red-700 border-gray-400"
+                    >
+                      <NavLink to={provider.to} className="">
+                        {" "}
+                        {provider.link}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
             <li>
-              <NavLink
-                onClick={() => {
-                  dispatch(setRoute({ customer: false, provider: true }));
-                }}
-              >
-                PROVIDER HUB
-              </NavLink>
+              <NavLink>About Us </NavLink>
             </li>
             <li>
-              <NavLink>ABOUT US</NavLink>
+              <NavLink>How It Works</NavLink>
             </li>
-            <li>
-              <NavLink>HOW IT WORKS</NavLink>
-            </li>
-            {
-              !logged ? <li>
-              <NavLink to="/signIn">SIGN IN</NavLink>
-            </li>:
-               <li>
-               <NavLink onClick={()=>{
-               const value= confirm('Are you sure tha you want to log out form this session');
-              if(value){
-                localStorage.removeItem('logged');
-                localStorage.removeItem('userId');
-                navigate('/',{replace:true})
-              }
-               }}>SIGN OUT</NavLink>
-              </li>
-            }
           </ul>
-
-          {
-            logged && customer &&
-            <ul className="text-white flex gap-10 font-bold">
-               <li>
-              <NavLink>MY ORDERS</NavLink>
-            </li>
-            <li>
-              <NavLink>NOTIFICATION</NavLink>
-            </li>
-            <li>
-              <NavLink to="/signIn">MY PROFILE</NavLink>
-            </li>
-            </ul>
-          }
-          
-          {
-           logged && provider  &&
-            <ul className="text-white flex gap-10 font-bold">
-               <li>
-              <NavLink>RECEIVED ORDERS</NavLink>
-            </li>
-           
-            <li>
-
-                <NavLink to='/user/service'>MY SERVICES</NavLink>
-            </li>
-            <li>
-              <NavLink to="/user/profile">MY PROFILE</NavLink>
-            </li>
-           
-              <li>
-                <NavLink to='/user/order'>RECEIVED ORDERS</NavLink>
-              </li>
-              <li>
-                <NavLink to='/user/category'>CATEGORY</NavLink>
-              </li>
-            
-            </ul>
-          }
         </div>
-        <div className="w-[300px] ">
-          {
-         !logged && <NavLink
-            className="bg-[#EF351B] p-2  px-10 rounded-full text-white "
-            to="register"
+        {!logged ? (
+          <div>
+            <NavLink
+              className="bg-gray-800 p-2 m-5 px-4  rounded-full text-white "
+              to="signIn"
+            >
+              Sign In
+            </NavLink>
+            <NavLink
+              className="bg-gray-800 p-2 px-4 m-5  rounded-full text-white "
+              to="register"
+            >
+              Sign Up
+            </NavLink>
+          </div>
+        ) : (
+          <div
+            onMouseEnter={() => {
+              setdropdown("profile");
+            }}
+            onMouseLeave={() => {
+              setdropdown("");
+            }}
+            className=" relative"
           >
-            REGISTER
-          </NavLink>
-
-          }
-        </div>
-
-        {/* <div className={`flex-1 place-self-center grid grid-cols-2 ${logged ? 'grid-cols-2' : 'grid-cols-3'}`}>
->>>>>>> develop
-          <div className={`flex   rounded-sm justify-self-center bg-white ${!logged? 'col-span-2' : ''}`}>
-                <div className=" w-[25Vw] ">
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    className="  flex-1  w-full p-3 text-gray-800  focus:outline-none rounded-sm text-sm"
-                    placeholder="Search Your Services"
-                  />
-                </div> 
-                <div className="  bg-gray-300 rounded-sm w-[100px] flex place-content-center ">
-                  <button className=' '>
-                    <FaSearch className=" text-blue-600 text-[1.5em] " />
-                  </button>
-                </div>
-              </div>
-              <div className='grid content-center  '>
-
-            <ul className=" flex justify-evenly text-white  font-medium tracking-wide  ">
-            <li>
-                <NavLink to='/'>Home</NavLink>
-              </li>
-              {
-                !logged? (<>
-                <li>
-                <NavLink to='/signIn' state={{
-                  path:location.pathname
-                }}>Sign In</NavLink>
-              </li>
-              <li>
-                <NavLink to='/signup'  state={{
-                  path:location.pathname
-                }}>Sign Up</NavLink>
-              </li>
-              </>
-              ):<>
-               <li>
-                <NavLink to='/user/profile'>Profile</NavLink>
-              </li>
-              <li>
-                <NavLink to='/user/order'>Orders</NavLink>
-              </li>
-              <li>
-                <NavLink to='/user/category'>Category</NavLink>
-              </li>
-              <li>
-                <NavLink to='/user/service'>Services</NavLink>
-              </li>
-<<<<<<< HEAD
-              <li>
-               <button onClick={()=>{
-               const value= confirm('Are you sure tha you want to log out form this session');
-              if(value){
-                localStorage.removeItem('logged');
-                localStorage.removeItem('userId');
-                navigate('/',{replace:true})
-                window.location.href="/Category/All"
-              }
-               }}>Log Out</button>
-              </li>
-=======
-          
->>>>>>> develop
-              </>
-              }
-            </ul>
-            </div>
-
-          </div> */}
+            <img
+              src={img2}
+              alt=""
+              className="rounded-full border h-[30px] w-[30px]"
+            />
+            {dropdown === "profile" && (
+              <ul className="text-white flex flex-col w-[200px]  font-bold absolute top-8 right-0  bg-black">
+                <li className="text-white border-b-2 p-3 hover:bg-red-700 border-gray-400">
+                  <NavLink to="user/profile">Profile</NavLink>
+                </li>
+                <li className="text-white border-b-2 p-2 hover:bg-red-700 border-gray-400">
+                  <NavLink
+                    onClick={() => {
+                      const value = confirm(
+                        "Are you sure tha you want to log out form this session"
+                      );
+                      if (value) {
+                        localStorage.removeItem("logged");
+                        localStorage.removeItem("userId");
+                        navigate("/", { replace: true });
+                      }
+                    }}
+                  >
+                    Sign Out
+                  </NavLink>
+                </li>
+              </ul>
+            )}
+          </div>
+        )}
       </nav>
     </>
   );
